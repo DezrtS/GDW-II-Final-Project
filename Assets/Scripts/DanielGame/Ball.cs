@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     Rigidbody2D body;
     Transform trans;
     SpriteRenderer sprite;
+    ParticleSystem partsys;
     public bool isRedPlayer1;
     public float mag;
     public float lastMag;
@@ -24,6 +25,8 @@ public class Ball : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
+        partsys = GetComponent<ParticleSystem>();
+        
         mag = body.velocity.magnitude;
         int randomNum = Random.Range(1, 10);
         if (randomNum < 6) 
@@ -54,7 +57,8 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        movementscript = collision.gameObject.GetComponent<playermovementballgame>();
+        movementscript = collision.gameObject.GetComponentInParent<playermovementballgame>();
+        //UnityEngine.Debug.Log("hit");
         sprite.color = movementscript.sprite.color;
         vecNorm = movementscript.FindUp();
         if(targetMag == 0)
@@ -63,6 +67,7 @@ public class Ball : MonoBehaviour
         }
         targetMag = targetMag + inc;
         body.velocity = vecNorm * targetMag;
+        partsys.Play();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

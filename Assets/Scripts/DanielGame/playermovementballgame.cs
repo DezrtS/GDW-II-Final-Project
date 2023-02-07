@@ -14,18 +14,25 @@ public class playermovementballgame : MonoBehaviour
     Collider2D hitBox;
     Rigidbody2D body;
     Transform trans;
-    Collider2D attackBox;
+    
     public SpriteRenderer sprite;
-    //[SerializeField] GameObject attackBox;
+    //Attack values
+    [SerializeField] GameObject attackBoxObject;
+    Collider2D attackBox;
     public int attackTime;
     public int attackTimeMax;
+    public int attackCoolOff;
+    public int attackCoolOffMax;
+    public Vector2 upDirection;
+    
+    //Movement values
     public float speed;
     public float rotationStr;
     public float steeringInput;
     public float moveInput;
     public bool buttonInput;
     public bool isPlayer1;
-    public Vector2 upDirection;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +40,8 @@ public class playermovementballgame : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
-        attackBox = GetComponent<CircleCollider2D>();
+        attackBox = attackBoxObject.GetComponentInChildren<PolygonCollider2D>();
+
         if (isPlayer1)
         {
             sprite.color = Color.red;
@@ -61,9 +69,10 @@ public class playermovementballgame : MonoBehaviour
 
     void Attack()
     {
-        if (buttonInput)
+        if (buttonInput && attackCoolOff == 0)
         {
             attackTime = attackTimeMax;
+            attackCoolOff = attackCoolOffMax;
         }
         if (attackTime > 0)
         {
@@ -73,8 +82,20 @@ public class playermovementballgame : MonoBehaviour
         } 
         else
         {
+            if(attackCoolOff > 0)
+            {
+                attackCoolOff--;
+            }
             attackBox.enabled = false;
         }
+        //if (attackBox.enabled)
+        //{
+        //    attackBoxObject.SetActive(true);
+        //}
+        //else
+        //{
+        //    attackBoxObject.SetActive(false);
+        //}
     }
     void Movement()
     {

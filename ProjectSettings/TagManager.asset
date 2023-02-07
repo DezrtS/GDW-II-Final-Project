@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Rotating Paddle
+  - ball
   layers:
   - Default
   - TransparentFX
