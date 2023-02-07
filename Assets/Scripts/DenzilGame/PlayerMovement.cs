@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     float startingTime;
 
     Vector3 lastGroundNormal = Vector3.right;
+    float gravity = 0;
 
     private void Start()
     {
@@ -33,14 +34,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(leftKey))
         {
-            transform.position = transform.position - groundNormal * speed * speedMultiplier;
-            //rig.velocity = -groundNormal * speed;
+            //transform.position = transform.position - groundNormal * speed * speedMultiplier;
+            rig.velocity = -groundNormal * speed;
         }
         if (Input.GetKey(rightKey))
         {
-            transform.position = transform.position + groundNormal * speed * speedMultiplier;
-            //rig.velocity = groundNormal * speed;
+            //transform.position = transform.position + groundNormal * speed * speedMultiplier;
+            rig.velocity = groundNormal * speed;
         }
+        if (ragdollActive)
+        {
+            gravity += 0.001f;
+        } else
+        {
+            gravity = 0.001f;
+        }
+        transform.position = transform.position + new Vector3(0, -gravity * Time.deltaTime, 0);
 
         /*
         if (Input.GetKey(rightKey))
