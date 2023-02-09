@@ -6,16 +6,18 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] private float playerSpeed = 10f;
      public Rigidbody2D  body;
+
+    int p1Health = 3;
     
     Vector2 move;
 
-    void Start()
+    public void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if(Input.GetKey(KeyCode.A))
         {
@@ -52,8 +54,27 @@ public class Movement : MonoBehaviour
 
     }
 
-     void FixedUpdate()
+     public void FixedUpdate()
     {
         body.MovePosition(body.position + move * playerSpeed * Time.fixedDeltaTime);
     }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            
+            p1Health--;
+            
+        }
+    }
+
+
+    public int ReturnP1Health()
+    {
+        return p1Health;
+    }
+
+
+
 }

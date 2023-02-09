@@ -9,6 +9,8 @@ public class MovementP2 : MonoBehaviour
 
     Vector2 move;
 
+    int p2Health = 3;
+
     void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
@@ -55,5 +57,20 @@ public class MovementP2 : MonoBehaviour
     void FixedUpdate()
     {
         body.MovePosition(body.position + move * playerSpeed * Time.fixedDeltaTime);
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Bullet")
+        {
+            p2Health--;
+        }
+    }
+
+
+    public int ReturnP2Health()
+    {
+        return p2Health;
     }
 }
