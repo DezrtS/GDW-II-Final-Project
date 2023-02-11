@@ -4,15 +4,19 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Bullet
+  - P1
+  - P2
+  tags:
   - Rotating Paddle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullet
   - Water
   - UI
-  - Ignore
+  - 
   - 
   - 
   - 

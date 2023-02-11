@@ -1,0 +1,81 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Cannon : MonoBehaviour
+{
+    public Transform spawn;
+    public GameObject bulletPre;
+    public float bulletSpeed;
+    public Vector2 distance;
+    [SerializeField] GameObject player1;
+
+
+
+    [SerializeField] GameObject player2;
+    public Vector2 distanceP2;
+
+
+
+    [SerializeField] int target;
+
+    [SerializeField] float timeLimit;
+    public float time = 0;
+    bool enter = false;
+
+    void Start()
+    {
+        spawn = gameObject.GetComponent<Transform>();
+       
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+        time += Time.deltaTime;
+        enter = false;
+        distance = new Vector2(player1.transform.position.x - spawn.position.x, player1.transform.position.y - spawn.position.y);
+
+
+
+        distanceP2 = new Vector2(player2.transform.position.x - spawn.position.x, player2.transform.position.y - spawn.position.y);
+
+
+        if (time >= timeLimit && !enter)
+        {
+            enter = true;
+            time = 0;
+
+
+            if (target == 1)
+            {
+                var bullet = Instantiate(bulletPre, spawn.position, spawn.rotation);
+                bullet.GetComponent<Rigidbody2D>().velocity = distance * bulletSpeed;
+                Destroy(bullet, 2);
+            }
+
+
+            if(target == 2)
+            {
+                var bulletP2 = Instantiate(bulletPre, spawn.position, spawn.rotation);
+                bulletP2.GetComponent<Rigidbody2D>().velocity = distanceP2 * bulletSpeed;
+                Destroy(bulletP2, 2);
+            }
+
+
+
+        }
+
+
+    }
+
+
+
+    public void setTarget(int num)
+    {
+
+        target = num;
+
+    }
+}
