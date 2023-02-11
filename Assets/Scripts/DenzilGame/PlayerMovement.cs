@@ -5,111 +5,117 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rig;
-
-    [SerializeField] private float maxSpeed = 5;
     [SerializeField] private float speed = 1;
+    [SerializeField] private float jumpPower = 1;
+    [SerializeField] private bool isPlayerOne;
 
-    private float speedMultiplier = 1;
+    private bool grounded;
+    private bool ragdollActive;
+    private Vector3 groundNormal = Vector3.right;
+    private float startingTime;
+    private Vector3 gravityVelocity;
+    private float knockback;
 
-    public KeyCode upKey;
-    public KeyCode downKey;
-    public KeyCode leftKey;
-    public KeyCode rightKey;
-
-    bool ragdollActive;
-
-    Vector3 groundNormal = Vector3.right;
-
-    float startingTime;
-
-    Vector3 lastGroundNormal = Vector3.right;
-    float gravity = 0;
+    float jump;
 
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (Input.GetKey(leftKey))
+        
+        float movementInput;
+        float jumpInput;
+        if (isPlayerOne)
         {
-            //transform.position = transform.position - groundNormal * speed * speedMultiplier;
-            rig.velocity = -groundNormal * speed;
-        }
-        if (Input.GetKey(rightKey))
-        {
-            //transform.position = transform.position + groundNormal * speed * speedMultiplier;
-            rig.velocity = groundNormal * speed;
-        }
-        if (ragdollActive)
-        {
-            gravity += 0.001f;
+            movementInput = Input.GetAxis("Horizontal");
+            jumpInput = Input.GetAxis("Vertical");
         } else
         {
-            gravity = 0.001f;
+            movementInput = Input.GetAxis("Horizontal2");
+            jumpInput = Input.GetAxis("Vertical2");
         }
-        transform.position = transform.position + new Vector3(0, -gravity * Time.deltaTime, 0);
-
         /*
-        if (Input.GetKey(rightKey))
+        if (!ragdollActive)
         {
-            float magnitude = ((Vector3)rig.velocity + speed * speedMultiplier * groundNormal).magnitude;
-            if (magnitude > maxSpeed)
+            knockback = Mathf.Lerp(knockback, 0, Time.deltaTime * 3);
+            if (Mathf.Abs(knockback) > 0.5f)
             {
-                rig.velocity = maxSpeed * speedMultiplier * new Vector3(groundNormal.x, groundNormal.y - lastGroundNormal.y + rig.velocity.y, 0);
-                //rig.velocity = maxSpeed * speedMultiplier * groundNormal;
+                movementInput = 0;
             }
-            else
+            Vector3 horizontalVelocity = (movementInput * speed * Time.fixedDeltaTime * groundNormal) + (knockback * Vector3.right);
+            if (grounded && jumpInput > 0)
             {
-                rig.AddForce(speed * speedMultiplier * groundNormal, ForceMode2D.Force);
+                jump = 1;
             }
-        }
-        if (Input.GetKey(leftKey))
+            Vector3 verticalVelocity = jump * jumpPower * Vector3.up;
+            gravityVelocity = (Time.time - startingTime) * -10 * Vector3.up;
+            rig.velocity = horizontalVelocity + verticalVelocity + gravityVelocity;
+        } else
         {
-            float magnitude = ((Vector3)rig.velocity - speed * speedMultiplier * groundNormal).magnitude;
-            if (magnitude > maxSpeed)
-            {
-                rig.velocity = -maxSpeed * speedMultiplier * new Vector3(groundNormal.x, -(groundNormal.y - lastGroundNormal.y + rig.velocity.y), 0);
-                //rig.velocity = -maxSpeed * speedMultiplier * groundNormal;
-            }
-            else
-            {
-                rig.AddForce(-speed * speedMultiplier * groundNormal, ForceMode2D.Force);
-            }
+            rig.constraints = RigidbodyConstraints2D.None;
         }
-        lastGroundNormal = groundNormal;
         */
+        Debug.Log(speed);
+
+        if (grounded && jumpInput > 0)
+        {
+            rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
+        }
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
+    }
+
+    public void ApplyKnockback(float knockback)
+    {
+        //this.knockback = knockback;
+        rig.AddForce(Vector3.right * knockback, ForceMode2D.Impulse);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        //if (collision.gameObject.tag == "Rotating Paddle")
-        //{
-            groundNormal = Quaternion.Euler(0, 0, -90) * collision.contacts[0].normal;
-            if (Mathf.Abs(groundNormal.y) > 0.45f)
+        ContactPoint2D[] contactPoints = new ContactPoint2D[1];
+        collision.GetContacts(contactPoints);
+        ContactPoint2D groundContactPoint = new ContactPoint2D();
+        foreach (ContactPoint2D contactPoint in contactPoints)
+        {
+            if (contactPoint.collider.tag == "Rotating Paddle")
             {
-                if (ragdollActive == false)
-                {
-                    //groundNormal = Vector3.zero;
-                    //lastGroundNormal = Vector3.zero;
-                    ragdollActive = true;
-                }
-                speedMultiplier = Mathf.Max(speedMultiplier - 0.01f, 0);
-            }
-            else
+                groundContactPoint = contactPoint;
+                break;
+            } else if (contactPoint.collider.tag != "player")
             {
-                speedMultiplier = 1;
-                ragdollActive = false;
+                groundContactPoint = contactPoint;
+            } else
+            {
+                groundContactPoint = contactPoint;
             }
-        //}
+        }
+
+        groundNormal = Quaternion.Euler(0, 0, -90) * groundContactPoint.normal;
+        //Debug.Log(groundContactPoint.collider.gameObject.name);
+        if (groundContactPoint.normal.y < 0.60f)
+        {
+            grounded = false; 
+            groundNormal = Vector3.right;
+            if (ragdollActive == false && collision.gameObject.tag == "Rotating Paddle")
+            {
+                //ragdollActive = true;
+            }
+        }
+        else
+        {
+            startingTime = Time.timeSinceLevelLoad;
+            ragdollActive = false;
+            grounded = true;
+            jump = 0;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //if (!ragdollActive && collision.gameObject.tag == "Rotating Paddle")
-        //{
-            groundNormal = Vector3.right;
-        //} 
+        groundNormal = Vector3.right;
+        grounded = false;
     }
 }
