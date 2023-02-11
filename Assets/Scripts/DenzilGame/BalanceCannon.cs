@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cannon : MonoBehaviour
+public class BalanceCannon : MonoBehaviour
 {
     [SerializeField] GameObject barrel;
 
