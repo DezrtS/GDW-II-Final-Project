@@ -5,11 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rig;
-    [SerializeField] private GameObject projectilePrefab; // Add this line
     [SerializeField] private float speed = 1;
     [SerializeField] private float jumpPower = 1;
     [SerializeField] private bool isPlayerOne;
-
     private bool grounded;
     private bool ragdollActive;
     private Vector3 groundNormal = Vector3.right;
@@ -56,37 +54,11 @@ public class Player : MonoBehaviour
             jumpInput = Input.GetAxis("Vertical2");
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) // Add this line
-        {
-            ShootProjectile();
-        }
-
         if (grounded && jumpInput > 0)
         {
             rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
         }
         transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (movementInput > 0)
-            {
-                // Shoot right
-                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-                projectile.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10, ForceMode2D.Impulse);
-            }
-            else if (movementInput < 0)
-            {
-                // Shoot left
-                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-                projectile.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 10, ForceMode2D.Impulse);
-            }
-        }
-    }
-
-    private void ShootProjectile() // Add this method
-    {
-        projectileReference = Instantiate(projectilePrefab, transform.position, transform.rotation);
     }
 
     public void ApplyKnockback(float knockback)
@@ -143,27 +115,27 @@ public class Player : MonoBehaviour
         grounded = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
-            transform.position = startPosition;
-
             GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
             foreach (GameObject projectile in projectiles)
             {
                 Destroy(projectile);
             }
         }
-        /*if (collision.gameObject.tag == "Projectile")
+    }*/
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Player"))
         {
-            transform.position = startPosition;
-            GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
-            foreach (GameObject projectile in projectiles)
-            {
-                Destroy(projectile);
-            }
-        }*/
+            // Only destroy the colliding projectile
+            Destroy(collision.gameObject);
+        }
     }
+
+
 
 }

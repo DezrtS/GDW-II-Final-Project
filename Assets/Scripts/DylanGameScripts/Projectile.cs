@@ -6,10 +6,12 @@ public class Projectile : MonoBehaviour
 {
     public float speed = 20f;
     private float screenWidth;
+    private Vector3 originalVelocity;
 
     private void Start()
     {
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
+        originalVelocity = GetComponent<Rigidbody2D>().velocity;
     }
 
     private void OnBecameInvisible()
@@ -22,34 +24,30 @@ public class Projectile : MonoBehaviour
         {
             transform.position = new Vector3(screenWidth, transform.position.y, transform.position.z);
         }
+        else if (transform.position.y > Camera.main.orthographicSize)
+        {
+            transform.position = new Vector3(transform.position.x, -Camera.main.orthographicSize, transform.position.z);
+        }
+        else if (transform.position.y < -Camera.main.orthographicSize)
+        {
+            transform.position = new Vector3(transform.position.x, Camera.main.orthographicSize, transform.position.z);
+        }
     }
+
 
     private void Update()
     {
-        transform.position += transform.right * speed * Time.deltaTime;
-    }
+        Vector3 direction = Vector3.zero;
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
+        if (Input.GetKey(KeyCode.Space))
         {
-            //transform.position = startPosition;
-
-            GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
-            foreach (GameObject projectile in projectiles)
-            {
-                Destroy(projectile);
-            }
+            direction += transform.right;
         }
-        /*if (collision.gameObject.tag == "Projectile")
+        if (Input.GetKey(KeyCode.R))
         {
-            transform.position = startPosition;
-            GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
-            foreach (GameObject projectile in projectiles)
-            {
-                Destroy(projectile);
-            }
-        }*/
+            direction += Vector3.up;
+        }
+        transform.position += direction * speed * Time.deltaTime;
     }
 
 }
