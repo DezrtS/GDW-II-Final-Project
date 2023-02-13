@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
         grounded = false;
     }
 
-    /*private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
@@ -125,16 +125,16 @@ public class Player : MonoBehaviour
                 Destroy(projectile);
             }
         }
-    }*/
+    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Projectile"))
         {
             // Only destroy the colliding projectile
             Destroy(collision.gameObject);
         }
-    }
+    }*/
 
 
 

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : MonoBehaviour
+public class PlayerShoot1 : MonoBehaviour
 {
     public Projectile projectilePrefab;
     private float timeSinceLastShot;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.R))
         {
             Shoot();
         }

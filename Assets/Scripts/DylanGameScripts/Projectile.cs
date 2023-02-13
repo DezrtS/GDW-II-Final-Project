@@ -39,15 +39,28 @@ public class Projectile : MonoBehaviour
     {
         Vector3 direction = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.R))
         {
             direction += transform.right;
         }
         if (Input.GetKey(KeyCode.R))
         {
-            direction += Vector3.up;
+            direction += transform.right;
         }
+        /*if (Input.GetKey(KeyCode.R))
+        {
+            direction += Vector3.up;
+        }*/
         transform.position += direction * speed * Time.deltaTime;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Projectile"))
+        {
+            // Only destroy the colliding projectile
+            Destroy(collision.gameObject);
+        }
     }
 
 }
