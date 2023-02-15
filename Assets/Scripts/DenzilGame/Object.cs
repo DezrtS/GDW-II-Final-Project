@@ -11,4 +11,12 @@ public class Object : MonoBehaviour
             collision.gameObject.GetComponent<PlayerMovement>().ApplyKnockback((collision.transform.position - transform.position).normalized * 5);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Lava")
+        {
+            Destroy(gameObject, 2);
+        }
+    }
 }
