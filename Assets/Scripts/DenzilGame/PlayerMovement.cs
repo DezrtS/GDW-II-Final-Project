@@ -67,10 +67,10 @@ public class PlayerMovement : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
     }
 
-    public void ApplyKnockback(float knockback)
+    public void ApplyKnockback(Vector3 knockback)
     {
         //this.knockback = knockback;
-        rig.AddForce(Vector3.right * knockback, ForceMode2D.Impulse);
+        rig.AddForce(knockback, ForceMode2D.Impulse);
     }
 
     private void OnCollisionStay2D(Collision2D collision)

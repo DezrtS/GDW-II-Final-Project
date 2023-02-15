@@ -15,7 +15,7 @@ public class BalanceCannon : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         GameObject newBarrel = Instantiate(barrel, transform.position, Quaternion.identity);
-        newBarrel.GetComponent<Rigidbody2D>().AddForce(transform.right * 30, ForceMode2D.Impulse);
+        newBarrel.GetComponent<Rigidbody2D>().AddForce(transform.right * 10, ForceMode2D.Impulse);
         StartCoroutine(Shoot());
     }
 

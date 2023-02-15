@@ -41,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (collider.gameObject != gameObject && collider.gameObject.tag == "Player")
             {
-                collider.gameObject.GetComponent<PlayerMovement>().ApplyKnockback(playerWeapon.knockbackAmount * attackDirection);
+                collider.gameObject.GetComponent<PlayerMovement>().ApplyKnockback(new Vector3(playerWeapon.knockbackAmount * attackDirection, 0, 0));
             }
         }
     }
