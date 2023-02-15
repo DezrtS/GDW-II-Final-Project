@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private float knockback;
     private float screenWidth;
     private Vector3 startPosition;
+    private int score = 0;
 
     float jump;
     private GameObject projectileReference; // Add this line
@@ -123,8 +124,14 @@ public class Player : MonoBehaviour
             foreach (GameObject projectile in projectiles)
             {
                 Destroy(projectile);
+                score++;
             }
         }
+    }
+
+    public int GetScore(int score)
+    {
+        return score;
     }
 
     /*private void OnCollisionEnter2D(Collision2D collision)
