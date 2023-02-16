@@ -21,8 +21,8 @@ public class Ball : MonoBehaviour
     public float maxMag;
     public float inc;
     public Vector2 vecNorm;
-    public Vector3 start1 = new Vector3(-10, 0, 0);
-    public Vector3 start2 = new Vector3(10, 0, 0);
+    public Vector3 start1 = new Vector3(-8, 0, 0);
+    public Vector3 start2 = new Vector3(8, 0, 0);
 
     public bool respawnfullreset;
     // Start is called before the first frame update
@@ -75,6 +75,7 @@ public class Ball : MonoBehaviour
         }
         targetMag = targetMag + inc;
         body.velocity = vecNorm * targetMag;
+        partsys.emissionRate = 10 + targetMag;
         partsys.Play();
     }
 
