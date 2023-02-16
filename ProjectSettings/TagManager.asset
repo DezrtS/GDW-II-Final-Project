@@ -4,24 +4,29 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Bullet
+  - P1
+  - P2
+  - Projectile
   - Rotating Paddle
+  - Lava
   - ball
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullet
   - Water
   - UI
+  - Walls
+  - Projectile
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Object
+  - Ignore
   - 
   - 
   - 
