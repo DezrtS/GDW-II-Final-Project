@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
+
+   // int target;
+    
     public Transform spawn;
     public GameObject bulletPre;
     public float bulletSpeed;
@@ -26,6 +29,7 @@ public class Cannon : MonoBehaviour
     void Start()
     {
         spawn = gameObject.GetComponent<Transform>();
+        bulletPre = GameObject.Find("Bullet");
        
     }
 
@@ -60,7 +64,7 @@ public class Cannon : MonoBehaviour
             {
                 var bulletP2 = Instantiate(bulletPre, spawn.position, spawn.rotation);
                 bulletP2.GetComponent<Rigidbody2D>().velocity = distanceP2 * bulletSpeed;
-                Destroy(bulletP2, 2);
+               Destroy(bulletP2, 2);
             }
 
 
@@ -70,12 +74,8 @@ public class Cannon : MonoBehaviour
 
     }
 
-
-
-    public void setTarget(int num)
+    public void SetTarget(int num)
     {
-
         target = num;
-
     }
 }

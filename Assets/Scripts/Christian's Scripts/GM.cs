@@ -6,27 +6,35 @@ public class GM : MonoBehaviour
 {
     public Movement p1;
     public MovementP2 p2;
-    //public Button spawner;
+    public ButtonSpawner spawner;
+     int counter = 2;
+
+    public GameObject[] buttons;
+    public GameObject[] cannons;
 
 
-   // public float timeLimit = 5;
-   // public float time = 0;
+    public float timeLimit = 5;
+    public float time = 0;
 
-    // Start is called before the first frame update
+    private void Start()
+    {
+        spawner = GetComponent<ButtonSpawner>();
+    }
 
 
     // Update is called once per frame
     void Update()
     {
-       // time += Time.deltaTime;
+        time += Time.deltaTime;
 
-       // if (time >= timeLimit)
-       // {
+        if (time >= timeLimit && counter < 8)
+        {
 
-          //  spawner.SpawnButton();
-          //  time = 0;
+            spawner.SpawnButton(buttons, counter);
+            counter++;
+            time = 0;
 
-       // }
+        }
 
         if (p1.ReturnP1Health() == 0)
         {

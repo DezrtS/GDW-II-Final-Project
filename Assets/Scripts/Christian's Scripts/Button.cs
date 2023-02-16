@@ -5,42 +5,47 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
 
-    public Cannon can;
     SpriteRenderer sprite;
+    public Cannon canNum;
+    
+    
 
     void Start()
     {
+
         sprite = GetComponent<SpriteRenderer>();
-
         
+      
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+       
     }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
         if(collision.gameObject.tag == "P1")
         {
-            can.setTarget(2);
+          canNum.SetTarget(2);
             sprite.color = Color.red;
             
         }
 
-        if (collision.gameObject.tag == "P2")
+       if (collision.gameObject.tag == "P2")
         {
-            can.setTarget(1);
-            sprite.color = Color.blue;
+        
+          canNum.SetTarget(1);
+           sprite.color = Color.blue;
         }
+     
 
     }
 
 
-    
 
-    
 }
