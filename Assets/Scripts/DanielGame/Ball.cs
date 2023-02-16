@@ -75,7 +75,7 @@ public class Ball : MonoBehaviour
         }
         targetMag = targetMag + inc;
         body.velocity = vecNorm * targetMag;
-        partsys.emissionRate = 10 + targetMag;
+        partsys.emissionRate = 10 + 2*targetMag;
         partsys.Play();
     }
 
