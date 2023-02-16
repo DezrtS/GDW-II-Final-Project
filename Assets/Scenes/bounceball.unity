@@ -319,7 +319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &963038781
 Transform:
   m_ObjectHideFlags: 0
@@ -352,17 +352,35 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 963038784}
+    m_ColliderPaths:
+    - - X: 160000000
+        Y: 90000000
+      - X: -160000000
+        Y: 90000000
+      - X: -160000000
+        Y: -90000000
+      - X: 160000000
+        Y: -90000000
+    - - X: -150000000
+        Y: -80000000
+      - X: -150000000
+        Y: 70000000
+      - X: 150000000
+        Y: 70000000
+      - X: 150000000
+        Y: -80000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 15.999981, y: -9.000004}
-      - {x: 15.999967, y: 9.00001}
-      - {x: -15.99999, y: 8.999974}
-      - {x: -15.999981, y: -9.000004}
-    - - {x: 14.99999, y: -7.9999704}
-      - {x: -14.99999, y: -7.9999704}
-      - {x: -14.99996, y: 6.9999905}
-      - {x: 14.99999, y: 6.999961}
+    - - {x: 15.999971, y: -9}
+      - {x: 15.999971, y: 9}
+      - {x: -16, y: 8.99997}
+      - {x: -15.999971, y: -9}
+    - - {x: 15, y: -7.9999704}
+      - {x: -15, y: -7.9999704}
+      - {x: -14.999971, y: 7}
+      - {x: 15, y: 6.9999704}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &963038783
@@ -2143,7 +2161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1866257848
 Transform:
   m_ObjectHideFlags: 0
@@ -2176,33 +2194,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1866257851}
-    m_ColliderPaths:
-    - - X: 160000100
-        Y: -90000041
-      - X: 160000100
-        Y: 90000041
-      - X: 160000041
-        Y: 90000100
-      - X: -160000041
-        Y: 90000100
-      - X: -160000100
-        Y: 90000041
-      - X: -160000100
-        Y: -90000041
-      - X: -160000041
-        Y: -90000100
-      - X: 160000041
-        Y: -90000100
-    - - X: -149999900
-        Y: -79999900
-      - X: -149999900
-        Y: 69999900
-      - X: 149999900
-        Y: 69999900
-      - X: 149999900
-        Y: -79999900
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 15.999974, y: -9.00001}
@@ -4072,6 +4064,8 @@ MonoBehaviour:
   movementscript: {fileID: 0}
   ballHitBox: {fileID: 0}
   sprite: {fileID: 0}
+  player1sprite: {fileID: 0}
+  player2sprite: {fileID: 0}
   isRedPlayer1: 0
   mag: 0
   lastMag: 0
@@ -4168,7 +4162,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  emitterVelocityMode: 0
+  emitterVelocityMode: 1
   looping: 0
   prewarm: 0
   playOnAwake: 1

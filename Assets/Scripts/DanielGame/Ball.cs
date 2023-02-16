@@ -9,11 +9,15 @@ using UnityEngine.SceneManagement;
 public class Ball : MonoBehaviour    
 {
     public playermovementballgame movementscript;
+    //ball components
     public Collider2D ballHitBox;
     Rigidbody2D body;
     Transform trans;
     public SpriteRenderer sprite;
     ParticleSystem partsys;
+    [SerializeField] Sprite player1sprite;
+    [SerializeField] Sprite player2sprite;
+    //ball values
     public bool isRedPlayer1;
     public float mag;
     public float lastMag;
@@ -21,6 +25,7 @@ public class Ball : MonoBehaviour
     public float maxMag;
     public float inc;
     public Vector2 vecNorm;
+    //start values
     public Vector3 start1 = new Vector3(-8, 0, 0);
     public Vector3 start2 = new Vector3(8, 0, 0);
 
