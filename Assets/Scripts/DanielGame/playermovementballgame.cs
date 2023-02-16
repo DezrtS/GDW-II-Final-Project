@@ -165,11 +165,11 @@ public class playermovementballgame : MonoBehaviour
         }
         else if(attackCoolOff == 0 & attackTime ==0)//when off cool down
         {
-            attackBoxRend.color = Color.grey;
+            attackBoxRend.color = Color.green;
         }
         else
         {
-            attackBoxRend.color = Color.green;//when on cool down
+            attackBoxRend.color = Color.grey;//when on cool down
         }
     }
 

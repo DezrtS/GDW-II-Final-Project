@@ -2046,7 +2046,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   attackBoxObject: {fileID: 659707515}
   attackTime: 0
-  attackTimeMax: 45
+  attackTimeMax: 60
   attackCoolOff: 0
   attackCoolOffMax: 180
   upDirection: {x: 0, y: 0}
@@ -2362,7 +2362,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   attackBoxObject: {fileID: 1012724218}
   attackTime: 0
-  attackTimeMax: 45
+  attackTimeMax: 60
   attackCoolOff: 0
   attackCoolOffMax: 180
   upDirection: {x: 0, y: 0}
