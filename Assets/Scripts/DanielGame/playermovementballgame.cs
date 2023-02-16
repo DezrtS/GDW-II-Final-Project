@@ -159,14 +159,17 @@ public class playermovementballgame : MonoBehaviour
 
     void AttackBoxReady()
     {
-        
-        if(attackCoolOff == 0)
+        if(attackTime > 0)//when active
+        {
+            attackBoxRend.color = Color.yellow;
+        }
+        else if(attackCoolOff == 0 & attackTime ==0)//when off cool down
         {
             attackBoxRend.color = Color.grey;
         }
         else
         {
-            attackBoxRend.color = Color.green;
+            attackBoxRend.color = Color.green;//when on cool down
         }
     }
 
