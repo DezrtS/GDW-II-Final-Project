@@ -11,29 +11,44 @@ using UnityEngine;
 public class playermovementballgame : MonoBehaviour
 {
     [SerializeField] Ball ballScript;
-    Collider2D hitBox;
+    //player components
+    public Collider2D hitBox;
     Rigidbody2D body;
     Transform trans;
-    Collider2D attackBox;
     public SpriteRenderer sprite;
-    //[SerializeField] GameObject attackBox;
+    
+    //Attack values
+    [SerializeField] GameObject attackBoxObject;
+    SpriteRenderer attackBoxRend;
+    Collider2D attackBox;
     public int attackTime;
     public int attackTimeMax;
+    public int attackCoolOff;
+    public int attackCoolOffMax;
+    public Vector2 upDirection;
+    
+    //Movement values
     public float speed;
     public float rotationStr;
     public float steeringInput;
     public float moveInput;
     public bool buttonInput;
     public bool isPlayer1;
-    public Vector2 upDirection;
+
+    public Vector3 startPos;
+    public quaternion startRot;
     // Start is called before the first frame update
     void Start()
     {
-        hitBox = GetComponent<PolygonCollider2D>();
+        hitBox = GetComponent<CircleCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
-        attackBox = GetComponent<CircleCollider2D>();
+        startPos = trans.position;
+        startRot = trans.rotation;
+        attackBox = attackBoxObject.GetComponentInChildren<PolygonCollider2D>();
+        attackBoxRend = attackBoxObject.GetComponentInChildren<SpriteRenderer>();
+
         if (isPlayer1)
         {
             sprite.color = Color.red;
@@ -50,20 +65,22 @@ public class playermovementballgame : MonoBehaviour
         FindUp();
         FindInputs();
         Attack();
-        
-        // create an if statment/function to get only the axis that you need
+        AttackBoxReady();
+        //Respawn();  
     }
 
     void FixedUpdate()
     {
+        AntiCollision();
         Movement();
     }
 
-    void Attack()
+        void Attack()
     {
-        if (buttonInput)
+        if (buttonInput && attackCoolOff == 0)
         {
             attackTime = attackTimeMax;
+            attackCoolOff = attackCoolOffMax;
         }
         if (attackTime > 0)
         {
@@ -73,8 +90,20 @@ public class playermovementballgame : MonoBehaviour
         } 
         else
         {
+            if(attackCoolOff > 0)
+            {
+                attackCoolOff--;
+            }
             attackBox.enabled = false;
         }
+        //if (attackBox.enabled)
+        //{
+        //    attackBoxObject.SetActive(true);
+        //}
+        //else
+        //{
+        //    attackBoxObject.SetActive(false);
+        //}
     }
     void Movement()
     {
@@ -92,6 +121,18 @@ public class playermovementballgame : MonoBehaviour
         //{
         //    hitBox.enabled = true;
         //}
+    }
+
+    void AntiCollision()
+    {
+        if (ballScript.sprite.color == sprite.color)
+        {
+            Physics2D.IgnoreCollision(ballScript.ballHitBox, hitBox , true);
+        }
+        else if (ballScript.sprite.color != sprite.color)
+        {
+            Physics2D.IgnoreCollision(ballScript.ballHitBox, hitBox, false);
+        }
     }
     public Vector2 FindUp()
     {
@@ -113,6 +154,22 @@ public class playermovementballgame : MonoBehaviour
             steeringInput = Input.GetAxis("Horizontal2");
             moveInput = Input.GetAxis("Vertical2");
             buttonInput = Input.GetButtonDown("Fire2");
+        }
+    }
+
+    void AttackBoxReady()
+    {
+        if(attackTime > 0)//when active
+        {
+            attackBoxRend.color = Color.yellow;
+        }
+        else if(attackCoolOff == 0 & attackTime ==0)//when off cool down
+        {
+            attackBoxRend.color = Color.green;
+        }
+        else
+        {
+            attackBoxRend.color = Color.grey;//when on cool down
         }
     }
 

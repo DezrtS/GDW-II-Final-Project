@@ -5,33 +5,18 @@ using UnityEngine;
 public class RotateController : MonoBehaviour
 {
     private Rigidbody2D rig;
-    [SerializeField] float maxRotationSpeed;
-
-    private void Start()
+    [SerializeField] private bool overrideRotation = false;
+    [SerializeField] private float rotationsPerSecond = 0;
+    void Start()
     {
         rig = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    void Update()
     {
-        if (rig.angularVelocity > maxRotationSpeed)
+        if (overrideRotation)
         {
-            rig.angularVelocity = maxRotationSpeed;
-        }
-        else if (rig.angularVelocity < -maxRotationSpeed)
-        {
-            rig.angularVelocity = -maxRotationSpeed;
-        }
-    }
-
-    private void LateUpdate()
-    {
-        if (rig.angularVelocity > maxRotationSpeed)
-        {
-            rig.angularVelocity = maxRotationSpeed;
-        } else if (rig.angularVelocity < -maxRotationSpeed)
-        {
-            rig.angularVelocity = -maxRotationSpeed;
+            rig.angularVelocity = rotationsPerSecond * 360;
         }
     }
 }

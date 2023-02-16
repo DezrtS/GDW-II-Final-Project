@@ -7,6 +7,10 @@ TagManager:
   - Bullet
   - P1
   - P2
+  - Projectile
+  - Rotating Paddle
+  - Lava
+  - ball
   - Can0
   layers:
   - Default
@@ -15,15 +19,15 @@ TagManager:
   - Bullet
   - Water
   - UI
+  - Walls
+  - Projectile
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Object
+  - Ignore
   - 
   - 
   - 
