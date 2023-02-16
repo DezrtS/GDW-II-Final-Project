@@ -114,13 +114,4 @@ public class Player : MonoBehaviour
         groundNormal = Vector3.right;
         grounded = false;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Projectile"))
-        {
-            transform.position = startingPosition;
-        }
-    }
-
 }

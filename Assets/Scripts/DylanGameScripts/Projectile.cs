@@ -70,7 +70,7 @@ public class Projectile : MonoBehaviour
         {
             if (collision.CompareTag("Player2"))
             {
-                PlayerScoreManager.UpdatePlayerScore("Player1");
+                PlayerScoreManager.UpdatePlayerScore("Player2");
                 Destroy(gameObject);
 
                 // Destroy all other projectiles in the scene
@@ -88,7 +88,7 @@ public class Projectile : MonoBehaviour
         {
             if (collision.CompareTag("Player1"))
             {
-                PlayerScoreManager.UpdatePlayerScore("Player2");
+                PlayerScoreManager.UpdatePlayerScore("Player1");
                 Destroy(gameObject);
 
                 // Destroy all other projectiles in the scene
