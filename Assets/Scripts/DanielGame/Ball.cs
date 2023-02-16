@@ -23,6 +23,8 @@ public class Ball : MonoBehaviour
     public Vector2 vecNorm;
     public Vector3 start1 = new Vector3(-10, 0, 0);
     public Vector3 start2 = new Vector3(10, 0, 0);
+
+    public bool respawnfullreset;
     // Start is called before the first frame update
     void Start()
     {
@@ -92,11 +94,11 @@ public class Ball : MonoBehaviour
             //    Physics2D.IgnoreCollision(movementscript.hitBox, ballHitBox);
             //}
         }
-        GetMagnitude();
-        if(mag != targetMag)
-        {
-            mag = targetMag;
-        }
+        //GetMagnitude();
+        //if(mag != targetMag)
+        //{
+        //    mag = targetMag;
+        //}
         //if (mag >= lastMag) 
         //{
         //    targetMag = mag; 
@@ -114,9 +116,9 @@ public class Ball : MonoBehaviour
         //    targetMag = maxMag;
         //}
         
-        BallSpeed();
-        GetMagnitude();
-        lastMag = mag;
+        //BallSpeed();
+        //GetMagnitude();
+        //lastMag = mag;
     }
 
     void BallSpeed()
@@ -138,29 +140,34 @@ public class Ball : MonoBehaviour
 
     public void Respawn(GameObject player)
     {
-        ////player reset
-        //player.transform.position = movementscript.startPos;
-        //player.transform.rotation = movementscript.startRot;
-        //player.SetActive(true);
-        ////ball reset
-        //targetMag = 0;
-        //body.velocity = new Vector2(0f, 0f);
-        //movementscript = player.GetComponent<playermovementballgame>();
-        //if (movementscript.sprite.color == Color.red)
-        //{
-        //    trans.position = start1;
-        //    sprite.color = Color.red;
-        //}
-        //else if (movementscript.sprite.color == Color.blue)
-        //{
-        //    trans.position = start2;
-        //    sprite.color = Color.blue;
-        //}
+        if (respawnfullreset)
+        {
+            // | resets scene
+            // V
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex); Start();
+        }
+        else
+        {
+            //player reset
+            player.transform.position = movementscript.startPos;
+            player.transform.rotation = movementscript.startRot;
+            player.SetActive(true);
+            //ball reset
+            targetMag = 0;
+            body.velocity = new Vector2(0f, 0f);
+            movementscript = player.GetComponent<playermovementballgame>();
+            if (movementscript.sprite.color == Color.red)
+            {
+                trans.position = start1;
+                sprite.color = Color.red;
+            }
+            else if (movementscript.sprite.color == Color.blue)
+            {
+                trans.position = start2;
+                sprite.color = Color.blue;
+            }
+        }
 
-
-        // | resets scene
-        // V
         
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);Start();
     }
 }
