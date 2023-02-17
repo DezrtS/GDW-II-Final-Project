@@ -49,14 +49,14 @@ public class Projectile : MonoBehaviour
     {
         Vector3 direction = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.R))
-        {
-            direction += transform.right;
-        }
-        if (Input.GetKey(KeyCode.R))
-        {
-            direction += transform.right;
-        }
+        //if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.R))
+        //{
+        //    direction += transform.right;
+        //}
+        //if (Input.GetKey(KeyCode.R))
+        //{
+        //    direction += transform.right;
+        //}
         /*if (Input.GetKey(KeyCode.R))
         {
             direction += Vector3.up;

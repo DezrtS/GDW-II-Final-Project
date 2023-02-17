@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
         groundNormal = Quaternion.Euler(0, 0, -90) * groundContactPoint.normal;
         //Debug.Log(groundContactPoint.collider.gameObject.name);
-        if (groundContactPoint.normal.y < 0.60f)
+        if (groundContactPoint.normal.y < 0.50f)
         {
             grounded = false; 
             groundNormal = Vector3.right;
