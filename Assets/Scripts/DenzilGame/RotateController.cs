@@ -13,9 +13,9 @@ public class RotateController : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
         if (startAtRandomRotation)
         {
-            transform.eulerAngles = new Vector3(0, 0, Random.Range(-30, 30));
+            transform.eulerAngles = new Vector3(0, 0, Random.Range(-45, 45));
         }
-        rotationsPerSecond = (Random.Range(-10, 10) / 100f);
+        rotationsPerSecond = (Random.Range(2, 8) * Mathf.Sign(Random.Range(-1, 0)) / 100f);
     }
 
     void Update()

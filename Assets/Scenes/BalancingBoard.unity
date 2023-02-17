@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 16163534}
   - component: {fileID: 16163533}
   - component: {fileID: 16163538}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rotating Platform
   m_TagString: Rotating Paddle
   m_Icon: {fileID: 0}
@@ -181,52 +181,32 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 16163535}
     m_ColliderPaths:
-    - - X: 40000041
-        Y: -5000099
-      - X: 40000100
-        Y: -5000040
-      - X: 40000100
-        Y: 5000041
-      - X: 40000041
-        Y: 5000100
-      - X: 29999959
-        Y: 5000099
-      - X: 29999900
-        Y: 5000040
-      - X: 29999900
+    - - X: -30000000
         Y: 5000000
-      - X: -29999900
+      - X: -30000000
+        Y: 4999999
+      - X: -40000000
         Y: 5000000
-      - X: -29999900
-        Y: 5000040
-      - X: -29999959
-        Y: 5000099
-      - X: -40000041
-        Y: 5000100
-      - X: -40000100
-        Y: 5000041
-      - X: -40000100
-        Y: -5000040
-      - X: -40000041
-        Y: -5000099
-      - X: -29999959
-        Y: -5000100
-      - X: -29999900
-        Y: -5000041
-      - X: -29999900
+      - X: -40000000
+        Y: -4999999
+      - X: -30000000
         Y: -5000000
-      - X: 29999900
+      - X: 30000000
         Y: -5000000
-      - X: 29999900
-        Y: -5000041
-      - X: 29999959
-        Y: -5000100
+      - X: 40000000
+        Y: -4999999
+      - X: 40000000
+        Y: 5000000
+      - X: 30000000
+        Y: 4999999
+      - X: 30000000
+        Y: 5000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 3.999981, y: -0.500004}
-      - {x: 3.9999747, y: 0.50001}
-      - {x: -4.00001, y: 0.49997482}
-      - {x: -3.999981, y: -0.500004}
+    - - {x: 3.999971, y: -0.4999999}
+      - {x: 3.999971, y: 0.5}
+      - {x: -4, y: 0.4999707}
+      - {x: -3.999971, y: -0.4999999}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &16163534
@@ -540,7 +520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overrideRotation: 1
-  startAtRandomRotation: 1
+  startAtRandomRotation: 0
   rotationsPerSecond: -0.021
 --- !u!1 &95743919
 GameObject:
@@ -659,7 +639,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.5
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -1557,7 +1537,7 @@ GameObject:
   - component: {fileID: 563213293}
   - component: {fileID: 563213292}
   - component: {fileID: 563213291}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rotating Platform (1)
   m_TagString: Rotating Paddle
   m_Icon: {fileID: 0}
@@ -1593,7 +1573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overrideRotation: 1
-  startAtRandomRotation: 1
+  startAtRandomRotation: 0
   rotationsPerSecond: 0.021
 --- !u!66 &563213292
 CompositeCollider2D:
@@ -2072,7 +2052,7 @@ GameObject:
   - component: {fileID: 744385240}
   - component: {fileID: 744385239}
   - component: {fileID: 744385238}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rotating Platform (6)
   m_TagString: Rotating Paddle
   m_Icon: {fileID: 0}
@@ -2890,7 +2870,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.5
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -2996,7 +2976,7 @@ GameObject:
   - component: {fileID: 1228583133}
   - component: {fileID: 1228583132}
   - component: {fileID: 1228583131}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rotating Platform (2)
   m_TagString: Rotating Paddle
   m_Icon: {fileID: 0}
@@ -3694,10 +3674,10 @@ CompositeCollider2D:
   m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
-    - - {x: 9.99997, y: -0.5}
-      - {x: 9.99997, y: 0.5}
-      - {x: -10, y: 0.4999707}
-      - {x: -9.99997, y: -0.5}
+    - - {x: 9.999981, y: -0.500004}
+      - {x: 9.999974, y: 0.50001}
+      - {x: -10.00001, y: 0.49997482}
+      - {x: -9.999981, y: -0.500004}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &1424023476
@@ -3798,9 +3778,9 @@ Tilemap:
   - first: {x: -10, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 6
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 2
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
@@ -3979,7 +3959,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
@@ -3988,9 +3968,9 @@ Tilemap:
   - first: {x: 9, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 6
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 1
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
@@ -4003,14 +3983,14 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: 11400000, guid: 5c898ed1844f637459c09dfad108df86, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 966583a9fe396904fb235d98553e0338, type: 2}
   - m_RefCount: 17
     m_Data: {fileID: 11400000, guid: 64f86e7bf2fcbf44783bf1aa927b6084, type: 2}
-  - m_RefCount: 2
-    m_Data: {fileID: 11400000, guid: 779cfd35b11ba1b4d8d3b8ea71356cae, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -4018,16 +3998,16 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: 217755262, guid: 48b023469c3dfd647bc3b5ad2a4cb0f1, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 600816753, guid: 48b023469c3dfd647bc3b5ad2a4cb0f1, type: 3}
   - m_RefCount: 17
     m_Data: {fileID: 2142924646, guid: 48b023469c3dfd647bc3b5ad2a4cb0f1, type: 3}
-  - m_RefCount: 2
-    m_Data: {fileID: 594321058, guid: 48b023469c3dfd647bc3b5ad2a4cb0f1, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 600816753, guid: 48b023469c3dfd647bc3b5ad2a4cb0f1, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 20
+  - m_RefCount: 18
     m_Data:
       e00: 1
       e01: 0
@@ -4035,6 +4015,42 @@ Tilemap:
       e03: 0
       e10: 0
       e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - m_RefCount: 1
+    m_Data:
+      e00: 0.000000059604645
+      e01: 0.99999994
+      e02: 0
+      e03: 0
+      e10: -0.99999994
+      e11: 0.000000059604645
+      e12: -0
+      e13: 0
+      e20: -0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  - m_RefCount: 1
+    m_Data:
+      e00: 0.000000059604645
+      e01: -0.99999994
+      e02: 0
+      e03: 0
+      e10: 0.99999994
+      e11: 0.000000059604645
       e12: 0
       e13: 0
       e20: 0
@@ -7387,7 +7403,7 @@ GameObject:
   - component: {fileID: 1685203396}
   - component: {fileID: 1685203395}
   - component: {fileID: 1685203394}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rotating Platform (5)
   m_TagString: Rotating Paddle
   m_Icon: {fileID: 0}
@@ -8242,7 +8258,7 @@ GameObject:
   - component: {fileID: 1714621909}
   - component: {fileID: 1714621908}
   - component: {fileID: 1714621907}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rotating Platform (4)
   m_TagString: Rotating Paddle
   m_Icon: {fileID: 0}
@@ -9585,69 +9601,31 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1733770723}
     m_ColliderPaths:
-    - - X: -149999959
-        Y: 140000100
-      - X: -160000041
-        Y: 140000100
-      - X: -160000100
-        Y: 140000041
-      - X: -160000100
-        Y: 59999959
-      - X: -160000041
-        Y: 59999900
+    - - X: -150000000
+        Y: -80000000
+      - X: -150000000
+        Y: 140000000
       - X: -160000000
-        Y: 59999900
+        Y: 140000000
       - X: -160000000
         Y: -90000000
       - X: 160000000
         Y: -90000000
       - X: 160000000
-        Y: 79999900
-      - X: 160000041
-        Y: 79999900
-      - X: 160000100
-        Y: 79999959
-      - X: 160000100
-        Y: 140000041
-      - X: 160000041
-        Y: 140000100
-      - X: 149999959
-        Y: 140000100
-      - X: 149999900
-        Y: 140000041
-      - X: 149999900
-        Y: 79999959
-      - X: 149999959
-        Y: 79999900
+        Y: 140000000
       - X: 150000000
-        Y: 79999900
+        Y: 140000000
       - X: 150000000
         Y: -80000000
-      - X: -150000000
-        Y: -80000000
-      - X: -150000000
-        Y: 59999900
-      - X: -149999959
-        Y: 59999900
-      - X: -149999900
-        Y: 59999959
-      - X: -149999900
-        Y: 79999900
-      - X: -149999959
-        Y: 79999900
-      - X: -149999900
-        Y: 79999959
-      - X: -149999900
-        Y: 140000041
   m_CompositePaths:
     m_Paths:
     - - {x: 15.999971, y: -9}
-      - {x: 15.999974, y: 14.00001}
-      - {x: 14.99999, y: 13.999974}
+      - {x: 15.999971, y: 14}
+      - {x: 15, y: 13.999971}
       - {x: 14.999971, y: -8}
       - {x: -15, y: -7.9999704}
-      - {x: -15.000026, y: 14.00001}
-      - {x: -16.00001, y: 13.999974}
+      - {x: -15.000029, y: 14}
+      - {x: -16, y: 13.999971}
       - {x: -15.999971, y: -9}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
@@ -9703,7 +9681,7 @@ GameObject:
   - component: {fileID: 1735274824}
   - component: {fileID: 1735274823}
   - component: {fileID: 1735274822}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rotating Platform (3)
   m_TagString: Rotating Paddle
   m_Icon: {fileID: 0}
