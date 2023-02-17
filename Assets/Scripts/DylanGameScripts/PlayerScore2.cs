@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerScore : MonoBehaviour
+public class PlayerScore2 : MonoBehaviour
 {
-    public Text player1ScoreText;
-
-    private int player1Score = 0;
+    public Text player2ScoreText;
+    private int player2Score = 0;
 
     private void OnEnable()
     {
@@ -21,10 +20,10 @@ public class PlayerScore : MonoBehaviour
 
     private void UpdateScoreText(string playerName)
     {
-        if (playerName == "Player1")
+        if (playerName == "Player2")
         {
-            player1Score++;
-            player1ScoreText.text = "Player 1 Hits: " + player1Score;
+            player2Score++;
+            player2ScoreText.text = "Player 2 Hits: " + player2Score;
         }
     }
 }

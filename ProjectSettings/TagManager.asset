@@ -12,6 +12,10 @@ TagManager:
   - Lava
   - ball
   - Can0
+  - Player1
+  - Player2
+  - ProjectilePlayer1
+  - ProjectilePlayer2
   layers:
   - Default
   - TransparentFX
@@ -21,7 +25,7 @@ TagManager:
   - UI
   - Walls
   - Projectile
-  - 
+  - Player
   - 
   - 
   - 
