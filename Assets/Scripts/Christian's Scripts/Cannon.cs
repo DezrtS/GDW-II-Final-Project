@@ -56,7 +56,7 @@ public class Cannon : MonoBehaviour
             {
                 var bullet = Instantiate(bulletPre, spawn.position, spawn.rotation);
                 bullet.GetComponent<Rigidbody2D>().velocity = distance * bulletSpeed;
-                Destroy(bullet, 2);
+                Destroy(bullet, 3);
             }
 
 
@@ -64,7 +64,7 @@ public class Cannon : MonoBehaviour
             {
                 var bulletP2 = Instantiate(bulletPre, spawn.position, spawn.rotation);
                 bulletP2.GetComponent<Rigidbody2D>().velocity = distanceP2 * bulletSpeed;
-               Destroy(bulletP2, 2);
+               Destroy(bulletP2, 3);
             }
 
 

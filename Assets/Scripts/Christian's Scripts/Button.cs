@@ -19,12 +19,6 @@ public class Button : MonoBehaviour
 
     }
 
-    private void Awake()
-    {
-       
-    }
-
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,6 +37,14 @@ public class Button : MonoBehaviour
            sprite.color = Color.blue;
         }
      
+
+       if(collision.gameObject.tag == "Button")
+        {
+            
+                gameObject.transform.position = gameObject.transform.position +  new Vector3(1,0);
+        }
+
+       
 
     }
 
