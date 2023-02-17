@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Debug Weapon
   m_EditorClassIdentifier: 
   weaponName: Debug
-  knockbackAmount: 5
+  knockbackAmount: 7
   timeTillAttack: 0.5
-  attackRadius: 0.75
-  attackRange: 0.5
+  attackRadius: 1
+  attackRange: 0.75
