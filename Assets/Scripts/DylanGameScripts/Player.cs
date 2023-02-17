@@ -15,17 +15,16 @@ public class Player : MonoBehaviour
     private Vector3 gravityVelocity;
     private float knockback;
     private float screenWidth;
-    private Vector3 startPosition;
     private int score = 0;
+    public Vector3 startingPosition;
 
     float jump;
-    private GameObject projectileReference; // Add this line
+    private GameObject projectileReference;
 
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
-        startPosition = transform.position;
     }
 
     private void OnBecameInvisible()
@@ -115,34 +114,4 @@ public class Player : MonoBehaviour
         groundNormal = Vector3.right;
         grounded = false;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
-            foreach (GameObject projectile in projectiles)
-            {
-                Destroy(projectile);
-                score++;
-            }
-        }
-    }
-
-    public int GetScore(int score)
-    {
-        return score;
-    }
-
-    /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Projectile"))
-        {
-            // Only destroy the colliding projectile
-            Destroy(collision.gameObject);
-        }
-    }*/
-
-
-
 }

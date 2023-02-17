@@ -8,10 +8,20 @@ public class Projectile : MonoBehaviour
     private float screenWidth;
     private Vector3 originalVelocity;
 
+    public float speed1 = 10f;
+    public float lifeTime = 2f;
+
+    private Rigidbody2D rb;
+
+    private float startingTime;
+
     private void Start()
     {
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
         originalVelocity = GetComponent<Rigidbody2D>().velocity;
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = transform.right * speed1;
+        //Destroy(gameObject, lifeTime);
     }
 
     private void OnBecameInvisible()
@@ -54,12 +64,43 @@ public class Projectile : MonoBehaviour
         transform.position += direction * speed * Time.deltaTime;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Projectile"))
+        if (gameObject.CompareTag("ProjectilePlayer1"))
         {
-            // Only destroy the colliding projectile
-            Destroy(collision.gameObject);
+            if (collision.CompareTag("Player2"))
+            {
+                PlayerScoreManager.UpdatePlayerScore("Player2");
+                Destroy(gameObject);
+
+                // Destroy all other projectiles in the scene
+                Projectile[] allProjectiles = FindObjectsOfType<Projectile>();
+                foreach (Projectile projectile in allProjectiles)
+                {
+                    if (projectile.gameObject != gameObject)
+                    {
+                        Destroy(projectile.gameObject);
+                    }
+                }
+            }
+        }
+        else if (gameObject.CompareTag("ProjectilePlayer2"))
+        {
+            if (collision.CompareTag("Player1"))
+            {
+                PlayerScoreManager.UpdatePlayerScore("Player1");
+                Destroy(gameObject);
+
+                // Destroy all other projectiles in the scene
+                Projectile[] allProjectiles = FindObjectsOfType<Projectile>();
+                foreach (Projectile projectile in allProjectiles)
+                {
+                    if (projectile.gameObject != gameObject)
+                    {
+                        Destroy(projectile.gameObject);
+                    }
+                }
+            }
         }
     }
 
