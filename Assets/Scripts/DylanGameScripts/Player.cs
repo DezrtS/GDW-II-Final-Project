@@ -21,8 +21,11 @@ public class Player : MonoBehaviour
     float jump;
     private GameObject projectileReference;
 
+    private Animator anim;
+
     private void Start()
     {
+        anim = GetComponent<Animator>();
         rig = GetComponent<Rigidbody2D>();
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
     }
@@ -43,10 +46,20 @@ public class Player : MonoBehaviour
     {
         float movementInput;
         float jumpInput;
+
         if (isPlayerOne)
         {
             movementInput = Input.GetAxis("Horizontal");
             jumpInput = Input.GetAxis("Vertical");
+
+            if (movementInput == 0)
+            {
+                anim.SetBool("isRunning", false);
+            }
+            else
+            {
+                anim.SetBool("isRunning", true);
+            }
         }
         else
         {
@@ -56,7 +69,13 @@ public class Player : MonoBehaviour
 
         if (grounded && jumpInput > 0)
         {
+            //anim.SetTrigger("Player1Jump");
             rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
+           // anim.SetBool("isJumping", false);
+        }
+        else
+        {
+            //anim.SetBool("isJumping", true);
         }
         transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
     }

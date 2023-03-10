@@ -82,6 +82,8 @@ public class Projectile : MonoBehaviour
                         Destroy(projectile.gameObject);
                     }
                 }
+
+                Camera.main.GetComponent<ShakeBehaviour>().TriggerShake();
             }
         }
         else if (gameObject.CompareTag("ProjectilePlayer2"))
@@ -100,6 +102,8 @@ public class Projectile : MonoBehaviour
                         Destroy(projectile.gameObject);
                     }
                 }
+
+                Camera.main.GetComponent<ShakeBehaviour>().TriggerShake();
             }
         }
     }
