@@ -8,7 +8,7 @@ public class Object : MonoBehaviour
     {
         if (collision.gameObject != gameObject && collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerMovement>().ApplyKnockback((collision.transform.position - transform.position).normalized * 5);
+            collision.gameObject.GetComponent<MovementV2>().ApplyKnockback((collision.transform.position - transform.position).normalized * 10);
         }
     }
 
