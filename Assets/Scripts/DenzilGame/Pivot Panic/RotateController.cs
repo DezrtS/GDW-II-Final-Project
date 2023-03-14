@@ -15,7 +15,7 @@ public class RotateController : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(0, 0, Random.Range(-45, 45));
         }
-        rotationsPerSecond = (Random.Range(2, 8) * Mathf.Sign(Random.Range(-1, 0)) / 100f);
+        rotationsPerSecond = (Random.Range(2, 8) * Mathf.Sign(Random.Range(-1, 1)) / 100f);
     }
 
     void Update()
