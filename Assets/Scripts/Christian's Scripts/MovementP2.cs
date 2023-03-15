@@ -7,6 +7,8 @@ public class MovementP2 : MonoBehaviour
     [SerializeField] private float playerSpeed = 10f;
     public Rigidbody2D body;
 
+    [SerializeField] Hearts heartScript;
+
     Vector2 move;
 
     int p2Health = 3;
@@ -14,6 +16,7 @@ public class MovementP2 : MonoBehaviour
     void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
+        heartScript = gameObject.GetComponent<Hearts>();
     }
 
     // Update is called once per frame
@@ -64,13 +67,13 @@ public class MovementP2 : MonoBehaviour
     {
         if(collision.gameObject.tag == "Bullet")
         {
-            p2Health--;
+            heartScript.subtractHealth();
         }
     }
 
 
     public int ReturnP2Health()
     {
-        return p2Health;
+        return (heartScript.returnHealth());
     }
 }

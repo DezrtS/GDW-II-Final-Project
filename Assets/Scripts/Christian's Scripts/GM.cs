@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GM : MonoBehaviour
 {
+
+    
     public Movement p1;
     public MovementP2 p2;
     public ButtonSpawner spawner;
@@ -38,12 +40,14 @@ public class GM : MonoBehaviour
 
         if (p1.ReturnP1Health() == 0)
         {
-            Debug.Log("p1 loses, game done");
+            Debug.Log("P2 WINS");
+            
         }
 
         if(p2.ReturnP2Health() == 0)
         {
-            Debug.Log("p2 loses, game done");
+            Debug.Log("P1 WINS");
+            P1Score.Instance.AddScore(1);
         }
         
     }

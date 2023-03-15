@@ -5,9 +5,6 @@ using UnityEngine;
 public class Player1Movement : MonoBehaviour
 {
     [SerializeField] private float playerSpeed = 4;
-    [SerializeField] private float minBouncePower = 1f;
-    [SerializeField] private float maxBouncePower = 5f;
-    [SerializeField] private float bouncePowerIncrement = 0.5f;
     [SerializeField] private float respawnTime = 2f;
 
     public Rigidbody2D body;
@@ -16,7 +13,6 @@ public class Player1Movement : MonoBehaviour
 
     [SerializeField] private bool isPlayerOne;
 
-    private float bouncePower = 0f;
     private bool isRespawning = false;
     private Vector2 respawnPosition;
 
@@ -112,7 +108,7 @@ public class Player1Movement : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    /*void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2"))
         {
@@ -158,5 +154,5 @@ public class Player1Movement : MonoBehaviour
     {
         isRespawning = false;
         bouncePower = minBouncePower;
-    }
+    }*/
 }
