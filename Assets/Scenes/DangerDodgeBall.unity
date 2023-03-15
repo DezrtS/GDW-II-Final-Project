@@ -1964,6 +1964,7 @@ GameObject:
   - component: {fileID: 1089111832}
   - component: {fileID: 1089111831}
   - component: {fileID: 1089111830}
+  - component: {fileID: 1089111835}
   - component: {fileID: 1089111829}
   - component: {fileID: 1089111833}
   - component: {fileID: 1089111834}
@@ -1989,18 +1990,12 @@ MonoBehaviour:
   ballScript: {fileID: 2077661301}
   hitBox: {fileID: 0}
   sprite: {fileID: 0}
-  attackBoxObject: {fileID: 659707515}
-  attackTime: 0
-  attackTimeMax: 60
-  attackCoolOff: 0
-  attackCoolOffMax: 180
   upDirection: {x: 0, y: 0}
   speed: 10
   rotationStr: 5
   steeringInput: 0
   moveInput: 0
   buttonInput: 0
-  isPlayer1: 1
   startPos: {x: 0, y: 0, z: 0}
   startRot:
     value:
@@ -2008,6 +2003,8 @@ MonoBehaviour:
       y: 0
       z: 0
       w: 0
+  isDangerDodgeBall: 1
+  isPlayer1: 1
 --- !u!50 &1089111830
 Rigidbody2D:
   serializedVersion: 4
@@ -2141,6 +2138,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.05}
   serializedVersion: 2
   m_Radius: 0.3
+--- !u!114 &1089111835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089111828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606ca33264437494d8daf639e7efb7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackBoxObject: {fileID: 659707515}
+  attackTime: 0
+  attackTimeMax: 30
+  attackCoolOff: 0
+  attackCoolOffMax: 180
+  upDirection: {x: 0, y: 0}
 --- !u!1 &1866257847
 GameObject:
   m_ObjectHideFlags: 0
@@ -3746,6 +3761,7 @@ GameObject:
   - component: {fileID: 2062219418}
   - component: {fileID: 2062219417}
   - component: {fileID: 2062219416}
+  - component: {fileID: 2062219419}
   - component: {fileID: 2062219415}
   - component: {fileID: 2062219414}
   - component: {fileID: 2062219413}
@@ -3815,18 +3831,12 @@ MonoBehaviour:
   ballScript: {fileID: 2077661301}
   hitBox: {fileID: 0}
   sprite: {fileID: 0}
-  attackBoxObject: {fileID: 1012724218}
-  attackTime: 0
-  attackTimeMax: 60
-  attackCoolOff: 0
-  attackCoolOffMax: 180
   upDirection: {x: 0, y: 0}
   speed: 10
   rotationStr: 5
   steeringInput: 0
   moveInput: 0
   buttonInput: 0
-  isPlayer1: 0
   startPos: {x: 0, y: 0, z: 0}
   startRot:
     value:
@@ -3834,6 +3844,8 @@ MonoBehaviour:
       y: 0
       z: 0
       w: 0
+  isDangerDodgeBall: 1
+  isPlayer1: 0
 --- !u!50 &2062219416
 Rigidbody2D:
   serializedVersion: 4
@@ -3923,6 +3935,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &2062219419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062219412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606ca33264437494d8daf639e7efb7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackBoxObject: {fileID: 1012724218}
+  attackTime: 0
+  attackTimeMax: 30
+  attackCoolOff: 0
+  attackCoolOffMax: 180
+  upDirection: {x: 0, y: 0}
 --- !u!1 &2077661296
 GameObject:
   m_ObjectHideFlags: 0

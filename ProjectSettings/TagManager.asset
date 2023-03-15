@@ -16,6 +16,11 @@ TagManager:
   - Player2
   - ProjectilePlayer1
   - ProjectilePlayer2
+  - Trail
+  - Reset
+  - Boundary
+  - Platform
+  - BounceObject
   layers:
   - Default
   - TransparentFX
