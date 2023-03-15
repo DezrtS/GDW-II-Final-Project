@@ -25,7 +25,7 @@ public class Trail : MonoBehaviour
 
     private void FixedUpdate()
     {
-        spriteShapeController.spline.SetPosition(spriteShapeController.spline.GetPointCount() - 1, transform.position - trail.transform.position - transform.up * 0.15f);
+        spriteShapeController.spline.SetPosition(spriteShapeController.spline.GetPointCount() - 1, transform.position - trail.transform.position - transform.up * 0.25f);
     }
 
     IEnumerator UpdateTrail()
