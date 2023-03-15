@@ -9,6 +9,8 @@ public class MovementV2 : MonoBehaviour
     [SerializeField] private float speed = 1;
     [SerializeField] private float jumpPower = 1;
     [SerializeField] private bool isPlayerOne;
+    [SerializeField] Hearts heartScript;
+    
 
     private bool grounded;
     private Vector3 groundNormal = Vector3.right;
@@ -18,6 +20,7 @@ public class MovementV2 : MonoBehaviour
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        heartScript = gameObject.GetComponent<Hearts>();
     }
 
     private void FixedUpdate()
@@ -109,9 +112,13 @@ public class MovementV2 : MonoBehaviour
         {
             rig.drag = 25;
             gameObject.layer = 12;
+            heartScript.subtractHealth();
+
         } else if (collision.gameObject.tag == "Reset")
         {
+            
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            
         }
     }
 }

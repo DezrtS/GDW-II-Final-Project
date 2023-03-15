@@ -54,4 +54,9 @@ public class Hearts : MonoBehaviour
     {
         return health;
     }
+
+    public void setHealth(int num)
+    {
+        health = num;
+    }
 }
