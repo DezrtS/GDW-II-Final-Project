@@ -11,6 +11,10 @@ public class Trail : MonoBehaviour
     SpriteShapeController spriteShapeController;
 
     int trailIndex = 2;
+    int updateCount = 0;
+
+    [SerializeField] int pointsTillExtend = 10;
+    [SerializeField] int trailLength = 10;
 
 
     void Start()
@@ -19,12 +23,29 @@ public class Trail : MonoBehaviour
         StartCoroutine(UpdateTrail());
     }
 
+    private void FixedUpdate()
+    {
+        spriteShapeController.spline.SetPosition(spriteShapeController.spline.GetPointCount() - 1, transform.position - trail.transform.position - transform.up * 0.15f);
+    }
+
     IEnumerator UpdateTrail()
     {
         yield return new WaitForSeconds(trailUpdateFrequency);
         spriteShapeController.spline.InsertPointAt(trailIndex, transform.position - trail.transform.position - transform.up * 0.15f);
         spriteShapeController.spline.SetTangentMode(trailIndex, ShapeTangentMode.Continuous);
-        trailIndex++;
+        if (trailIndex >= trailLength)
+        {
+            spriteShapeController.spline.RemovePointAt(0);
+            updateCount++;
+            if (updateCount >= pointsTillExtend)
+            {
+                trailLength++;
+                updateCount = 0;
+            }
+        } else
+        {
+            trailIndex++;
+        }
         StartCoroutine(UpdateTrail());
     }
 }

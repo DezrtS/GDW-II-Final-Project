@@ -107,6 +107,10 @@ public class MovementV2 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Lava")
         {
+            rig.drag = 25;
+            gameObject.layer = 12;
+        } else if (collision.gameObject.tag == "Reset")
+        {
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         }
     }
