@@ -342,8 +342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 8.5
-  moveSpeed: 5
-  cooldownTime: 2
+  moveSpeed: 0.5
+  cooldownTime: 1
 --- !u!1 &962846197
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 962846200}
   - component: {fileID: 962846202}
   - component: {fileID: 962846203}
+  - component: {fileID: 962846204}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -425,8 +426,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 962846197}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.43, y: -3.65, z: -6.4428573}
-  m_LocalScale: {x: 4.7287707, y: 4.7287707, z: 4.7287707}
+  m_LocalPosition: {x: 4.57, y: -3.65, z: -6.4428573}
+  m_LocalScale: {x: 2.0253, y: 2.0253, z: 2.0253}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1892086120}
@@ -449,7 +450,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.45, y: 0.35}
+    oldSize: {x: 0.703125, y: 0.546875}
     newSize: {x: 0.45, y: 0.35}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -474,7 +475,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: aac6039d0989eb34786580489c81a1db, type: 2}
+  m_Material: {fileID: 6200000, guid: 27099835a99ef4cc8a7d4aca5183baf8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -492,9 +493,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 4
-  minBouncePower: 2
-  maxBouncePower: 10
-  bouncePowerIncrement: 2
   respawnTime: 2
   body: {fileID: 962846201}
   gameCamera: {fileID: 655200810}
@@ -511,6 +509,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711ab10f19a4c4f66bb6c9ff3b10dbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &962846204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962846197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75661759e3e3a4a27b6198457db6c231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minBouncePower: 2
+  maxBouncePower: 10
+  powerIncrease: 2
+  body: {fileID: 962846201}
 --- !u!1 &1182712256
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +539,7 @@ GameObject:
   - component: {fileID: 1182712257}
   - component: {fileID: 1182712262}
   - component: {fileID: 1182712263}
+  - component: {fileID: 1182712264}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -548,7 +563,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: aac6039d0989eb34786580489c81a1db, type: 2}
+  m_Material: {fileID: 6200000, guid: 27099835a99ef4cc8a7d4aca5183baf8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -639,8 +654,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182712256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: -3.55, z: -6.4428573}
-  m_LocalScale: {x: 3.1630566, y: 3.1630566, z: 3.1630566}
+  m_LocalPosition: {x: 0, y: -3.55, z: -6.4428573}
+  m_LocalScale: {x: 2.0076, y: 2.0076, z: 2.0076}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1892086120}
@@ -659,9 +674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 4
-  minBouncePower: 2
-  maxBouncePower: 10
-  bouncePowerIncrement: 2
   respawnTime: 2
   body: {fileID: 1182712257}
   gameCamera: {fileID: 655200810}
@@ -678,6 +690,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711ab10f19a4c4f66bb6c9ff3b10dbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1182712264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182712256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75661759e3e3a4a27b6198457db6c231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minBouncePower: 2
+  maxBouncePower: 10
+  powerIncrease: 2
+  body: {fileID: 1182712257}
 --- !u!1 &1462682954
 GameObject:
   m_ObjectHideFlags: 0

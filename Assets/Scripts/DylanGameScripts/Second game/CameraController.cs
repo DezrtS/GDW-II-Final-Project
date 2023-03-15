@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float radius = 5f;
-    public float moveSpeed = 1f;
+    public float moveSpeed = 0.1f;
     public float cooldownTime = 3f;
 
     private Vector3 targetPosition;
@@ -14,7 +14,6 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        // Start with a random target position
         targetPosition = GetRandomPosition();
     }
 
@@ -22,10 +21,8 @@ public class CameraController : MonoBehaviour
     {
         if (isMoving)
         {
-            // Move towards the target position
             transform.position = Vector3.Lerp(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-            // Check if we've reached the target position
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
                 isMoving = false;
@@ -34,7 +31,6 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            // Check if we need to start moving again
             if (cooldownTimer > 0)
             {
                 cooldownTimer -= Time.deltaTime;
@@ -49,7 +45,6 @@ public class CameraController : MonoBehaviour
 
     private Vector3 GetRandomPosition()
     {
-        // Get a random point inside a circle with radius 'radius'
         Vector2 randomPoint = Random.insideUnitCircle * radius;
         Vector3 newPosition = transform.position + new Vector3(randomPoint.x, randomPoint.y, 0f);
         return newPosition;
