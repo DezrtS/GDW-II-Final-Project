@@ -18,6 +18,8 @@ TagManager:
   - ProjectilePlayer2
   - Trail
   - Boundary
+  - Platform
+  - BounceObject
   layers:
   - Default
   - TransparentFX

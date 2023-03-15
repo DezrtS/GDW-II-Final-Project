@@ -116,22 +116,41 @@ public class Player1Movement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player1") || collision.gameObject.CompareTag("Player2"))
         {
-            // Calculate bounce power based on the number of collisions
-            int numCollisions = collision.contacts.Length;
-            bouncePower = Mathf.Clamp(bouncePower + numCollisions * bouncePowerIncrement, minBouncePower, maxBouncePower);
+            Debug.Log("What's up");
 
-            // Bounce both players off each other
-            Vector2 direction = (body.position - collision.rigidbody.position).normalized;
-            body.velocity = direction * bouncePower;
-            collision.rigidbody.velocity = -direction * bouncePower;
+            if (collision.contacts.Length > 0)
+            {
+                int numCollisions = collision.contacts.Length;
+                bouncePower = Mathf.Clamp(bouncePower + numCollisions * bouncePowerIncrement, minBouncePower, maxBouncePower);
+
+                Vector2 direction = (body.position - collision.rigidbody.position).normalized;
+                body.velocity = direction * bouncePower;
+                collision.rigidbody.velocity = -direction * bouncePower;
+            }
+            else
+            {
+                Debug.Log("Hello your game sucks");
+            }
         }
         else if (collision.gameObject.CompareTag("Boundary"))
         {
-            // Respawn the player in the middle of the camera
             isRespawning = true;
             body.velocity = Vector2.zero;
             transform.position = Vector3.zero;
-            Invoke("ResetRespawn", 1f); // Reset respawn after 1 second delay
+            Invoke("ResetRespawn", 1f); 
+        }
+        else if (collision.gameObject.CompareTag("BounceObject"))
+        {
+            // Bounce off prefab
+            if (collision.contacts.Length > 0)
+            {
+                int numCollisions = collision.contacts.Length;
+                bouncePower = Mathf.Clamp(bouncePower + numCollisions * bouncePowerIncrement, minBouncePower, maxBouncePower);
+
+                Vector2 direction = (body.position - collision.rigidbody.position).normalized;
+                body.velocity = direction * bouncePower;
+                collision.rigidbody.velocity = -direction * bouncePower;
+            }
         }
     }
 

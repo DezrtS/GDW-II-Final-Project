@@ -4,22 +4,55 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float cameraSpeed = 5f;
-    private Vector3 startPos;
+    public float radius = 5f;
+    public float moveSpeed = 1f;
+    public float cooldownTime = 3f;
 
-    // Start is called before the first frame update
-    void Start()
+    private Vector3 targetPosition;
+    private bool isMoving = false;
+    private float cooldownTimer = 0f;
+
+    private void Start()
     {
-        startPos = transform.position;
+        // Start with a random target position
+        targetPosition = GetRandomPosition();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.position += transform.forward * cameraSpeed * Time.deltaTime;
+        if (isMoving)
+        {
+            // Move towards the target position
+            transform.position = Vector3.Lerp(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-        Vector3 pos = startPos;
-        pos.x += Mathf.Sin(Time.time * cameraSpeed) * 2f; 
-        transform.position = new Vector3(pos.x, transform.position.y, pos.z);  
+            // Check if we've reached the target position
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            {
+                isMoving = false;
+                cooldownTimer = cooldownTime;
+            }
+        }
+        else
+        {
+            // Check if we need to start moving again
+            if (cooldownTimer > 0)
+            {
+                cooldownTimer -= Time.deltaTime;
+            }
+            else
+            {
+                targetPosition = GetRandomPosition();
+                isMoving = true;
+            }
+        }
+    }
+
+    private Vector3 GetRandomPosition()
+    {
+        // Get a random point inside a circle with radius 'radius'
+        Vector2 randomPoint = Random.insideUnitCircle * radius;
+        Vector3 newPosition = transform.position + new Vector3(randomPoint.x, randomPoint.y, 0f);
+        return newPosition;
     }
 }
+
