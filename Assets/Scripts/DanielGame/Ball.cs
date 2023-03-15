@@ -46,13 +46,13 @@ public class Ball : MonoBehaviour
         if (randomNum == 2) 
         {
             isRedPlayer1 = false;
-            sprite.color = Color.blue;
+            //sprite.color = Color.blue;
             trans.position = start2;
         } 
         else if( randomNum == 1)
         {
             isRedPlayer1 = true;
-            sprite.color = Color.red;
+            //sprite.color = Color.red;
             trans.position = start1;
         }
     }
@@ -72,7 +72,7 @@ public class Ball : MonoBehaviour
     {
         movementscript = collision.gameObject.GetComponentInParent<playermovementballgame>();
         //UnityEngine.Debug.Log("hit");
-        sprite.color = movementscript.sprite.color;
+        //sprite.color = movementscript.sprite.color;
         vecNorm = movementscript.FindUp();
         if(targetMag == 0)
         {
@@ -90,41 +90,13 @@ public class Ball : MonoBehaviour
         {
             movementscript = collision.gameObject.GetComponent<playermovementballgame>();
             
-            if (movementscript.sprite.color != sprite.color)
+            if (movementscript.isPlayer1 != isRedPlayer1)
             {
                 Respawn(collision.gameObject);
-                //collision.gameObject.SetActive(false);
+                
             }
-            //else if (movementscript.sprite.color == sprite.color)
-            //{
-            //    Physics2D.IgnoreCollision(movementscript.hitBox, ballHitBox);
-            //}
+            
         }
-        //GetMagnitude();
-        //if(mag != targetMag)
-        //{
-        //    mag = targetMag;
-        //}
-        //if (mag >= lastMag) 
-        //{
-        //    targetMag = mag; 
-        //}
-        //else
-        //{
-        //    targetMag = lastMag;
-        //}
-        //if (targetMag <= maxMag)
-        //{
-        //    //targetMag = targetMag + inc;
-        //}
-        //else
-        //{
-        //    targetMag = maxMag;
-        //}
-        
-        //BallSpeed();
-        //GetMagnitude();
-        //lastMag = mag;
     }
 
     void BallSpeed()
@@ -162,18 +134,17 @@ public class Ball : MonoBehaviour
             targetMag = 0;
             body.velocity = new Vector2(0f, 0f);
             movementscript = player.GetComponent<playermovementballgame>();
-            if (movementscript.sprite.color == Color.red)
+            if (movementscript.isPlayer1)
             {
                 trans.position = start1;
-                sprite.color = Color.red;
+                isRedPlayer1 = true;
             }
-            else if (movementscript.sprite.color == Color.blue)
+            else if (movementscript.isPlayer1 == false)//player 2 blue
             {
                 trans.position = start2;
-                sprite.color = Color.blue;
+                isRedPlayer1 = false;
             }
+            //isRedPlayer1 = movementscript.isPlayer1;
         }
-
-        
     }
 }
