@@ -66,8 +66,12 @@ public class TronMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Trail" || collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Trail")
         {
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        } else if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Tie");
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         }
     }
