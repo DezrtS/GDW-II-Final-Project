@@ -407,8 +407,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerOne: 1
-  speed: 5
+  regularSpeed: 5
+  fasterSpeed: 10
   rotationSpeed: 5
+  trail: {fileID: 1785066602}
 --- !u!212 &1785066598
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -510,7 +512,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trail: {fileID: 42807727}
-  trailUpdateFrequency: 0.1
+  trailUpdateFrequency: 0.01
+  pointsTillExtend: 10
+  trailLength: 20
 --- !u!61 &1785066603
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -12,8 +12,11 @@ public class TronMovement : MonoBehaviour
 
     Rigidbody2D rig;
 
-    [SerializeField] float speed = 5;
+    [SerializeField] float regularSpeed = 5;
+    [SerializeField] float fasterSpeed = 10;
     [SerializeField] float rotationSpeed = 5;
+
+    [SerializeField] Trail trail;
 
     void Start()
     {
@@ -49,6 +52,14 @@ public class TronMovement : MonoBehaviour
 
     void Move()
     {
+        float speed;
+        if (Input.GetAxis(verticalInput) > 0)
+        {
+            speed = fasterSpeed;
+        } else
+        {
+            speed = regularSpeed;
+        }
         rig.MovePosition(rig.position + (Vector2)transform.up * speed * Time.fixedDeltaTime);
         transform.Rotate(0f, 0f, -Input.GetAxis(horizontalInput) * rotationSpeed, Space.Self);
     }

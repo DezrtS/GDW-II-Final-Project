@@ -17,6 +17,7 @@ TagManager:
   - ProjectilePlayer1
   - ProjectilePlayer2
   - Trail
+  - Reset
   layers:
   - Default
   - TransparentFX
