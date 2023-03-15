@@ -6,7 +6,7 @@ public class StartUp : MonoBehaviour
 {
     public SpriteRenderer title;
     public SpriteRenderer titleLogo;
-    float size = 0.01f;
+    float size = 0.004f;
     public AudioSource flicker;
     public AudioSource music;
     // public Button startButton;

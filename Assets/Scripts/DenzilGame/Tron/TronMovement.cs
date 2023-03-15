@@ -16,12 +16,15 @@ public class TronMovement : MonoBehaviour
     [SerializeField] float fasterSpeed = 10;
     [SerializeField] float rotationSpeed = 5;
 
+    [SerializeField] Hearts heartScript;
+
     [SerializeField] Trail trail;
 
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         SetupPlayerInput();
+        heartScript = gameObject.GetComponent<Hearts>();
     }
 
     void Update()
@@ -68,6 +71,7 @@ public class TronMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Trail")
         {
+            heartScript.subtractHealth();
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         } else if (collision.gameObject.tag == "Player")
         {
