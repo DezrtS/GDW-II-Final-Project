@@ -9,7 +9,9 @@ public class MovementV2 : MonoBehaviour
     [SerializeField] private float speed = 1;
     [SerializeField] private float jumpPower = 1;
     [SerializeField] private bool isPlayerOne;
+
     [SerializeField] Hearts heartScript;
+
     [SerializeField] HeartsKeeper heartsKeeper;
     [SerializeField] HeartsKeeperManager heartsKeeperManager;
     
@@ -145,7 +147,7 @@ public class MovementV2 : MonoBehaviour
             } else
             {
                 heartsKeeperManager.ResetHealths = false;
-                SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
     }
