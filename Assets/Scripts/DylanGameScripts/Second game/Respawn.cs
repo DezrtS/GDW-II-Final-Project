@@ -6,9 +6,18 @@ public class Respawn : MonoBehaviour
 {
     private Camera mainCamera;
 
+    int player1Health = 3;
+    int player2Health = 3;
+
+    [SerializeField] private bool isPlayerOne;
+
+    [SerializeField] Hearts heartScript;
+
+
     private void Start()
     {
         mainCamera = Camera.main;
+        heartScript = gameObject.GetComponent<Hearts>();
     }
 
     private void OnBecameInvisible()
@@ -37,6 +46,25 @@ public class Respawn : MonoBehaviour
 
         Vector3 cameraPos = mainCamera.transform.position;
         transform.position = new Vector3(cameraPos.x, cameraPos.y, transform.position.z);
+
+        if (isPlayerOne)
+        {
+            heartScript.subtractHealth();
+        }
+        else
+        {
+            heartScript.subtractHealth();
+        }
+    }
+
+    public int ReturnP1Health()
+    {
+        return (heartScript.returnHealth());
+    }
+
+    public int ReturnP2Health()
+    {
+        return (heartScript.returnHealth());
     }
 }
 
