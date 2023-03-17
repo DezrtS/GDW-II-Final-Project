@@ -18,8 +18,38 @@ public class LoadGame1 : MonoBehaviour
         
     }
 
-    public void LoadScene()
+    public void LoadDangerDodgeball ()
     {
-        SceneManager.LoadScene("bounceball");
+        SceneManager.LoadScene("DangerDodgeBall");
     }
+
+    public void LoadPivotPanic()
+    {
+        SceneManager.LoadScene("PivotPanic");
+    }
+    public void LoadButtonBullets()
+    {
+        SceneManager.LoadScene("Bullet Buttons");
+    }
+
+    public void LoadPilotPush()
+    {
+        SceneManager.LoadScene("PilotPush");
+    }
+
+    public void LoadRichochetRumbel()
+    {
+        SceneManager.LoadScene("RicohetRumble");
+    }
+
+    public void LoadSavageShooter()
+    {
+        SceneManager.LoadScene("SavageShooter");
+    }
+
+    public void TrailTrapper()
+    {
+        SceneManager.LoadScene("TrailTrappers");
+    }
+
 }
