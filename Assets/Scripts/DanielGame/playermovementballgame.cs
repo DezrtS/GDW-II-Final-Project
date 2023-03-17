@@ -10,7 +10,9 @@ using UnityEngine;
 
 public class playermovementballgame : MonoBehaviour
 {
+    //Collects Scripts
     [SerializeField] Ball ballScript;
+    [SerializeField] Hearts heartScript;
     //player components
     public Collider2D hitBox;
     Rigidbody2D body;
@@ -69,6 +71,7 @@ public class playermovementballgame : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
+        heartScript = gameObject.GetComponent<Hearts>();
         startPos = trans.position;
         startRot = trans.rotation;
         //attackBox = attackBoxObject.GetComponentInChildren<PolygonCollider2D>();

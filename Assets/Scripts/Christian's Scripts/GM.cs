@@ -42,6 +42,7 @@ public class GM : MonoBehaviour
         {
             Debug.Log("P2 WINS");
             
+            
         }
 
         if(p2.ReturnP2Health() == 0)

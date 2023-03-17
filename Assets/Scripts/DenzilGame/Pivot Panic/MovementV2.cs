@@ -10,6 +10,12 @@ public class MovementV2 : MonoBehaviour
     [SerializeField] private float jumpPower = 1;
     [SerializeField] private bool isPlayerOne;
 
+    [SerializeField] Hearts heartScript;
+
+    [SerializeField] HeartsKeeper heartsKeeper;
+    [SerializeField] HeartsKeeperManager heartsKeeperManager;
+    
+
     private bool grounded;
     private Vector3 groundNormal = Vector3.right;
     Vector3 normal = Vector3.right;
@@ -17,7 +23,22 @@ public class MovementV2 : MonoBehaviour
 
     private void Start()
     {
+        if (heartsKeeperManager.ResetHealths)
+        {
+            heartsKeeper.ResetHealth();
+        }
+        if (heartsKeeperManager.OtherPlayerReset)
+        {
+            heartsKeeperManager.ResetHealths = true;
+            heartsKeeperManager.OtherPlayerReset = false;
+        }
+        else
+        {
+            heartsKeeperManager.OtherPlayerReset = true;
+        }
         rig = GetComponent<Rigidbody2D>();
+        heartScript = gameObject.GetComponent<Hearts>();
+        heartScript.setHealth(heartsKeeper.health);
     }
 
     private void FixedUpdate()
@@ -109,9 +130,25 @@ public class MovementV2 : MonoBehaviour
         {
             rig.drag = 25;
             gameObject.layer = 12;
+            heartScript.subtractHealth();
+            heartsKeeper.health--;
+
         } else if (collision.gameObject.tag == "Reset")
         {
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            if (heartScript.returnHealth() <= 0)
+            {
+                if (isPlayerOne)
+                {
+                    Debug.Log("Player Two Wins");
+                } else
+                {
+                    Debug.Log("Player One Wins");
+                }
+            } else
+            {
+                heartsKeeperManager.ResetHealths = false;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 }

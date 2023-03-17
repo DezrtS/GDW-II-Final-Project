@@ -15,12 +15,20 @@ public class Projectile : MonoBehaviour
 
     private float startingTime;
 
+    int player1Health = 3;
+    int player2Health = 3;
+
+    [SerializeField] private bool isPlayerOne;
+
+    [SerializeField] Hearts heartScript;
+
     private void Start()
     {
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
         originalVelocity = GetComponent<Rigidbody2D>().velocity;
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * speed1;
+        heartScript = gameObject.GetComponent<Hearts>();
         //Destroy(gameObject, lifeTime);
     }
 
@@ -73,6 +81,11 @@ public class Projectile : MonoBehaviour
                 PlayerScoreManager.UpdatePlayerScore("Player2");
                 Destroy(gameObject);
 
+                if (!isPlayerOne)
+                {
+                    heartScript.subtractHealth();
+                }
+
                 // Destroy all other projectiles in the scene
                 Projectile[] allProjectiles = FindObjectsOfType<Projectile>();
                 foreach (Projectile projectile in allProjectiles)
@@ -93,6 +106,11 @@ public class Projectile : MonoBehaviour
                 PlayerScoreManager.UpdatePlayerScore("Player1");
                 Destroy(gameObject);
 
+                if (isPlayerOne)
+                {
+                    heartScript.subtractHealth();
+                }
+
                 // Destroy all other projectiles in the scene
                 Projectile[] allProjectiles = FindObjectsOfType<Projectile>();
                 foreach (Projectile projectile in allProjectiles)
@@ -108,4 +126,13 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    public int ReturnP1Health()
+    {
+        return (heartScript.returnHealth());
+    }
+
+    public int ReturnP2Health()
+    {
+        return (heartScript.returnHealth());
+    }
 }

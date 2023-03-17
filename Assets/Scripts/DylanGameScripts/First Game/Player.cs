@@ -54,11 +54,11 @@ public class Player : MonoBehaviour
 
             if (movementInput == 0)
             {
-                anim.SetBool("isRunning", false);
+                //anim.SetBool("isRunning", false);
             }
             else
             {
-                anim.SetBool("isRunning", true);
+                //anim.SetBool("isRunning", true);
             }
         }
         else

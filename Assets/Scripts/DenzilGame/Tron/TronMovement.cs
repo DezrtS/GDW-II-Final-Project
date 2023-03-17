@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.U2D;
 
 public class TronMovement : MonoBehaviour
 {
@@ -16,12 +15,32 @@ public class TronMovement : MonoBehaviour
     [SerializeField] float fasterSpeed = 10;
     [SerializeField] float rotationSpeed = 5;
 
+    [SerializeField] Hearts heartScript;
+
+    [SerializeField] HeartsKeeper heartsKeeper;
+    [SerializeField] HeartsKeeperManager heartsKeeperManager;
+
     [SerializeField] Trail trail;
 
     void Start()
     {
+        if (heartsKeeperManager.ResetHealths)
+        {
+            heartsKeeper.ResetHealth();
+        }
+        if (heartsKeeperManager.OtherPlayerReset)
+        {
+            heartsKeeperManager.ResetHealths = true;
+            heartsKeeperManager.OtherPlayerReset = false;
+        }
+        else
+        {
+            heartsKeeperManager.OtherPlayerReset = true;
+        }
         rig = GetComponent<Rigidbody2D>();
         SetupPlayerInput();
+        heartScript = gameObject.GetComponent<Hearts>();
+        heartScript.setHealth(heartsKeeper.health);
     }
 
     void Update()
@@ -66,9 +85,32 @@ public class TronMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Trail" || collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Trail")
         {
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            heartScript.subtractHealth();
+            heartsKeeper.health--;
+            if (heartScript.returnHealth() <= 0)
+            {
+                if (isPlayerOne)
+                {
+                    Debug.Log("Player Two Wins");
+                }
+                else
+                {
+                    Debug.Log("Player One Wins");
+                }
+                trail.StopAllCoroutines();
+            }
+            else
+            {
+                heartsKeeperManager.ResetHealths = false;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        } else if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Tie");
+            heartsKeeperManager.ResetHealths = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

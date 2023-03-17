@@ -16,6 +16,8 @@ public class Trail : MonoBehaviour
     [SerializeField] int pointsTillExtend = 10;
     [SerializeField] int trailLength = 10;
 
+    bool resetPosition = true;
+    Vector3 position;
 
     void Start()
     {
@@ -25,27 +27,40 @@ public class Trail : MonoBehaviour
 
     private void FixedUpdate()
     {
-        spriteShapeController.spline.SetPosition(spriteShapeController.spline.GetPointCount() - 1, transform.position - trail.transform.position - transform.up * 0.15f);
+        spriteShapeController.spline.SetPosition(spriteShapeController.spline.GetPointCount() - 1, transform.position - trail.transform.position - transform.up * 0.25f);
     }
 
     IEnumerator UpdateTrail()
     {
-        yield return new WaitForSeconds(trailUpdateFrequency);
-        spriteShapeController.spline.InsertPointAt(trailIndex, transform.position - trail.transform.position - transform.up * 0.15f);
-        spriteShapeController.spline.SetTangentMode(trailIndex, ShapeTangentMode.Continuous);
-        if (trailIndex >= trailLength)
+        yield return new WaitForSeconds(trailUpdateFrequency / 2);
+        if (resetPosition)
         {
-            spriteShapeController.spline.RemovePointAt(0);
-            updateCount++;
-            if (updateCount >= pointsTillExtend)
+            position = transform.position - trail.transform.position - transform.up * 0.15f;
+            resetPosition = false;
+        }
+        yield return new WaitForSeconds(trailUpdateFrequency / 2);
+        spriteShapeController.spline.SetPosition(spriteShapeController.spline.GetPointCount() - 1, position);
+        if ((transform.position - trail.transform.position - transform.up * 0.15f - position).magnitude > 0.15f)
+        {
+            resetPosition = true;
+            spriteShapeController.spline.InsertPointAt(trailIndex, transform.position - trail.transform.position - transform.up * 0.15f);
+            spriteShapeController.spline.SetTangentMode(trailIndex, ShapeTangentMode.Continuous);
+            if (trailIndex >= trailLength)
             {
-                trailLength++;
-                updateCount = 0;
+                spriteShapeController.spline.RemovePointAt(0);
+                updateCount++;
+                if (updateCount >= pointsTillExtend)
+                {
+                    trailLength++;
+                    updateCount = 0;
+                }
             }
-        } else
-        {
-            trailIndex++;
+            else
+            {
+                trailIndex++;
+            }
         }
         StartCoroutine(UpdateTrail());
+        
     }
 }

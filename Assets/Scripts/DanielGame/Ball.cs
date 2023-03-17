@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class Ball : MonoBehaviour    
 {
     public playermovementballgame movementscript;
+    public Hearts heartScript;
     //ball components
     public Collider2D ballHitBox;
     Rigidbody2D body;
@@ -118,6 +119,8 @@ public class Ball : MonoBehaviour
 
     public void Respawn(GameObject player)
     {
+
+
         if (respawnfullreset)
         {
             // | resets scene
@@ -133,6 +136,7 @@ public class Ball : MonoBehaviour
             //ball reset
             targetMag = 0;
             body.velocity = new Vector2(0f, 0f);
+            heartScript = player.GetComponent<Hearts>();
             movementscript = player.GetComponent<playermovementballgame>();
             if (movementscript.isPlayer1)
             {
@@ -145,6 +149,12 @@ public class Ball : MonoBehaviour
                 isRedPlayer1 = false;
             }
             //isRedPlayer1 = movementscript.isPlayer1;
+            heartScript.subtractHealth();
+
+            if(heartScript.returnHealth() == 0)
+            {
+                UnityEngine.Debug.Log("PLayer loses");
+            }
         }
     }
 }
