@@ -9,6 +9,9 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     [SerializeField] GameObject Bullet;
     public Transform shootPosition;
 
+    [SerializeField] Animator animator;
+    Hearts hearts;
+
     Vector2 startPosition;
     public int bulletNum;
 
@@ -17,6 +20,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     {
         playermovementballgame = GetComponent<playermovementballgame>();
         startPosition = playermovementballgame.transform.position;
+        hearts = GetComponent<Hearts>();
     }
 
     // Update is called once per frame
@@ -52,6 +56,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     void Respawn()
     {
         transform.position = startPosition;
-        // this is where you do hearts--
+        hearts.subtractHealth();
+        animator.Play("");
     }
 }
