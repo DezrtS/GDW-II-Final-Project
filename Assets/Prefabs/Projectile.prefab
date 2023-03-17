@@ -123,6 +123,8 @@ MonoBehaviour:
   speed: 20
   speed1: 10
   lifeTime: 2
+  isPlayerOne: 1
+  heartScript: {fileID: 0}
 --- !u!70 &5976615852627688374
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

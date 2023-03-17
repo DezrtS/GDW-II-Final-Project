@@ -6,11 +6,10 @@ public class CameraController : MonoBehaviour
 {
     public float radius = 5f;
     public float moveSpeed = 0.1f;
-    public float cooldownTime = 3f;
+    public float moveTime = 3f;
 
     private Vector3 targetPosition;
     private bool isMoving = false;
-    private float cooldownTimer = 0f;
 
     private void Start()
     {
@@ -19,28 +18,29 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (isMoving)
+        if (!isMoving)
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            StartCoroutine(MoveToPosition(targetPosition));
+        }
+    }
 
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-            {
-                isMoving = false;
-                cooldownTimer = cooldownTime;
-            }
-        }
-        else
+    private IEnumerator MoveToPosition(Vector3 position)
+    {
+        isMoving = true;
+
+        float elapsedTime = 0f;
+        Vector3 startingPosition = transform.position;
+
+        while (elapsedTime < moveTime)
         {
-            if (cooldownTimer > 0)
-            {
-                cooldownTimer -= Time.deltaTime;
-            }
-            else
-            {
-                targetPosition = GetRandomPosition();
-                isMoving = true;
-            }
+            transform.position = Vector3.Lerp(startingPosition, position, elapsedTime / moveTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+
+        transform.position = position;
+        targetPosition = GetRandomPosition();
+        isMoving = false;
     }
 
     private Vector3 GetRandomPosition()
@@ -50,4 +50,5 @@ public class CameraController : MonoBehaviour
         return newPosition;
     }
 }
+
 
