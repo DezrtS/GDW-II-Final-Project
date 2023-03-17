@@ -9,7 +9,7 @@ public class StartUp : MonoBehaviour
     float size = 0.004f;
     public AudioSource flicker;
     public AudioSource music;
-    // public Button startButton;
+    [SerializeField]  Button startButton;
 
     bool once = true;
 

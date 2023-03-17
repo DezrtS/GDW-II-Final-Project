@@ -17,4 +17,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Controls.unity
     guid: 4140ab06c1fad0a4b971f02e91f93426
+  - enabled: 1
+    path: Assets/Scenes/Bullet Buttons.unity
+    guid: 70e091604a644db428df52d0047776f1
+  - enabled: 1
+    path: Assets/Scenes/PilotPush.unity
+    guid: 62c3498de3855404d876c20800376c7a
+  - enabled: 1
+    path: Assets/Scenes/RicohetRumble.unity
+    guid: b8d6640c2caedf643bd358c20a3ac005
+  - enabled: 1
+    path: Assets/Scenes/SavageShooter.unity
+    guid: 6bba124c527b44bb3aed05ffbabbb30f
+  - enabled: 1
+    path: Assets/Scenes/TrailTrappers.unity
+    guid: 5b8a58ec0b6bf3547b1ccb16c0dca732
+  - enabled: 1
+    path: Assets/Scenes/PivotPanic.unity
+    guid: 33ae4f963f4f48f4a995c75ac8a84517
   m_configObjects: {}
