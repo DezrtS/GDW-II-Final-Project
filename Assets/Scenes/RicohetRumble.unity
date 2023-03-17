@@ -1648,6 +1648,14 @@ PrefabInstance:
       propertyPath: m_LinearDrag
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5695375417486766726, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: canPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695375417486766726, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: LethalTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5753590123565845528, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -4365,6 +4373,14 @@ PrefabInstance:
       propertyPath: m_LinearDrag
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5695375417486766726, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: canPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695375417486766726, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: LethalTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5753590123565845528, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -4457,6 +4473,14 @@ PrefabInstance:
       propertyPath: m_LinearDrag
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5695375417486766726, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: canPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695375417486766726, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: LethalTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5753590123565845528, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -4517,6 +4541,14 @@ PrefabInstance:
     - target: {fileID: 3214647244370789988, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
       propertyPath: m_LinearDrag
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695375417486766726, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: canPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695375417486766726, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: LethalTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5753590123565845528, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
       propertyPath: m_RootOrder
