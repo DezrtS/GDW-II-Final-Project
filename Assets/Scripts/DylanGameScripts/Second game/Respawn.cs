@@ -13,7 +13,6 @@ public class Respawn : MonoBehaviour
 
     [SerializeField] Hearts heartScript;
 
-
     private void Start()
     {
         mainCamera = Camera.main;
