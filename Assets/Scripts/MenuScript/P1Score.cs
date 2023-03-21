@@ -6,13 +6,19 @@ public class P1Score : Singleton<P1Score>
 {
     int score = 0;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+
     public int ReturnScore()
     {
         return score;
     }
 
-    public void AddScore(int amount)
+    public void AddScore()
     {
-        score += amount;
+        score ++;
     }
 }

@@ -102,6 +102,7 @@ public class MovementV2 : MonoBehaviour
 
         if (grounded && jumpInput > 0)
         {
+            rig.velocity = new Vector2(rig.velocity.x, 0);
             rig.AddForce(jumpPower * Vector2.up, ForceMode2D.Impulse);
             grounded = false;
         }
@@ -199,13 +200,13 @@ public class MovementV2 : MonoBehaviour
                 if (isPlayerOne)
                 {
                     Debug.Log("Player Two Wins");
-                    P2Score.Instance.AddScore(1);
+                    P2Score.Instance.AddScore();
                 } else
                 {
                     Debug.Log("Player One Wins");
-                    P1Score.Instance.AddScore(1);
+                    P1Score.Instance.AddScore();
                 }
-                StartCoroutine(PivotGameController.instance.LoadMainMenuReset());
+                SceneManager.LoadScene("GameMenu");
             } else
             {
                 if (heartsKeeper.BothPlayersAlive())

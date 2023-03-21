@@ -18,6 +18,17 @@ public class TrailGameController : MonoBehaviour
         }  
     }
 
+    public void ShortenOtherPlayerTail(bool isPlayerOne)
+    {
+        if (isPlayerOne)
+        {
+            playerTwoMovement.trail.SetTrailLength(2);
+        } else
+        {
+            playerOneMovement.trail.SetTrailLength(2);
+        }
+    }
+
     public void FreezeGame()
     {
         playerOneMovement.canMove = false;
@@ -41,6 +52,7 @@ public class TrailGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         playerOneMovement.heartsKeeper.resetHealths = false;
+        playerOneMovement.heartsKeeper.canTakeAwayHealth = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

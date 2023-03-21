@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GM : MonoBehaviour
 {
@@ -40,15 +41,17 @@ public class GM : MonoBehaviour
 
         if (p1.ReturnP1Health() == 0)
         {
-            Debug.Log("P2 WINS");
+            P2Score.Instance.AddScore();
+            SceneManager.LoadScene("GameMenu");
             
             
         }
 
         if(p2.ReturnP2Health() == 0)
         {
-            Debug.Log("P1 WINS");
-            P1Score.Instance.AddScore(1);
+            
+            P1Score.Instance.AddScore();
+            SceneManager.LoadScene("GameMenu");
         }
         
     }

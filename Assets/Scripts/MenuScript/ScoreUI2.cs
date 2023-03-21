@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
-public class ScoreTest : MonoBehaviour
+public class ScoreUI2 : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public TextMeshProUGUI scoreTextP2;
     void Start()
     {
         
-
-        //After player wins a game
-        P1Score.Instance.AddScore();
-  
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        scoreTextP2.text = P2Score.Instance.ReturnScore().ToString();
     }
 }

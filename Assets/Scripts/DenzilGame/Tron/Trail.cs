@@ -30,6 +30,11 @@ public class Trail : MonoBehaviour
         spriteShapeController.spline.SetPosition(spriteShapeController.spline.GetPointCount() - 1, transform.position - trail.transform.position - transform.up * 0.25f);
     }
 
+    public void SetTrailLength(int amount)
+    {
+        trailLength = amount;
+    }
+
     IEnumerator UpdateTrail()
     {
         yield return new WaitForSeconds(trailUpdateFrequency / 2);
