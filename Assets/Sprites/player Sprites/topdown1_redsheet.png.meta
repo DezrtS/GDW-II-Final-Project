@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 558c661a8c627104a95b198015ea93ff
+guid: 7509976d1f9fa3d479caf987c0fe536a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: character_1_0
+      name: topdown1_redsheet_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 77
-        width: 45
-        height: 35
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1127c32737c70ad408a5658682a8a369
-      internalID: 649373430
+      spriteID: 7488d6fdda6d8834a9f4508cb47884a6
+      internalID: -1756772321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_1_1
+      name: topdown1_redsheet_1
       rect:
         serializedVersion: 2
-        x: 74
-        y: 69
-        width: 45
-        height: 45
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73966266409c0ac48bb034d5eef69b87
-      internalID: 2128949905
+      spriteID: c82fa712eba6c22418329c6c63ca39c8
+      internalID: -1761594167
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_1_2
+      name: topdown1_redsheet_2
       rect:
         serializedVersion: 2
-        x: 137
-        y: 69
-        width: 45
-        height: 45
+        x: 128
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 580be6cbbe7971c4a9099cabfa15a5d6
-      internalID: -1989303433
+      spriteID: 066d61f531d96ae46be6c19375bacb74
+      internalID: 1051634746
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_1_3
+      name: topdown1_redsheet_3
       rect:
         serializedVersion: 2
-        x: 8
-        y: 13
-        width: 41
-        height: 51
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,50 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 895421c1219879f409f325d2e8948073
-      internalID: 1816342788
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: character_1_4
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 13
-        width: 41
-        height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 651880fcd29495843a354db65fb43ae0
-      internalID: 503242641
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: character_1_5
-      rect:
-        serializedVersion: 2
-        x: 136
-        y: 13
-        width: 41
-        height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ca44bb72c49a9814c940f2a6ec02d929
-      internalID: -771978894
+      spriteID: 1db3645a20cd00747b055c8db58f8c9b
+      internalID: -952005361
       vertices: []
       indices: 
       edges: []
@@ -241,12 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      character_1_4: 503242641
-      character_1_0: 649373430
-      character_1_3: 1816342788
-      character_1_5: -771978894
-      character_1_1: 2128949905
-      character_1_2: -1989303433
+      topdown1_redsheet_1: -1761594167
+      topdown1_redsheet_3: -952005361
+      topdown1_redsheet_0: -1756772321
+      topdown1_redsheet_2: 1051634746
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4a59591a55ec64db2b309e65db3eaf40
+guid: a87ef2fc6549e284ab36b5b81e986282
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: character_2_0
+      name: topdown1_bluesheet_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 77
-        width: 45
-        height: 35
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9e1691d856ff44db95e0f9b330aa0a5
-      internalID: -715872393
+      spriteID: fbebe50db42bcf143af78c535df1133e
+      internalID: -1800677078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_2_1
+      name: topdown1_bluesheet_1
       rect:
         serializedVersion: 2
-        x: 74
-        y: 69
-        width: 45
-        height: 45
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b4e021c42add40359838351570d5f2f
-      internalID: 1637567885
+      spriteID: e470319e6b2939f44838db859e9ccc14
+      internalID: 256741149
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_2_2
+      name: topdown1_bluesheet_2
       rect:
         serializedVersion: 2
-        x: 137
-        y: 69
-        width: 45
-        height: 45
+        x: 128
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 748acf2dbef834f22ae85eda593f2db3
-      internalID: 576388863
+      spriteID: 17740392f076f984e98426c00f5a0cc5
+      internalID: 1402454260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: character_2_3
+      name: topdown1_bluesheet_3
       rect:
         serializedVersion: 2
-        x: 8
-        y: 13
-        width: 41
-        height: 51
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,50 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd61387442913468da9cf9db829eda75
-      internalID: -1815251454
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: character_2_4
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 13
-        width: 41
-        height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 628ffe3cccfe94bf287419726cbed31e
-      internalID: -464604386
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: character_2_5
-      rect:
-        serializedVersion: 2
-        x: 136
-        y: 13
-        width: 41
-        height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7855b12d949e4e9a8624a68fd716891
-      internalID: -1129506247
+      spriteID: 3ee997565183aa147b9e36f7273eb94b
+      internalID: -1106371765
       vertices: []
       indices: 
       edges: []
@@ -241,12 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      character_2_2: 576388863
-      character_2_4: -464604386
-      character_2_0: -715872393
-      character_2_1: 1637567885
-      character_2_3: -1815251454
-      character_2_5: -1129506247
+      topdown1_bluesheet_3: -1106371765
+      topdown1_bluesheet_1: 256741149
+      topdown1_bluesheet_0: -1800677078
+      topdown1_bluesheet_2: 1402454260
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
