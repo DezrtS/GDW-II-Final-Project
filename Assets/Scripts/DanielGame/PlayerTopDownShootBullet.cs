@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerTopDownShootBullet : MonoBehaviour
 {
@@ -70,6 +71,20 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     {
         transform.position = startPosition;
         hearts.subtractHealth();
+        if (hearts.returnHealth() == 0)
+        {
+            UnityEngine.Debug.Log("PLayer loses");
+            if (playermovementballgame.isPlayer1)
+            {
+                P2Score.Instance.AddScore();
+            }
+            else
+            {
+                P1Score.Instance.AddScore();
+            }
+            SceneManager.LoadScene("GameMenu");
+        }
         animator.Play("");
+
     }
 }
