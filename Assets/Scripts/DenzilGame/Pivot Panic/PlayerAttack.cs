@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private KeyCode attackButton;
 
     [SerializeField] Animator animator;
+    [SerializeField] Animator attackAnimator;
 
     private bool isAttacking = false;
     private float attackDirection = 1;
@@ -37,10 +38,13 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator InitiateAttack(float timeTillAttack)
     {
-        yield return new WaitForSeconds(timeTillAttack);
+        yield return new WaitForSeconds(timeTillAttack / 2f);
+        attackAnimator.SetBool("IsAttacking", isAttacking);
+        yield return new WaitForSeconds(timeTillAttack / 2f);
         Attack();
         isAttacking = false;
         animator.SetBool("IsAttacking", isAttacking);
+        attackAnimator.SetBool("IsAttacking", isAttacking);
         GetComponent<MovementV2>().keepRotation = false;
     }
 

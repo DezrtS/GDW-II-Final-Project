@@ -79,7 +79,7 @@ public class ricohetBulletScript : MonoBehaviour
         if(collision.gameObject.tag == "Player" && canPickup == true)
         {
             PlayerTopDownShootBullet playerTopDownShoot = collision.gameObject.GetComponent<PlayerTopDownShootBullet>();
-            playerTopDownShoot.bulletNum++;
+            playerTopDownShoot.AmmoChange(true);
             Destroy(gameObject);
             
         }

@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class Ball : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMeshProUGUI;
-    Text textMag;
+    [SerializeField] Animator animator;
     //test above
     public playermovementballgame movementscript;
     public Hearts heartScript;
@@ -173,12 +173,23 @@ public class Ball : MonoBehaviour
                 isRedPlayer1 = false;
             }
             //isRedPlayer1 = movementscript.isPlayer1;
+
             heartScript.subtractHealth();
 
             if(heartScript.returnHealth() == 0)
             {
                 UnityEngine.Debug.Log("PLayer loses");
+                if (movementscript.isPlayer1)
+                {
+                    P2Score.Instance.AddScore();
+                }
+                else
+                {
+                    P1Score.Instance.AddScore();
+                }
+                SceneManager.LoadScene("GameMenu");
             }
+            animator.Play("");
         }
     }
 }
