@@ -52,6 +52,7 @@ public class TrailGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         playerOneMovement.heartsKeeper.resetHealths = false;
+        playerOneMovement.heartsKeeper.canTakeAwayHealth = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

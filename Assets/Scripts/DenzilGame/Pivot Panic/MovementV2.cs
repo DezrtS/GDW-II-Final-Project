@@ -200,11 +200,11 @@ public class MovementV2 : MonoBehaviour
                 if (isPlayerOne)
                 {
                     Debug.Log("Player Two Wins");
-                    P2Score.Instance.AddScore(1);
+                    P2Score.Instance.AddScore();
                 } else
                 {
                     Debug.Log("Player One Wins");
-                    P1Score.Instance.AddScore(1);
+                    P1Score.Instance.AddScore();
                 }
                 SceneManager.LoadScene("GameMenu");
             } else
