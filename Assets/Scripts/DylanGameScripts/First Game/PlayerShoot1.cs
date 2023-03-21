@@ -7,11 +7,19 @@ public class PlayerShoot1 : MonoBehaviour
     public Projectile projectilePrefab;
     private float timeSinceLastShot;
 
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     private void Update()
     {
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.F))
         {
             Shoot();
+            anim.SetTrigger("isShooting");
         }
 
         /*if (Input.GetKeyDown(KeyCode.Space) && Input.GetKeyDown(KeyCode.UpArrow))

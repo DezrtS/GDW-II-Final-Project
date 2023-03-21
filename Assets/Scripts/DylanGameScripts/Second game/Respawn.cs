@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Respawn : MonoBehaviour
 {
@@ -54,6 +55,23 @@ public class Respawn : MonoBehaviour
         {
             heartScript.subtractHealth();
         }
+
+        if (heartScript.returnHealth() <= 0)
+        {
+            if (isPlayerOne)
+            {
+                Debug.Log("Player Two Wins");
+                P2Score.Instance.AddScore(1);
+                LoadMainMenuReset();
+            }
+            else
+            {
+                Debug.Log("Player One Wins");
+                P1Score.Instance.AddScore(1);
+                LoadMainMenuReset();
+            }
+            FreezeGame(true);
+        }
     }
 
     public int ReturnP1Health()
@@ -64,6 +82,20 @@ public class Respawn : MonoBehaviour
     public int ReturnP2Health()
     {
         return (heartScript.returnHealth());
+    }
+
+    public void FreezeGame(bool loadMainMenu)
+    {
+        if (loadMainMenu)
+        {
+            StartCoroutine(LoadMainMenuReset());
+        }
+    }
+
+    IEnumerator LoadMainMenuReset()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("GameMenu");
     }
 }
 

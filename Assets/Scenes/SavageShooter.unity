@@ -2562,6 +2562,7 @@ GameObject:
   - component: {fileID: 1418462216}
   - component: {fileID: 1418462217}
   - component: {fileID: 1418462218}
+  - component: {fileID: 1418462219}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -2768,6 +2769,26 @@ MonoBehaviour:
   - {fileID: 1374774446}
   fullHeartSprite: {fileID: 21300000, guid: 11e12f41729326a48b5501f4939fd100, type: 3}
   emptyHeartSprite: {fileID: 21300000, guid: f34e1cb487e56ca4fb56e7eaf56e8378, type: 3}
+--- !u!95 &1418462219
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418462210}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 73c0f6b4cbfef48d1a3b3180cd811663, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1459507580
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,6 +2804,7 @@ GameObject:
   - component: {fileID: 1459507586}
   - component: {fileID: 1459507587}
   - component: {fileID: 1459507588}
+  - component: {fileID: 1459507589}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -2989,6 +3011,26 @@ MonoBehaviour:
   - {fileID: 1102763933}
   fullHeartSprite: {fileID: 21300000, guid: e96a1f202801037439dcb3c9bdb772cd, type: 3}
   emptyHeartSprite: {fileID: 21300000, guid: f34e1cb487e56ca4fb56e7eaf56e8378, type: 3}
+--- !u!95 &1459507589
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459507580}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a56e676ae302c4653b7ba3d2a4cba989, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1473631380
 GameObject:
   m_ObjectHideFlags: 0
