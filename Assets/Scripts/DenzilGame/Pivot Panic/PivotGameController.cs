@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class PivotGameController : MonoBehaviour
 {
-    public static GameController instance;
+    public static PivotGameController instance;
 
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private List<GameObject> cannons = new List<GameObject>();
@@ -33,5 +34,11 @@ public class GameController : MonoBehaviour
             }
         }
         return closestPlayer;
+    }
+
+    public IEnumerator LoadMainMenuReset()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("GameMenu");
     }
 }

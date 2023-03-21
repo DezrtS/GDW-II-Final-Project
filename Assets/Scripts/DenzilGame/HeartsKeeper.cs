@@ -5,11 +5,45 @@ using UnityEngine;
 [CreateAssetMenu]
 public class HeartsKeeper : ScriptableObject
 {
+    public bool resetHealths = true;
+    public bool otherPlayerReset = false;
+    public bool otherPlayerTakenDamage = false;
     public static int resetHealthValue = 3;
-    public int health = 3;
+    public int playerOneHealth = 3;
+    public int playerTwoHealth = 3;
 
     public void ResetHealth()
     {
-        health = resetHealthValue;
+        playerOneHealth = resetHealthValue;
+        playerTwoHealth = resetHealthValue;
+        otherPlayerTakenDamage = false;
+    }
+
+    public int GetHealth(bool isPlayerOne)
+    {
+        if (isPlayerOne)
+        {
+            return playerOneHealth;
+        } else
+        {
+            return playerTwoHealth;
+        }
+    }
+
+    public void TakeAwayHealth(bool isPlayerOne)
+    {
+        if (isPlayerOne)
+        {
+            playerOneHealth--;
+        }
+        else
+        {
+            playerTwoHealth--;
+        }
+    }
+
+    public bool BothPlayersAlive()
+    {
+        return (playerOneHealth > 0 && playerTwoHealth > 0);
     }
 }

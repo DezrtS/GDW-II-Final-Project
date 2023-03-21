@@ -17,30 +17,30 @@ public class TronMovement : MonoBehaviour
 
     [SerializeField] Hearts heartScript;
 
-    [SerializeField] HeartsKeeper heartsKeeper;
-    [SerializeField] HeartsKeeperManager heartsKeeperManager;
+    [SerializeField] public HeartsKeeper heartsKeeper;
 
     [SerializeField] Trail trail;
 
+    public bool canMove = true;
+
     void Start()
     {
-        if (heartsKeeperManager.ResetHealths)
+        if (heartsKeeper.resetHealths)
         {
             heartsKeeper.ResetHealth();
         }
-        if (heartsKeeperManager.OtherPlayerReset)
+        if (heartsKeeper.otherPlayerReset)
         {
-            heartsKeeperManager.ResetHealths = true;
-            heartsKeeperManager.OtherPlayerReset = false;
-        }
-        else
+            heartsKeeper.resetHealths = true;
+            heartsKeeper.otherPlayerReset = false;
+        } else
         {
-            heartsKeeperManager.OtherPlayerReset = true;
+            heartsKeeper.otherPlayerReset = true;
         }
         rig = GetComponent<Rigidbody2D>();
         SetupPlayerInput();
         heartScript = gameObject.GetComponent<Hearts>();
-        heartScript.setHealth(heartsKeeper.health);
+        heartScript.setHealth(heartsKeeper.GetHealth(isPlayerOne));
     }
 
     void Update()
@@ -71,46 +71,56 @@ public class TronMovement : MonoBehaviour
 
     void Move()
     {
-        float speed;
-        if (Input.GetAxis(verticalInput) > 0)
+        if (canMove)
         {
-            speed = fasterSpeed;
-        } else
-        {
-            speed = regularSpeed;
+            float speed;
+            if (Input.GetAxis(verticalInput) > 0)
+            {
+                speed = fasterSpeed;
+            }
+            else
+            {
+                speed = regularSpeed;
+            }
+            rig.MovePosition(rig.position + (Vector2)transform.up * speed * Time.fixedDeltaTime);
+            transform.Rotate(0f, 0f, -Input.GetAxis(horizontalInput) * rotationSpeed, Space.Self);
         }
-        rig.MovePosition(rig.position + (Vector2)transform.up * speed * Time.fixedDeltaTime);
-        transform.Rotate(0f, 0f, -Input.GetAxis(horizontalInput) * rotationSpeed, Space.Self);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Trail")
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Tie");
+            //heartsKeeper.resetHealths = false;
+            trail.StopAllCoroutines();
+            TrailGameController.instance.FreezeGame();
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        } else if (collision.gameObject.tag == "Trail")
         {
             heartScript.subtractHealth();
-            heartsKeeper.health--;
+            heartsKeeper.TakeAwayHealth(isPlayerOne);
             if (heartScript.returnHealth() <= 0)
             {
                 if (isPlayerOne)
                 {
                     Debug.Log("Player Two Wins");
+                    P2Score.Instance.AddScore(1);
                 }
                 else
                 {
                     Debug.Log("Player One Wins");
+                    P1Score.Instance.AddScore(1);
                 }
-                trail.StopAllCoroutines();
+                TrailGameController.instance.FreezeGame(true);
             }
             else
             {
-                heartsKeeperManager.ResetHealths = false;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                //heartsKeeper.resetHealths = false;
+                trail.StopAllCoroutines();
+                TrailGameController.instance.FreezeGame();
+                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
-        } else if (collision.gameObject.tag == "Player")
-        {
-            Debug.Log("Tie");
-            heartsKeeperManager.ResetHealths = false;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

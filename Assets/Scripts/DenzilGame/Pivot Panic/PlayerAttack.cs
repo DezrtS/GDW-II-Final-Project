@@ -10,6 +10,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Weapon playerWeapon;
     [SerializeField] private KeyCode attackButton;
 
+    [SerializeField] Animator animator;
+
     private bool isAttacking = false;
     private float attackDirection = 1;
 
@@ -18,8 +20,17 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetKeyDown(attackButton) && !isAttacking)
         {
             isAttacking = true;
-            GameObject otherPlayer = GameController.instance.GetClosestPlayer(gameObject);
+            animator.SetBool("IsAttacking", isAttacking);
+            GameObject otherPlayer = PivotGameController.instance.GetClosestPlayer(gameObject);
             attackDirection = Mathf.Sign((otherPlayer.transform.position - transform.position).x);
+            GetComponent<MovementV2>().keepRotation = true;
+            if (attackDirection > 0)
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+            } else
+            {
+                transform.eulerAngles = new Vector3(0, 180, 0);
+            }
             StartCoroutine(InitiateAttack(playerWeapon.timeTillAttack));
         }
     }
@@ -29,6 +40,8 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(timeTillAttack);
         Attack();
         isAttacking = false;
+        animator.SetBool("IsAttacking", isAttacking);
+        GetComponent<MovementV2>().keepRotation = false;
     }
 
     public void Attack()
