@@ -6,10 +6,10 @@ public class StartUp : MonoBehaviour
 {
     public SpriteRenderer title;
     public SpriteRenderer titleLogo;
-    float size = 0.004f;
+    float size = 0.05f;
     public AudioSource flicker;
     public AudioSource music;
-    [SerializeField]  Button startButton;
+    [SerializeField]  GameObject startButton;
 
     bool once = true;
 
@@ -24,7 +24,7 @@ public class StartUp : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Camera.main.orthographicSize > 9)
         {
@@ -68,6 +68,7 @@ public class StartUp : MonoBehaviour
            
 
             once = false;
+            
 
 
         }
@@ -80,6 +81,7 @@ public class StartUp : MonoBehaviour
         yield return new WaitForSeconds(3);
         titleLogo.enabled = true;
         music.Play();
+        startButton.SetActive(true);
     }
 
     
