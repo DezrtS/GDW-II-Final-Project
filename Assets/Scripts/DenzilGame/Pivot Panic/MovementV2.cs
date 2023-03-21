@@ -14,6 +14,8 @@ public class MovementV2 : MonoBehaviour
 
     [SerializeField] HeartsKeeper heartsKeeper;
     [SerializeField] HeartsKeeperManager heartsKeeperManager;
+
+    //[SerializeField] ParticleSystem groundedParticleSystem;
     
 
     private bool grounded;
@@ -91,6 +93,14 @@ public class MovementV2 : MonoBehaviour
     {
         rig.AddForce(knockback);
         this.knockback = this.knockback + knockback;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //if (collision.contacts[0].normal.x < 0.5f)
+        //{
+        //    groundedParticleSystem.Play();
+        //}
     }
 
     private void OnCollisionStay2D(Collision2D collision)
