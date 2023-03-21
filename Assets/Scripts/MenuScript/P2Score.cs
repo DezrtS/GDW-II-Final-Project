@@ -12,9 +12,9 @@ public class P2Score : Singleton<P2Score>
         return score;
     }
 
-    public void AddScore(int amount)
+    public void AddScore()
     {
-        score += amount;
+        score ++;
     }
 
 

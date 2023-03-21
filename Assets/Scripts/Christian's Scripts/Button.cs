@@ -7,7 +7,8 @@ public class Button : MonoBehaviour
 
     SpriteRenderer sprite;
     public Cannon canNum;
-    
+    public Sprite Red;
+    public Sprite Blue;
     
 
     void Start()
@@ -26,7 +27,7 @@ public class Button : MonoBehaviour
         if(collision.gameObject.tag == "P1")
         {
           canNum.SetTarget(2);
-            sprite.color = Color.red;
+            sprite.sprite = Red;
             
         }
 
@@ -34,7 +35,7 @@ public class Button : MonoBehaviour
         {
         
           canNum.SetTarget(1);
-           sprite.color = Color.blue;
+            sprite.sprite = Blue;
         }
      
 

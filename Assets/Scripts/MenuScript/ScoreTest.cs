@@ -10,7 +10,7 @@ public class ScoreTest : MonoBehaviour
         
 
         //After player wins a game
-        P1Score.Instance.AddScore(1);
+        P1Score.Instance.AddScore();
   
 
     }
