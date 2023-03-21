@@ -56,25 +56,6 @@ public class playertopdownattack : MonoBehaviour
 
     void Attack()
     {
-        //if (playermovementballgame.buttonInput && attackCoolOff == 0)
-        //{
-        //    attackTime = attackTimeMax;
-        //    attackCoolOff = attackCoolOffMax;
-        //}
-        //if (attackTime > 0)
-        //{
-        //    attackBox.enabled = true;
-
-        //    attackTime--;
-        //}
-        //else
-        //{
-        //    if (attackCoolOff > 0)
-        //    {
-        //        attackCoolOff--;
-        //    }
-        //    attackBox.enabled = false;
-        //}
         if (playermovementballgame.buttonInput && canAttack)
         {
             startTime = Time.time;
