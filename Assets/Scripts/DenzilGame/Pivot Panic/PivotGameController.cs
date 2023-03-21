@@ -35,10 +35,4 @@ public class PivotGameController : MonoBehaviour
         }
         return closestPlayer;
     }
-
-    public IEnumerator LoadMainMenuReset()
-    {
-        yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene("GameMenu");
-    }
 }
