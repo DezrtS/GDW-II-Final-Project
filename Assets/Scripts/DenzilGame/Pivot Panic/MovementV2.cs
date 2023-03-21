@@ -13,7 +13,10 @@ public class MovementV2 : MonoBehaviour
     [SerializeField] Hearts heartScript;
 
     [SerializeField] HeartsKeeper heartsKeeper;
-    [SerializeField] HeartsKeeperManager heartsKeeperManager;
+
+    //[SerializeField] ParticleSystem groundedParticleSystem;
+    [SerializeField] ParticleSystem lavaSplash;
+    [SerializeField] Animator animator;
     
 
     private bool grounded;
@@ -21,24 +24,28 @@ public class MovementV2 : MonoBehaviour
     Vector3 normal = Vector3.right;
     private Vector3 knockback;
 
+    bool isWalking = false;
+    public bool keepRotation = false;
+
     private void Start()
     {
-        if (heartsKeeperManager.ResetHealths)
+        if (heartsKeeper.resetHealths)
         {
             heartsKeeper.ResetHealth();
         }
-        if (heartsKeeperManager.OtherPlayerReset)
+        if (heartsKeeper.otherPlayerReset)
         {
-            heartsKeeperManager.ResetHealths = true;
-            heartsKeeperManager.OtherPlayerReset = false;
+            heartsKeeper.resetHealths = true;
+            heartsKeeper.otherPlayerReset = false;
         }
         else
         {
-            heartsKeeperManager.OtherPlayerReset = true;
+            heartsKeeper.otherPlayerReset = true;
         }
         rig = GetComponent<Rigidbody2D>();
         heartScript = gameObject.GetComponent<Hearts>();
-        heartScript.setHealth(heartsKeeper.health);
+        heartScript.setHealth(heartsKeeper.GetHealth(isPlayerOne));
+        //animator.SetBool("IsGrounded", grounded);
     }
 
     private void FixedUpdate()
@@ -62,6 +69,33 @@ public class MovementV2 : MonoBehaviour
         if (Mathf.Abs(knockback.x) > 1f)
         {
             movementInput = 0;
+        }
+
+        if (movementInput != 0 && grounded)
+        {
+            if (!isWalking)
+            {
+                isWalking = true;
+                animator.SetBool("IsWalking", isWalking);
+            }
+        } else
+        {
+            if (isWalking)
+            {
+                isWalking = false;
+                animator.SetBool("IsWalking", isWalking);
+            }
+        }
+        if (!keepRotation)
+        {
+            if (movementInput > 0)
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+            else if (movementInput < 0)
+            {
+                transform.eulerAngles = new Vector3(0, 180, 0);
+            }
         }
 
         Vector3 horizontalVelocity = (movementInput * speed * Time.fixedDeltaTime * groundNormal) + (knockback);
@@ -93,6 +127,14 @@ public class MovementV2 : MonoBehaviour
         this.knockback = this.knockback + knockback;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //if (collision.contacts[0].normal.x < 0.5f)
+        //{
+        //    groundedParticleSystem.Play();
+        //}
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         Vector2 groundContactNormal = Vector2.right;
@@ -108,11 +150,14 @@ public class MovementV2 : MonoBehaviour
         groundNormal = Quaternion.Euler(0, 0, -90) * groundContactNormal;
         if (groundContactNormal.y < 0.5f)
         {
-            grounded = false;
             groundNormal = Vector3.right;
         }
         else
         {
+            //if (!grounded)
+            //{
+            //    animator.SetBool("IsGrounded", true);
+            //}
             grounded = true;
         }
         normal = groundNormal;
@@ -120,6 +165,11 @@ public class MovementV2 : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        //if (grounded)
+        //{
+        //    animator.SetBool("IsGrounded", false);
+        //}
+        grounded = false;
         groundNormal = Vector3.right;
         grounded = false;
     }
@@ -128,10 +178,19 @@ public class MovementV2 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Lava")
         {
+            ShakeBehaviour.instance.TriggerShake();
+            lavaSplash.Play();
             rig.drag = 25;
             gameObject.layer = 12;
-            heartScript.subtractHealth();
-            heartsKeeper.health--;
+            if (!heartsKeeper.otherPlayerTakenDamage)
+            {
+                heartScript.subtractHealth();
+                heartsKeeper.TakeAwayHealth(isPlayerOne);
+                heartsKeeper.otherPlayerTakenDamage = true;
+            } else
+            {
+                heartsKeeper.otherPlayerTakenDamage = false;
+            }
 
         } else if (collision.gameObject.tag == "Reset")
         {
@@ -140,14 +199,21 @@ public class MovementV2 : MonoBehaviour
                 if (isPlayerOne)
                 {
                     Debug.Log("Player Two Wins");
+                    P2Score.Instance.AddScore(1);
                 } else
                 {
                     Debug.Log("Player One Wins");
+                    P1Score.Instance.AddScore(1);
                 }
+                StartCoroutine(PivotGameController.instance.LoadMainMenuReset());
             } else
             {
-                heartsKeeperManager.ResetHealths = false;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                if (heartsKeeper.BothPlayersAlive())
+                {
+                    heartsKeeper.resetHealths = false;
+                    heartsKeeper.otherPlayerTakenDamage = false;
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
             }
         }
     }

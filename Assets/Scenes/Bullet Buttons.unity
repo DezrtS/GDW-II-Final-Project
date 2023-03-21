@@ -222,12 +222,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -715872393, guid: 4a59591a55ec64db2b309e65db3eaf40, type: 3}
+  m_Sprite: {fileID: -1756772321, guid: 7509976d1f9fa3d479caf987c0fe536a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.703125, y: 0.546875}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -262,7 +262,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.75, y: 0.5}
   m_Direction: 0
 --- !u!58 &80320643
 CircleCollider2D:
@@ -918,12 +918,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 649373430, guid: 558c661a8c627104a95b198015ea93ff, type: 3}
+  m_Sprite: {fileID: -1800677078, guid: a87ef2fc6549e284ab36b5b81e986282, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -994,7 +994,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.75, y: 0.5}
   m_Direction: 0
 --- !u!114 &560974132
 MonoBehaviour:

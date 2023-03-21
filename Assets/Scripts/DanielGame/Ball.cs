@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class Ball : MonoBehaviour    
+public class Ball : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI textMeshProUGUI;
+    Text textMag;
+    //test above
     public playermovementballgame movementscript;
     public Hearts heartScript;
     //ball components
@@ -16,8 +21,8 @@ public class Ball : MonoBehaviour
     Transform trans;
     public SpriteRenderer sprite;
     ParticleSystem partsys;
-    [SerializeField] Sprite player1sprite;
-    [SerializeField] Sprite player2sprite;
+    [SerializeField] Sprite player1spriteRed;
+    [SerializeField] Sprite player2spriteBlue;
     //ball values
     public bool isRedPlayer1;
     public float mag;
@@ -48,20 +53,24 @@ public class Ball : MonoBehaviour
         {
             isRedPlayer1 = false;
             //sprite.color = Color.blue;
+            //sprite.sprite = player2spriteBlue;
             trans.position = start2;
         } 
         else if( randomNum == 1)
         {
             isRedPlayer1 = true;
             //sprite.color = Color.red;
+            //sprite.sprite = player1spriteRed;
             trans.position = start1;
         }
+        Color();
     }
 
     // Update is called once per frame
     void Update()
     {
         GetMagnitude();
+        Color();
     }
 
     void FixedUpdate()
@@ -72,17 +81,18 @@ public class Ball : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         movementscript = collision.gameObject.GetComponentInParent<playermovementballgame>();
-        //UnityEngine.Debug.Log("hit");
-        //sprite.color = movementscript.sprite.color;
+        playertopdownattack topdownattack = collision.gameObject.GetComponentInParent<playertopdownattack>();
+        topdownattack.canAttack = false; topdownattack.attackTime = Time.time; topdownattack.attackCoolOff = topdownattack.startTime + topdownattack.attackCoolOffMax;
+        isRedPlayer1 = movementscript.isPlayer1;
         vecNorm = movementscript.FindUp();
-        if(targetMag == 0)
-        {
-            targetMag = targetMag + inc*5;
-        }
+        //if(targetMag == 0)
+        //{
+        //    targetMag = targetMag + inc*5;
+        //}
         targetMag = targetMag + inc;
         body.velocity = vecNorm * targetMag;
-        partsys.emissionRate = 10 + 2*targetMag;
-        partsys.Play();
+        //partsys.emissionRate = 10 + 2*targetMag;
+        //partsys.Play();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -100,6 +110,18 @@ public class Ball : MonoBehaviour
         }
     }
 
+    public void Color()
+    {
+        if (isRedPlayer1)
+        {
+            sprite.sprite = player1spriteRed;
+        }
+        else if (isRedPlayer1 == false)
+        {
+            sprite.sprite = player2spriteBlue;
+        }
+    }
+
     void BallSpeed()
     {
         if (mag != targetMag)
@@ -108,11 +130,13 @@ public class Ball : MonoBehaviour
         }
         vecNorm = body.velocity.normalized;
         body.velocity = vecNorm*targetMag;
+        textMeshProUGUI.text = mag.ToString();
     }
 
     void GetMagnitude()
     {
         mag = body.velocity.magnitude;
+        //textMeshProUGUI.text = mag.ToString();
         //UnityEngine.Debug.Log(body.velocity.magnitude); 
         //UnityEngine.Debug.Log(mag);
     }

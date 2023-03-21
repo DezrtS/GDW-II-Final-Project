@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShakeBehaviour : MonoBehaviour
 {
+    public static ShakeBehaviour instance;
     // Transform of the GameObject you want to shake
     private Transform transform;
 
@@ -24,6 +25,11 @@ public class ShakeBehaviour : MonoBehaviour
         if (transform == null)
         {
             transform = GetComponent(typeof(Transform)) as Transform;
+        }
+
+        if (instance == null)
+        {
+            instance = this;
         }
     }
 
