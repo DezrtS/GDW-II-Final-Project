@@ -19,7 +19,7 @@ public class TronMovement : MonoBehaviour
 
     [SerializeField] public HeartsKeeper heartsKeeper;
 
-    [SerializeField] Trail trail;
+    [SerializeField] public Trail trail;
 
     public bool canMove = true;
 
@@ -121,6 +121,15 @@ public class TronMovement : MonoBehaviour
                 TrailGameController.instance.FreezeGame();
                 //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Shortener")
+        {
+            TrailGameController.instance.ShortenOtherPlayerTail(isPlayerOne);
+            Destroy(collision.gameObject);
         }
     }
 }

@@ -18,6 +18,17 @@ public class TrailGameController : MonoBehaviour
         }  
     }
 
+    public void ShortenOtherPlayerTail(bool isPlayerOne)
+    {
+        if (isPlayerOne)
+        {
+            playerTwoMovement.trail.SetTrailLength(2);
+        } else
+        {
+            playerOneMovement.trail.SetTrailLength(2);
+        }
+    }
+
     public void FreezeGame()
     {
         playerOneMovement.canMove = false;
