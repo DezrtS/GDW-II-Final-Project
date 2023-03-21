@@ -10,18 +10,23 @@ public class playertopdownattack : MonoBehaviour
     [SerializeField] GameObject attackBoxObject;
     SpriteRenderer attackBoxRend;
     playermovementballgame playermovementballgame;
+    Animator animator;
     Collider2D attackBox;
-    public int attackTime;
-    public int attackTimeMax;
-    public int attackCoolOff;
-    public int attackCoolOffMax;
+    public bool canAttack = true;
+    public float attackTime;
+    public float attackTimeMax;
+    public float attackCoolOff;
+    public float attackCoolOffMax;
     public Vector2 upDirection;
+
+    public float startTime;
     // Start is called before the first frame update
-    void Start()
+    void Start() 
     {
         playermovementballgame = GetComponent<playermovementballgame>();
-        attackBox = attackBoxObject.GetComponentInChildren<PolygonCollider2D>();
+        attackBox = attackBoxObject.GetComponentInChildren<Collider2D>();
         attackBoxRend = attackBoxObject.GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -32,40 +37,51 @@ public class playertopdownattack : MonoBehaviour
     }
     void AttackBoxReady()
     {// this will need to be changed once an animation is created
-        if (attackTime > 0)//when active
+        if (attackBox.enabled)//when active
         {
-            attackBoxRend.color = Color.yellow;
+            //attackBoxRend.color = Color.yellow;
+            animator.SetInteger("animationNum", 1);
         }
-        else if (attackCoolOff == 0 & attackTime == 0)//when off cool down
+        else if (canAttack)//when off cool down
         {
-            attackBoxRend.color = Color.green;
+            //attackBoxRend.color = Color.green;
+            animator.SetInteger("animationNum", 0);
         }
-        else
+        else//when on cool down
         {
-            attackBoxRend.color = Color.grey;//when on cool down
+            //attackBoxRend.color = Color.grey;
+            animator.SetInteger("animationNum", 2);
         }
     }
 
     void Attack()
     {
-        if (playermovementballgame.buttonInput && attackCoolOff == 0)
+        if (playermovementballgame.buttonInput && canAttack)
         {
-            attackTime = attackTimeMax;
-            attackCoolOff = attackCoolOffMax;
+            startTime = Time.time;
+            attackTime = startTime + attackTimeMax;
+            attackCoolOff = startTime + attackTimeMax + attackCoolOffMax;
+            canAttack = false;
         }
-        if (attackTime > 0)
+        if(attackTime > Time.time)
         {
             attackBox.enabled = true;
-
-            attackTime--;
         }
-        else
+        else 
         {
-            if (attackCoolOff > 0)
+            //startTime = Time.time;
+            //attackCoolOff = startTime + attackCoolOffMax;
+            //if (attackCoolOff > Time.time)
+            //{
+
+            //}
+            if (attackCoolOff < Time.time)
             {
-                attackCoolOff--;
+                canAttack = true;
+                
             }
             attackBox.enabled = false;
+            
         }
     }
 }

@@ -11,8 +11,8 @@ public class P1Score : Singleton<P1Score>
         return score;
     }
 
-    public void AddScore(int amount)
+    public void AddScore()
     {
-        score += amount;
+        score ++;
     }
 }
