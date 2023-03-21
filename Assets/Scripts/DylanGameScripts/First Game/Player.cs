@@ -52,19 +52,28 @@ public class Player : MonoBehaviour
             movementInput = Input.GetAxis("Horizontal");
             jumpInput = Input.GetAxis("Vertical");
 
-            if (movementInput == 0)
+            if (movementInput == 0 && grounded)
             {
-                //anim.SetBool("isRunning", false);
+                anim.SetBool("isRunning", false);
             }
             else
             {
-                //anim.SetBool("isRunning", true);
+                anim.SetBool("isRunning", true);
             }
         }
         else
         {
             movementInput = Input.GetAxis("Horizontal2");
             jumpInput = Input.GetAxis("Vertical2");
+
+            if (movementInput == 0 && grounded)
+            {
+                anim.SetBool("isRunning2", false);
+            }
+            else
+            {
+                anim.SetBool("isRunning2", true);
+            }
         }
 
         if (grounded && jumpInput > 0)

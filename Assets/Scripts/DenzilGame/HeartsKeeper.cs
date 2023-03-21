@@ -7,6 +7,7 @@ public class HeartsKeeper : ScriptableObject
 {
     public bool resetHealths = true;
     public bool otherPlayerReset = false;
+    public bool canTakeAwayHealth = true;
     public bool otherPlayerTakenDamage = false;
     public static int resetHealthValue = 3;
     public int playerOneHealth = 3;
@@ -17,6 +18,7 @@ public class HeartsKeeper : ScriptableObject
         playerOneHealth = resetHealthValue;
         playerTwoHealth = resetHealthValue;
         otherPlayerTakenDamage = false;
+        canTakeAwayHealth = true;
     }
 
     public int GetHealth(bool isPlayerOne)
@@ -32,13 +34,16 @@ public class HeartsKeeper : ScriptableObject
 
     public void TakeAwayHealth(bool isPlayerOne)
     {
-        if (isPlayerOne)
+        if (canTakeAwayHealth)
         {
-            playerOneHealth--;
-        }
-        else
-        {
-            playerTwoHealth--;
+            if (isPlayerOne)
+            {
+                playerOneHealth--;
+            }
+            else
+            {
+                playerTwoHealth--;
+            }
         }
     }
 

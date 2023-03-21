@@ -92,14 +92,20 @@ public class TronMovement : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Debug.Log("Tie");
+            heartsKeeper.canTakeAwayHealth = false;
             //heartsKeeper.resetHealths = false;
             trail.StopAllCoroutines();
             TrailGameController.instance.FreezeGame();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         } else if (collision.gameObject.tag == "Trail")
         {
-            heartScript.subtractHealth();
-            heartsKeeper.TakeAwayHealth(isPlayerOne);
+            if (heartsKeeper.BothPlayersAlive() && heartsKeeper.canTakeAwayHealth)
+            {
+                heartScript.subtractHealth();
+                heartsKeeper.TakeAwayHealth(isPlayerOne);
+            
+            }
+
             if (heartScript.returnHealth() <= 0)
             {
                 if (isPlayerOne)
@@ -114,13 +120,14 @@ public class TronMovement : MonoBehaviour
                 }
                 TrailGameController.instance.FreezeGame(true);
             }
-            else
+            else if (heartsKeeper.BothPlayersAlive())
             {
                 //heartsKeeper.resetHealths = false;
                 trail.StopAllCoroutines();
                 TrailGameController.instance.FreezeGame();
                 //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+            heartsKeeper.canTakeAwayHealth = false;
         }
     }
 

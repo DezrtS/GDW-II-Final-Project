@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Movement : MonoBehaviour
 {
     [SerializeField] private float playerSpeed = 10f;
      public Rigidbody2D  body;
 
     [SerializeField] Hearts heartScript;
+   // [SerializeField] Animator animator;
 
 
     int p1Health;
@@ -55,7 +57,7 @@ public class Movement : MonoBehaviour
             move.y = 0;
         }
 
-
+        
     }
 
      public void FixedUpdate()
@@ -68,6 +70,7 @@ public class Movement : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             heartScript.subtractHealth();
+            //animator.Play("");
 
             //Hearts.Instance.subtractHealth();
 
