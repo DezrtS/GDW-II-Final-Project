@@ -10,7 +10,7 @@ public class bulletsUI : MonoBehaviour
     public Image[] BulletImage;
 
     public Sprite bulletSprite;
-    public Sprite emptySprite;
+    //public Sprite emptySprite;
 
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class bulletsUI : MonoBehaviour
 
             else
             {
-                BulletImage[i].sprite = emptySprite;
+               // BulletImage[i].sprite = emptySprite;
                 BulletImage[i].color = Color.clear;
             }
 
