@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7f21fac445d40694aa6c23f9528a72d2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playAttack: {instanceID: 0}
+  - playHit: {instanceID: 0}
+  - playBounce: {instanceID: 0}
+  - playDeath: {instanceID: 0}
+  - playCountdown: {instanceID: 0}
+  - playShoot: {instanceID: 0}
+  - attackClip: {fileID: 8300000, guid: a107387e301ea144d8bba0a426933425, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

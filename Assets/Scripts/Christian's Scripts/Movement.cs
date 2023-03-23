@@ -69,6 +69,8 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
+            SoundManager.Instance.playAttackSound();
+           // SoundManager.Instance.playHitSound();
             heartScript.subtractHealth();
             //animator.Play("");
 
