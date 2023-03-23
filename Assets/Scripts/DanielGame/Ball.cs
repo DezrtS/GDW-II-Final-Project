@@ -94,6 +94,8 @@ public class Ball : MonoBehaviour
         //}
         targetMag = targetMag + inc;
         body.velocity = vecNorm * targetMag;
+        SoundManager.Instance.playBounceSound();
+        UnityEngine.Debug.Log("attackhit");
         //partsys.emissionRate = 10 + 2*targetMag;
         //partsys.Play();
     }
@@ -110,6 +112,10 @@ public class Ball : MonoBehaviour
                 
             }
             
+        }
+        else
+        {
+            SoundManager.Instance.playHitSound();
         }
     }
 
@@ -180,6 +186,8 @@ public class Ball : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.playBounceSound();
+            UnityEngine.Debug.Log("hit");
             //player reset
             player.transform.position = movementscript.startPos;
             player.transform.rotation = movementscript.startRot;
@@ -203,8 +211,9 @@ public class Ball : MonoBehaviour
 
             heartScript.subtractHealth();
 
-            if(heartScript.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
+            if(heartScript.returnHealth() == 0 && !GameEnder.instance.IsGameEnding())
             {
+                GameEnder.instance.StartEndGame();
                 UnityEngine.Debug.Log("PLayer loses");
                 if (movementscript.isPlayer1)
                 {
@@ -214,9 +223,13 @@ public class Ball : MonoBehaviour
                 {
                     P1Score.Instance.AddScore();
                 }
-                GameEnder.instance.StartEndGame();
+
             }
-            ShakeBehaviour.instance.TriggerShake();playCountdown = true;
+            else
+            {
+                ShakeBehaviour.instance.TriggerShake();playCountdown = true;
+            }
+            
             //PlayCountdown();
             
             

@@ -71,15 +71,23 @@ public class ricohetBulletScript : MonoBehaviour
         //    ricohetBulletScript ricohetBullet = collision.gameObject.GetComponent<ricohetBulletScript>();
         //    Physics2D.IgnoreCollision(ricohetBullet.collider2D, collider2D, true);
         //}
+        if (collision.gameObject.tag == "Untagged")
+        {
+            SoundManager.Instance.playBounceSound();
+        }
+
         if (collision.gameObject.tag == "Untagged" && canKill == false)
         {
+            SoundManager.Instance.playBounceSound();
             canKill = true;
             Physics2D.IgnoreLayerCollision(8, 3,false);
+            
         }
         if(collision.gameObject.tag == "Player" && canPickup == true)
         {
             PlayerTopDownShootBullet playerTopDownShoot = collision.gameObject.GetComponent<PlayerTopDownShootBullet>();
             playerTopDownShoot.AmmoChange(true);
+            SoundManager.Instance.playCountdownSound();
             Destroy(gameObject);
             
         }

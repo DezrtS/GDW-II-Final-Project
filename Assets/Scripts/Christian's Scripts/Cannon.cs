@@ -54,6 +54,7 @@ public class Cannon : MonoBehaviour
 
             if (target == 1)
             {
+                SoundManager.Instance.playShootSound();
                 var bullet = Instantiate(bulletPre, spawn.position, Quaternion.Euler(0,0,0 ));
                 bullet.GetComponent<Rigidbody2D>().velocity = distance * bulletSpeed;
                 Destroy(bullet, 3);
@@ -62,6 +63,7 @@ public class Cannon : MonoBehaviour
 
             if(target == 2)
             {
+                SoundManager.Instance.playShootSound();
                 var bulletP2 = Instantiate(bulletPre, spawn.position, Quaternion.Euler(0,0,0));
                 bulletP2.GetComponent<Rigidbody2D>().velocity = distanceP2 * bulletSpeed;
                Destroy(bulletP2, 3);
