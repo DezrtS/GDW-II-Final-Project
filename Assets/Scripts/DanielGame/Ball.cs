@@ -94,6 +94,8 @@ public class Ball : MonoBehaviour
         //}
         targetMag = targetMag + inc;
         body.velocity = vecNorm * targetMag;
+        SoundManager.Instance.playBounceSound();
+        UnityEngine.Debug.Log("attackhit");
         //partsys.emissionRate = 10 + 2*targetMag;
         //partsys.Play();
     }
@@ -110,6 +112,10 @@ public class Ball : MonoBehaviour
                 
             }
             
+        }
+        else
+        {
+            SoundManager.Instance.playHitSound();
         }
     }
 
@@ -180,6 +186,8 @@ public class Ball : MonoBehaviour
         }
         else
         {
+            SoundManager.Instance.playBounceSound();
+            UnityEngine.Debug.Log("hit");
             //player reset
             player.transform.position = movementscript.startPos;
             player.transform.rotation = movementscript.startRot;

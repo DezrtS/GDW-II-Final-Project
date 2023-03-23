@@ -42,6 +42,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
             ricohetBulletScript ricohetBulletScript = collision.gameObject.GetComponent<ricohetBulletScript>();
             if(ricohetBulletScript.canKill)
             {
+                SoundManager.Instance.playDeathSound();
                 Destroy(collision.gameObject);
                 AmmoChange(true);
                 Respawn();
@@ -54,7 +55,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
         {
             GameObject bullet = Instantiate(Bullet, shootPosition.position,shootPosition.rotation);
             AmmoChange(false);
-
+            SoundManager.Instance.playShootSound();
             Physics2D.IgnoreLayerCollision(8, 3);
         }
     }
