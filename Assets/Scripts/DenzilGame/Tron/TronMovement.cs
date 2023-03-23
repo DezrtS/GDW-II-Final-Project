@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class TronMovement : MonoBehaviour
 {
     public bool isPlayerOne;
-    string horizontal1 = "Horizontal", horizontal2 = "Horizontal2", vertical1 = "Vertical", vertical2 = "Vertical2", button1 = "Fire1", button2 = "Fire2";
+    string horizontal1 = "Horizontal", horizontal2 = "Horizontal2", vertical1 = "Vertical", vertical2 = "Vertical2";
     string horizontalInput, verticalInput;
     public KeyCode attackButton;
 
@@ -48,7 +48,7 @@ public class TronMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(attackButton) && canDropTail)
+        if (Input.GetKeyDown(attackButton) && canDropTail && Time.timeScale == 1)
         {
             trail.PlaceTrail(isPlayerOne);
             trail.ShrinkTailNow(2);
