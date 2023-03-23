@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class Ball : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMeshProUGUI;
+    [SerializeField] TextMeshPro textMeshPro;
     [SerializeField] Animator animator;
     //test above
     public playermovementballgame movementscript;
@@ -130,7 +131,7 @@ public class Ball : MonoBehaviour
         }
         vecNorm = body.velocity.normalized;
         body.velocity = vecNorm*targetMag;
-        textMeshProUGUI.text = mag.ToString();
+        MagText();
     }
 
     void GetMagnitude()
@@ -139,6 +140,30 @@ public class Ball : MonoBehaviour
         //textMeshProUGUI.text = mag.ToString();
         //UnityEngine.Debug.Log(body.velocity.magnitude); 
         //UnityEngine.Debug.Log(mag);
+    }
+
+    void MagText()
+    {
+        //textMeshProUGUI.text = mag.ToString();
+        textMeshPro.text = mag.ToString();
+        if (isRedPlayer1)
+        {
+            textMeshPro.color = new Color32(245, 80, 80, 155);
+        }
+        else
+        {
+            textMeshPro.color = new Color32(101, 141, 171, 155);
+        }
+        if (mag > 9)
+        {
+            textMeshPro.rectTransform.position = new Vector3
+            (1f, textMeshPro.rectTransform.position.y, textMeshPro.rectTransform.position.z);
+        }
+        else
+        {
+            textMeshPro.rectTransform.position = new Vector3
+            (0f, textMeshPro.rectTransform.position.y, textMeshPro.rectTransform.position.z);
+        }
     }
 
     public void Respawn(GameObject player)

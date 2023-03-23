@@ -48,7 +48,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     }
     void Shoot()
     {
-        if(playermovementballgame.buttonInput && bulletNum > 0)
+        if(playermovementballgame.buttonInput && bulletNum > 0 && Time.timeScale == 1)
         {
             GameObject bullet = Instantiate(Bullet, shootPosition.position,shootPosition.rotation);
             AmmoChange(false);
