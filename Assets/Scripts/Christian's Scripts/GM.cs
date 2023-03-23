@@ -39,19 +39,19 @@ public class GM : MonoBehaviour
 
         }
 
-        if (p1.ReturnP1Health() == 0)
+        if (p1.ReturnP1Health() <= 0 && !GameEnder.instance.IsGameEnding())
         {
             P2Score.Instance.AddScore();
-            SceneManager.LoadScene("GameMenu");
+            GameEnder.instance.StartEndGame();
             
             
         }
 
-        if(p2.ReturnP2Health() == 0)
+        if(p2.ReturnP2Health() <= 0 && !GameEnder.instance.IsGameEnding())
         {
             
             P1Score.Instance.AddScore();
-            SceneManager.LoadScene("GameMenu");
+            GameEnder.instance.StartEndGame();
         }
         
     }

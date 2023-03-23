@@ -68,6 +68,7 @@ public class MovementP2 : MonoBehaviour
         if(collision.gameObject.tag == "Bullet")
         {
             heartScript.subtractHealth();
+            ShakeBehaviour.instance.TriggerShake();
         }
     }
 

@@ -72,6 +72,7 @@ public class Movement : MonoBehaviour
             SoundManager.Instance.playAttackSound();
            // SoundManager.Instance.playHitSound();
             heartScript.subtractHealth();
+            ShakeBehaviour.instance.TriggerShake();
             //animator.Play("");
 
             //Hearts.Instance.subtractHealth();

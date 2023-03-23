@@ -56,7 +56,7 @@ public class playertopdownattack : MonoBehaviour
 
     void Attack()
     {
-        if (playermovementballgame.buttonInput && canAttack)
+        if (playermovementballgame.buttonInput && canAttack && Time.timeScale == 1)
         {
             startTime = Time.time;
             attackTime = startTime + attackTimeMax;

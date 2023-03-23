@@ -17,6 +17,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     Vector2 startPosition;
     public int bulletNum;
 
+    bool playCountdown;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     void Update()
     {
         Shoot();
+        PlayCountdownFunction();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -48,7 +50,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     }
     void Shoot()
     {
-        if(playermovementballgame.buttonInput && bulletNum > 0)
+        if(playermovementballgame.buttonInput && bulletNum > 0 && Time.timeScale == 1)
         {
             GameObject bullet = Instantiate(Bullet, shootPosition.position,shootPosition.rotation);
             AmmoChange(false);
@@ -71,7 +73,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     {
         transform.position = startPosition;
         hearts.subtractHealth();
-        if (hearts.returnHealth() == 0)
+        if (hearts.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
         {
             UnityEngine.Debug.Log("PLayer loses");
             if (playermovementballgame.isPlayer1)
@@ -82,9 +84,19 @@ public class PlayerTopDownShootBullet : MonoBehaviour
             {
                 P1Score.Instance.AddScore();
             }
-            SceneManager.LoadScene("GameMenu");
+            GameEnder.instance.StartEndGame();
         }
-        animator.Play("");
+        ShakeBehaviour.instance.TriggerShake();
+        //animator.Play("");
+        playCountdown = true;
+    }
+    void PlayCountdownFunction()
+    {
 
+        if (ShakeBehaviour.instance.shakeDuration == 0 && playCountdown)
+        {
+            animator.Play("");
+            playCountdown = false;
+        }
     }
 }

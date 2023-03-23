@@ -110,7 +110,7 @@ public class ricohetBulletScript : MonoBehaviour
     void CheckLethalTime()
     {
         LethalTime = Time.time - startTime;
-        if(LethalTime >= LethalTimeMax)
+        if(LethalTime >= LethalTimeMax || speed == 0)
         {
             body.drag = 100;
             body.angularVelocity = 60;

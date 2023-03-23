@@ -9,8 +9,8 @@ public class ShakeBehaviour : MonoBehaviour
     private Transform transform;
 
     // Desired duration of the shake effect
-    private float shakeDuration = 0f;
-
+    public float shakeDuration = 0f;
+    // Daniel changed this to public(was private) so it wouldn't conflict with the countdown animation
     // A measure of magnitude for the shake. Tweak based on your preference
     private float shakeMagnitude = 0.2f;
 
@@ -56,5 +56,11 @@ public class ShakeBehaviour : MonoBehaviour
     public void TriggerShake()
     {
         shakeDuration = 0.3f;
+    }
+
+    public void RemoveShake()
+    {
+        shakeDuration = 0f;
+        transform.localPosition = initialPosition;
     }
 }

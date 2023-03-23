@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class TronMovement : MonoBehaviour
 {
     public bool isPlayerOne;
-    string horizontal1 = "Horizontal", horizontal2 = "Horizontal2", vertical1 = "Vertical", vertical2 = "Vertical2", button1 = "Fire1", button2 = "Fire2";
-    string horizontalInput, verticalInput, fireInput;
+    string horizontal1 = "Horizontal", horizontal2 = "Horizontal2", vertical1 = "Vertical", vertical2 = "Vertical2";
+    string horizontalInput, verticalInput;
+    public KeyCode attackButton;
 
     Rigidbody2D rig;
 
@@ -22,6 +23,8 @@ public class TronMovement : MonoBehaviour
     [SerializeField] public Trail trail;
 
     public bool canMove = true;
+
+    bool canDropTail = true;
 
     void Start()
     {
@@ -45,7 +48,13 @@ public class TronMovement : MonoBehaviour
 
     void Update()
     {
-         
+        if (Input.GetKeyDown(attackButton) && canDropTail && Time.timeScale == 1)
+        {
+            trail.PlaceTrail(isPlayerOne);
+            trail.ShrinkTailNow(2);
+            canDropTail = false;
+            StartCoroutine(DropTailCooldwon());
+        }
     }
 
     private void FixedUpdate()
@@ -59,13 +68,11 @@ public class TronMovement : MonoBehaviour
         {
             horizontalInput = horizontal1;
             verticalInput = vertical1;
-            fireInput = button1;
         }
         else
         {
             horizontalInput = horizontal2;
             verticalInput = vertical2;
-            fireInput = button2;
         }
     }
 
@@ -131,12 +138,9 @@ public class TronMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator DropTailCooldwon()
     {
-        if (collision.tag == "Shortener")
-        {
-            TrailGameController.instance.ShortenOtherPlayerTail(isPlayerOne);
-            Destroy(collision.gameObject);
-        }
+        yield return new WaitForSeconds(1f);
+        canDropTail = true;
     }
 }

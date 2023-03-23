@@ -18,7 +18,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(attackButton) && !isAttacking)
+        if (Input.GetKeyDown(attackButton) && !isAttacking && Time.timeScale == 1)
         {
             isAttacking = true;
             animator.SetBool("IsAttacking", isAttacking);

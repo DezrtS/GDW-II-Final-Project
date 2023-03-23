@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class Ball : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMeshProUGUI;
+    [SerializeField] TextMeshPro textMeshPro;
     [SerializeField] Animator animator;
     //test above
     public playermovementballgame movementscript;
@@ -36,6 +37,7 @@ public class Ball : MonoBehaviour
     public Vector3 start2 = new Vector3(8, 0, 0);
 
     public bool respawnfullreset;
+    bool playCountdown;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +73,7 @@ public class Ball : MonoBehaviour
     {
         GetMagnitude();
         Color();
+        PlayCountdownFunction();
     }
 
     void FixedUpdate()
@@ -130,7 +133,7 @@ public class Ball : MonoBehaviour
         }
         vecNorm = body.velocity.normalized;
         body.velocity = vecNorm*targetMag;
-        textMeshProUGUI.text = mag.ToString();
+        MagText();
     }
 
     void GetMagnitude()
@@ -139,6 +142,30 @@ public class Ball : MonoBehaviour
         //textMeshProUGUI.text = mag.ToString();
         //UnityEngine.Debug.Log(body.velocity.magnitude); 
         //UnityEngine.Debug.Log(mag);
+    }
+
+    void MagText()
+    {
+        //textMeshProUGUI.text = mag.ToString();
+        textMeshPro.text = mag.ToString();
+        if (isRedPlayer1)
+        {
+            textMeshPro.color = new Color32(245, 80, 80, 155);
+        }
+        else
+        {
+            textMeshPro.color = new Color32(101, 141, 171, 155);
+        }
+        if (mag > 9)
+        {
+            textMeshPro.rectTransform.position = new Vector3
+            (1f, textMeshPro.rectTransform.position.y, textMeshPro.rectTransform.position.z);
+        }
+        else
+        {
+            textMeshPro.rectTransform.position = new Vector3
+            (0f, textMeshPro.rectTransform.position.y, textMeshPro.rectTransform.position.z);
+        }
     }
 
     public void Respawn(GameObject player)
@@ -176,7 +203,7 @@ public class Ball : MonoBehaviour
 
             heartScript.subtractHealth();
 
-            if(heartScript.returnHealth() == 0)
+            if(heartScript.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
             {
                 UnityEngine.Debug.Log("PLayer loses");
                 if (movementscript.isPlayer1)
@@ -187,8 +214,20 @@ public class Ball : MonoBehaviour
                 {
                     P1Score.Instance.AddScore();
                 }
-                SceneManager.LoadScene("GameMenu");
+                GameEnder.instance.StartEndGame();
             }
+            ShakeBehaviour.instance.TriggerShake();playCountdown = true;
+            //PlayCountdown();
+            
+            
+        }
+    }
+    void PlayCountdownFunction()
+    {
+
+        if (ShakeBehaviour.instance.shakeDuration == 0 && playCountdown) 
+        {
+            playCountdown = false; 
             animator.Play("");
         }
     }
