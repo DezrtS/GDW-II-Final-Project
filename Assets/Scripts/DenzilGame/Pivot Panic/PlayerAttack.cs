@@ -39,6 +39,7 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator InitiateAttack(float timeTillAttack)
     {
         yield return new WaitForSeconds(timeTillAttack / 2f);
+        SoundManager.Instance.playAttackSound();
         attackAnimator.SetBool("IsAttacking", isAttacking);
         yield return new WaitForSeconds(timeTillAttack / 2f);
         Attack();
@@ -59,6 +60,7 @@ public class PlayerAttack : MonoBehaviour
             if (collider.gameObject != gameObject && collider.gameObject.tag == "Player")
             {
                 collider.gameObject.GetComponent<MovementV2>().ApplyKnockback(new Vector3(playerWeapon.knockbackAmount * attackDirection, 0, 0));
+                SoundManager.Instance.playHitSound();
             }
         }
     }

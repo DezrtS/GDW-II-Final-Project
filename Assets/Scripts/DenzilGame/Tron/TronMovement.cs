@@ -99,6 +99,7 @@ public class TronMovement : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Debug.Log("Tie");
+            SoundManager.Instance.playHitSound();
             heartsKeeper.canTakeAwayHealth = false;
             //heartsKeeper.resetHealths = false;
             trail.StopAllCoroutines();
@@ -115,6 +116,7 @@ public class TronMovement : MonoBehaviour
 
             if (heartScript.returnHealth() <= 0)
             {
+                SoundManager.Instance.playDeathSound();
                 if (isPlayerOne)
                 {
                     Debug.Log("Player Two Wins");
@@ -130,6 +132,7 @@ public class TronMovement : MonoBehaviour
             else if (heartsKeeper.BothPlayersAlive())
             {
                 //heartsKeeper.resetHealths = false;
+                SoundManager.Instance.playHitSound();
                 trail.StopAllCoroutines();
                 TrailGameController.instance.FreezeGame();
                 //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

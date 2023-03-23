@@ -179,6 +179,7 @@ public class MovementV2 : MonoBehaviour
     {
         if (collision.gameObject.tag == "Lava")
         {
+            SoundManager.Instance.playDeathSound();
             ShakeBehaviour.instance.TriggerShake();
             lavaSplash.Play();
             rig.drag = 25;
