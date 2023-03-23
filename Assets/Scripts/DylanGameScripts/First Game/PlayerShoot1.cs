@@ -20,6 +20,7 @@ public class PlayerShoot1 : MonoBehaviour
         {
             Shoot();
             anim.SetTrigger("isShooting");
+            SoundManager.Instance.playShootSound();
         }
 
         /*if (Input.GetKeyDown(KeyCode.Space) && Input.GetKeyDown(KeyCode.UpArrow))

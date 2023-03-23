@@ -27,7 +27,28 @@ public class Projectile : MonoBehaviour
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
         originalVelocity = GetComponent<Rigidbody2D>().velocity;
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.right * speed1;
+        if (isPlayerOne)
+        {
+            if (GameObject.Find("Player1").GetComponent<SpriteRenderer>().flipX)
+            {
+                rb.velocity = -transform.right * speed1;
+            }
+            else
+            {
+                rb.velocity = transform.right * speed1;
+            }
+        }
+        else
+        {
+            if (GameObject.Find("Player2").GetComponent<SpriteRenderer>().flipX)
+            {
+                rb.velocity = -transform.right * speed1;
+            }
+            else
+            {
+                rb.velocity = transform.right * speed1;
+            }
+        }
         heartScript = gameObject.GetComponent<Hearts>();
         //Destroy(gameObject, lifeTime);
     }
@@ -80,6 +101,7 @@ public class Projectile : MonoBehaviour
             {
                 PlayerScoreManager.UpdatePlayerScore("Player2");
                 Destroy(gameObject);
+                SoundManager.Instance.playDeathSound();
 
                 if (!isPlayerOne)
                 {
@@ -105,6 +127,7 @@ public class Projectile : MonoBehaviour
             {
                 PlayerScoreManager.UpdatePlayerScore("Player1");
                 Destroy(gameObject);
+                SoundManager.Instance.playDeathSound();
 
                 if (isPlayerOne)
                 {

@@ -19,6 +19,7 @@ public class PlayerShoot : MonoBehaviour
         {
             Shoot();
             anim.SetTrigger("isShooting2");
+            SoundManager.Instance.playShootSound();
         }
 
         /*if (Input.GetKeyDown(KeyCode.Space) && Input.GetKeyDown(KeyCode.UpArrow))
