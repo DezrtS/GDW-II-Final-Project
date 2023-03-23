@@ -10,6 +10,10 @@ public class Respawn : MonoBehaviour
     int player1Health = 3;
     int player2Health = 3;
 
+    private Rigidbody2D body;
+    private PhysicsMaterial2D originalMaterial;
+    private float originalBounciness;
+
     [SerializeField] private bool isPlayerOne;
 
     [SerializeField] Hearts heartScript;
@@ -17,6 +21,9 @@ public class Respawn : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        body = GetComponent<Rigidbody2D>();
+        originalMaterial = body.sharedMaterial;
+        originalBounciness = originalMaterial.bounciness;
         heartScript = gameObject.GetComponent<Hearts>();
     }
 
@@ -33,6 +40,10 @@ public class Respawn : MonoBehaviour
         if (screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height)
         {
             RespawnPlayer();
+            Debug.Log("Player left the screen, resetting bounciness.");
+            var material = new PhysicsMaterial2D();
+            material.bounciness = originalBounciness;
+            body.sharedMaterial = material;
         }
     }
 
