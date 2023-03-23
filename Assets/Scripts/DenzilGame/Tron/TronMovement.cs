@@ -48,8 +48,8 @@ public class TronMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(attackButton) && trail != null)
         {
-            //trail.PlaceTrail();
-            //StartCoroutine(GenerateNewTrail());
+            trail.PlaceTrail(isPlayerOne);
+            trail.ShrinkTailNow(2);
         }
     }
 
@@ -137,7 +137,7 @@ public class TronMovement : MonoBehaviour
     IEnumerator GenerateNewTrail()
     {
         yield return new WaitForSeconds(2);
-        GameObject newTrail = Instantiate(TrailGameController.instance.trailPrefab, transform.position, Quaternion.identity);
-        trail.Restart(newTrail);
+        //GameObject newTrail = Instantiate(TrailGameController.instance.trailPrefab, new Vector3(-16, 0, 0), Quaternion.identity);
+        //trail.Restart(newTrail);
     }
 }
