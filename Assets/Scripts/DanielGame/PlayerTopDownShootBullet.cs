@@ -87,9 +87,13 @@ public class PlayerTopDownShootBullet : MonoBehaviour
             }
             GameEnder.instance.StartEndGame();
         }
-        ShakeBehaviour.instance.TriggerShake();
+        else
+        {
+            ShakeBehaviour.instance.TriggerShake();playCountdown = true;
+        }
+        
         //animator.Play("");
-        playCountdown = true;
+        
     }
     void PlayCountdownFunction()
     {

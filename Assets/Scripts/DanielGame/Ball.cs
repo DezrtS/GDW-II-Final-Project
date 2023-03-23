@@ -211,8 +211,9 @@ public class Ball : MonoBehaviour
 
             heartScript.subtractHealth();
 
-            if(heartScript.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
+            if(heartScript.returnHealth() == 0 && !GameEnder.instance.IsGameEnding())
             {
+                GameEnder.instance.StartEndGame();
                 UnityEngine.Debug.Log("PLayer loses");
                 if (movementscript.isPlayer1)
                 {
@@ -222,9 +223,13 @@ public class Ball : MonoBehaviour
                 {
                     P1Score.Instance.AddScore();
                 }
-                GameEnder.instance.StartEndGame();
+
             }
-            ShakeBehaviour.instance.TriggerShake();playCountdown = true;
+            else
+            {
+                ShakeBehaviour.instance.TriggerShake();playCountdown = true;
+            }
+            
             //PlayCountdown();
             
             
