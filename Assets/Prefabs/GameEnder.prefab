@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freezeTime: 0
+  unfrozenWaitTime: 1
 --- !u!114 &6482548107998942644
 MonoBehaviour:
   m_ObjectHideFlags: 0

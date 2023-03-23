@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class TronMovement : MonoBehaviour
 {
     public bool isPlayerOne;
-    string horizontal1 = "Horizontal", horizontal2 = "Horizontal2", vertical1 = "Vertical", vertical2 = "Vertical2", button1 = "Fire1", button2 = "Fire2";
+    string horizontal1 = "Horizontal", horizontal2 = "Horizontal2", vertical1 = "Vertical", vertical2 = "Vertical2";
     string horizontalInput, verticalInput;
     public KeyCode attackButton;
 
@@ -23,6 +23,8 @@ public class TronMovement : MonoBehaviour
     [SerializeField] public Trail trail;
 
     public bool canMove = true;
+
+    bool canDropTail = true;
 
     void Start()
     {
@@ -46,10 +48,12 @@ public class TronMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(attackButton) && trail != null)
+        if (Input.GetKeyDown(attackButton) && canDropTail && Time.timeScale == 1)
         {
-            //trail.PlaceTrail();
-            //StartCoroutine(GenerateNewTrail());
+            trail.PlaceTrail(isPlayerOne);
+            trail.ShrinkTailNow(2);
+            canDropTail = false;
+            StartCoroutine(DropTailCooldwon());
         }
     }
 
@@ -134,10 +138,9 @@ public class TronMovement : MonoBehaviour
         }
     }
 
-    IEnumerator GenerateNewTrail()
+    IEnumerator DropTailCooldwon()
     {
-        yield return new WaitForSeconds(2);
-        GameObject newTrail = Instantiate(TrailGameController.instance.trailPrefab, transform.position, Quaternion.identity);
-        trail.Restart(newTrail);
+        yield return new WaitForSeconds(1f);
+        canDropTail = true;
     }
 }

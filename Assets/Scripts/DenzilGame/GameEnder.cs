@@ -13,6 +13,8 @@ public class GameEnder : MonoBehaviour
 
     [SerializeField] private float unfrozenWaitTime = 1f;
 
+    private bool gameEnding = false;
+
 
     private void Awake()
     {
@@ -25,10 +27,14 @@ public class GameEnder : MonoBehaviour
 
     public void StartEndGame()
     {
+        gameEnding = true;
         if (freezeTime)
         {
             Time.timeScale = 0;
-            ShakeBehaviour.instance.RemoveShake();
+            if (ShakeBehaviour.instance != null)
+            {
+                ShakeBehaviour.instance.RemoveShake();
+            }
             freezeTimeAnimator.SetBool("CanEndGame", true);
         } else
         {
@@ -36,6 +42,12 @@ public class GameEnder : MonoBehaviour
         }
 
         // Play End Game Animation Here... (Adjust waitFor variable and/or EndGame animation length) (Make sure animation is Time.scaled independent)
+    }
+
+
+    public bool IsGameEnding()
+    {
+        return gameEnding;
     }
 
     public void LoadMainMenuScene()

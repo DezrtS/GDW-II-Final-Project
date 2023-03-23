@@ -10,7 +10,8 @@ public class TrailGameController : MonoBehaviour
     [SerializeField] private TronMovement playerOneMovement;
     [SerializeField] private TronMovement playerTwoMovement;
 
-    [SerializeField] public GameObject trailPrefab;
+    [SerializeField] public GameObject playerOneTrailPrefab;
+    [SerializeField] public GameObject playerTwoTrailPrefab;
 
     private void Awake()
     {

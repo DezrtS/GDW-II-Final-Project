@@ -73,7 +73,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     {
         transform.position = startPosition;
         hearts.subtractHealth();
-        if (hearts.returnHealth() == 0)
+        if (hearts.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
         {
             UnityEngine.Debug.Log("PLayer loses");
             if (playermovementballgame.isPlayer1)
@@ -84,7 +84,10 @@ public class PlayerTopDownShootBullet : MonoBehaviour
             {
                 P1Score.Instance.AddScore();
             }
-            SceneManager.LoadScene("GameMenu");
+            GameEnder.instance.StartEndGame();
+        } else if (!GameEnder.instance.IsGameEnding())
+        {
+            animator.Play("");
         }
         ShakeBehaviour.instance.TriggerShake();
         //animator.Play("");

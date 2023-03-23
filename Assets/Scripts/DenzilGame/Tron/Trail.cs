@@ -27,6 +27,8 @@ public class Trail : MonoBehaviour
 
     public void Restart(GameObject trail)
     {
+        trailIndex = 2;
+        updateCount = 0;
         spriteShapeController = trail.GetComponent<SpriteShapeController>();
         StartCoroutine(UpdateTrail());
     }
@@ -44,14 +46,46 @@ public class Trail : MonoBehaviour
         trailLength = amount;
     }
 
-    public void PlaceTrail()
+    public void ShrinkTailNow(int amount)
     {
-        StopAllCoroutines();
-        spriteShapeController = null;
+        while (trailIndex > amount)
+        {
+            spriteShapeController.spline.RemovePointAt(0);
+            trailIndex--;
+        }
+        trailLength = amount;
+    }
+
+    public void PlaceTrail(bool isPlayerOne)
+    {
+        GameObject placedTrail;
+        if (isPlayerOne)
+        {
+            placedTrail = Instantiate(TrailGameController.instance.playerOneTrailPrefab);
+        } else
+        {
+            placedTrail = Instantiate(TrailGameController.instance.playerTwoTrailPrefab);
+        }
+        SpriteShapeController spriteShape = placedTrail.GetComponent<SpriteShapeController>();
+        int a = spriteShape.spline.GetPointCount() - 1;
+        for (int i = spriteShapeController.spline.GetPointCount() - 1; i >= 0; i--)
+        {
+            if (a >= 0)
+            {
+                spriteShape.spline.SetPosition(a, spriteShapeController.spline.GetPosition(i));
+                spriteShape.spline.SetTangentMode(a, ShapeTangentMode.Continuous);
+                a--;
+            } else
+            {
+                spriteShape.spline.InsertPointAt(0, spriteShapeController.spline.GetPosition(i));
+                spriteShape.spline.SetTangentMode(0, ShapeTangentMode.Continuous);
+            }
+        }
     }
 
     IEnumerator UpdateTrail()
     {
+        //Debug.Log("Trail Length: " + spriteShapeController.spline.GetPointCount() + " at time: " + Time.timeSinceLevelLoad);
         yield return new WaitForSeconds(trailUpdateFrequency / 2);
         if (resetPosition)
         {

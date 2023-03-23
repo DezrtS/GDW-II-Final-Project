@@ -181,21 +181,19 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (heartScript.returnHealth() <= 0)
+        if (heartScript.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
         {
             if (isPlayerOne)
             {
                 Debug.Log("Player Two Wins");
                 P2Score.Instance.AddScore();
-                LoadMainMenuReset();
             }
             else
             {
                 Debug.Log("Player One Wins");
                 P1Score.Instance.AddScore();
-                LoadMainMenuReset();
             }
-            FreezeGame(true);
+            GameEnder.instance.StartEndGame();
         }
     }
 
@@ -207,19 +205,5 @@ public class Player : MonoBehaviour
     public int ReturnP2Health()
     {
         return (heartScript.returnHealth());
-    }
-
-    public void FreezeGame(bool loadMainMenu)
-    {
-        if (loadMainMenu)
-        {
-            StartCoroutine(LoadMainMenuReset());
-        }
-    }
-
-    IEnumerator LoadMainMenuReset()
-    {
-        yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene("GameMenu");
     }
 }
