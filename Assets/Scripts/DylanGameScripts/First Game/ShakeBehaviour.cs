@@ -57,4 +57,10 @@ public class ShakeBehaviour : MonoBehaviour
     {
         shakeDuration = 0.3f;
     }
+
+    public void RemoveShake()
+    {
+        shakeDuration = 0f;
+        transform.localPosition = initialPosition;
+    }
 }

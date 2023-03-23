@@ -10,6 +10,8 @@ public class TrailGameController : MonoBehaviour
     [SerializeField] private TronMovement playerOneMovement;
     [SerializeField] private TronMovement playerTwoMovement;
 
+    [SerializeField] public GameObject trailPrefab;
+
     private void Awake()
     {
         if (instance == null)
@@ -44,7 +46,8 @@ public class TrailGameController : MonoBehaviour
         ShakeBehaviour.instance.TriggerShake();
         if (loadMainMenu)
         {
-            StartCoroutine(LoadMainMenuReset());
+            GameEnder.instance.StartEndGame();
+            //StartCoroutine(LoadMainMenuReset());
         }
     }
 
