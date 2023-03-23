@@ -24,6 +24,8 @@ public class TronMovement : MonoBehaviour
 
     public bool canMove = true;
 
+    bool canDropTail = true;
+
     void Start()
     {
         if (heartsKeeper.resetHealths)
@@ -46,10 +48,12 @@ public class TronMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(attackButton) && trail != null)
+        if (Input.GetKeyDown(attackButton) && canDropTail)
         {
             trail.PlaceTrail(isPlayerOne);
             trail.ShrinkTailNow(2);
+            canDropTail = false;
+            StartCoroutine(DropTailCooldwon());
         }
     }
 
@@ -134,10 +138,9 @@ public class TronMovement : MonoBehaviour
         }
     }
 
-    IEnumerator GenerateNewTrail()
+    IEnumerator DropTailCooldwon()
     {
-        yield return new WaitForSeconds(2);
-        //GameObject newTrail = Instantiate(TrailGameController.instance.trailPrefab, new Vector3(-16, 0, 0), Quaternion.identity);
-        //trail.Restart(newTrail);
+        yield return new WaitForSeconds(1f);
+        canDropTail = true;
     }
 }
