@@ -2715,7 +2715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75661759e3e3a4a27b6198457db6c231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 962846201}
+  bounceIncrease: 2
+  otherPlayer: {fileID: 1182712256}
 --- !u!114 &962846205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2833,7 +2834,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 962846197}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ff341403a2aac408c8789f6f8683d478, type: 2}
   m_CullingMode: 0
@@ -3299,7 +3300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da3d8cba023c4274bc720524d013ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 1182712257}
+  bounceIncrease: 2
+  otherPlayer: {fileID: 962846197}
 --- !u!95 &1182712270
 Animator:
   serializedVersion: 4
@@ -3308,7 +3310,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182712256}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b3f4745e4da40433ba264e8202fed9f0, type: 2}
   m_CullingMode: 0
@@ -4324,7 +4326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1648631336
 Transform:
   m_ObjectHideFlags: 0
@@ -5278,7 +5280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1963632513
 Transform:
   m_ObjectHideFlags: 0
