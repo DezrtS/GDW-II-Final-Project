@@ -44,7 +44,8 @@ public class TrailGameController : MonoBehaviour
         ShakeBehaviour.instance.TriggerShake();
         if (loadMainMenu)
         {
-            StartCoroutine(LoadMainMenuReset());
+            GameEnder.instance.StartEndGame();
+            //StartCoroutine(LoadMainMenuReset());
         }
     }
 

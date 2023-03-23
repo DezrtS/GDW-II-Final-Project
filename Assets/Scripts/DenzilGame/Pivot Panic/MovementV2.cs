@@ -206,7 +206,7 @@ public class MovementV2 : MonoBehaviour
                     Debug.Log("Player One Wins");
                     P1Score.Instance.AddScore();
                 }
-                SceneManager.LoadScene("GameMenu");
+                GameEnder.instance.StartEndGame();
             } else
             {
                 if (heartsKeeper.BothPlayersAlive())
