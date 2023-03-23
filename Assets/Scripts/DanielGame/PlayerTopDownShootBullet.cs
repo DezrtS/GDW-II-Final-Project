@@ -85,9 +85,6 @@ public class PlayerTopDownShootBullet : MonoBehaviour
                 P1Score.Instance.AddScore();
             }
             GameEnder.instance.StartEndGame();
-        } else if (!GameEnder.instance.IsGameEnding())
-        {
-            animator.Play("");
         }
         ShakeBehaviour.instance.TriggerShake();
         //animator.Play("");

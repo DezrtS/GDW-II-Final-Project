@@ -215,13 +215,10 @@ public class Ball : MonoBehaviour
                     P1Score.Instance.AddScore();
                 }
                 GameEnder.instance.StartEndGame();
-            } else if (!GameEnder.instance.IsGameEnding())
-            {
-                animator.Play("");
             }
-            ShakeBehaviour.instance.TriggerShake();
+            ShakeBehaviour.instance.TriggerShake();playCountdown = true;
             //PlayCountdown();
-            playCountdown = true;
+            
             
         }
     }
@@ -229,9 +226,9 @@ public class Ball : MonoBehaviour
     {
 
         if (ShakeBehaviour.instance.shakeDuration == 0 && playCountdown) 
-        { 
+        {
+            playCountdown = false; 
             animator.Play("");
-            playCountdown = false;
         }
     }
 }
