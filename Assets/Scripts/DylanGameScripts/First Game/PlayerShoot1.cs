@@ -19,8 +19,6 @@ public class PlayerShoot1 : MonoBehaviour
         if (Input.GetKey(KeyCode.F))
         {
             Shoot();
-            anim.SetTrigger("isShooting");
-            SoundManager.Instance.playShootSound();
         }
 
         /*if (Input.GetKeyDown(KeyCode.Space) && Input.GetKeyDown(KeyCode.UpArrow))
@@ -35,7 +33,10 @@ public class PlayerShoot1 : MonoBehaviour
         {
             timeSinceLastShot = Time.time;
             Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-            projectile.GetComponent<Rigidbody2D>().velocity = transform.right * projectile.speed;
+            float facingDirection = Mathf.Sign(transform.localScale.x);
+            projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(facingDirection * projectile.speed, 0f);
+            anim.SetTrigger("isShooting");
+            SoundManager.Instance.playShootSound();
         }
     }
 

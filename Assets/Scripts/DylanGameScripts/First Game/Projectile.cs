@@ -27,6 +27,7 @@ public class Projectile : MonoBehaviour
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
         originalVelocity = GetComponent<Rigidbody2D>().velocity;
         rb = GetComponent<Rigidbody2D>();
+
         if (isPlayerOne)
         {
             if (GameObject.Find("Player1").GetComponent<SpriteRenderer>().flipX)
