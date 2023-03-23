@@ -15,7 +15,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space)) 
+        if (Input.GetKey(KeyCode.Return)) 
         {
             Shoot();
             anim.SetTrigger("isShooting2");
@@ -33,9 +33,21 @@ public class PlayerShoot : MonoBehaviour
         {
             timeSinceLastShot = Time.time;
             Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-            projectile.GetComponent<Rigidbody2D>().velocity = transform.right * projectile.speed;
+            projectile.GetComponent<Rigidbody2D>().velocity = (transform.right * transform.localScale.x) * projectile.speed;
         }
     }
+
+
+    /*private void Shoot()
+    {
+        if (Time.time - timeSinceLastShot >= 3f)
+        {
+            timeSinceLastShot = Time.time;
+            Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
+            projectile.GetComponent<Rigidbody2D>().velocity = transform.localScale.x * Vector2.right * projectile.speed;
+        }
+    }*/
+
 
     private void ShootVertically()
     {

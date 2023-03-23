@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -23,11 +24,14 @@ public class Player : MonoBehaviour
 
     private Animator anim;
 
+    [SerializeField] Hearts heartScript;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
         rig = GetComponent<Rigidbody2D>();
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
+        heartScript = gameObject.GetComponent<Hearts>();
     }
 
     private void OnBecameInvisible()
@@ -60,6 +64,16 @@ public class Player : MonoBehaviour
             {
                 anim.SetBool("isRunning", true);
             }
+
+            if (movementInput > 0)
+            {
+                transform.localScale = new Vector3(2, 2, 2); // Flip the sprite to face right
+            }
+            else if (movementInput < 0)
+            {
+                transform.localScale = new Vector3(-2, 2, 2); // Flip the sprite to face left
+            }
+
         }
         else
         {
@@ -74,13 +88,23 @@ public class Player : MonoBehaviour
             {
                 anim.SetBool("isRunning2", true);
             }
+
+            if (movementInput > 0)
+            {
+                transform.localScale = new Vector3(2, 2, 2); // Flip the sprite to face right
+            }
+            else if (movementInput < 0)
+            {
+                transform.localScale = new Vector3(-2, 2, 2); // Flip the sprite to face left
+            }
+
         }
 
         if (grounded && jumpInput > 0)
         {
             //anim.SetTrigger("Player1Jump");
             rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
-           // anim.SetBool("isJumping", false);
+            // anim.SetBool("isJumping", false);
         }
         else
         {
@@ -141,5 +165,61 @@ public class Player : MonoBehaviour
     {
         groundNormal = Vector3.right;
         grounded = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (gameObject.CompareTag("Player1") || gameObject.CompareTag("Player2"))
+        {
+            if (collision.CompareTag("ProjectilePlayer1") || collision.CompareTag("ProjectilePlayer2"))
+            {
+                if ((isPlayerOne && collision.CompareTag("ProjectilePlayer2")) ||
+                    (!isPlayerOne && collision.CompareTag("ProjectilePlayer1")))
+                {
+                    heartScript.subtractHealth();
+                }
+            }
+        }
+
+        if (heartScript.returnHealth() <= 0)
+        {
+            if (isPlayerOne)
+            {
+                Debug.Log("Player Two Wins");
+                P2Score.Instance.AddScore();
+                LoadMainMenuReset();
+            }
+            else
+            {
+                Debug.Log("Player One Wins");
+                P1Score.Instance.AddScore();
+                LoadMainMenuReset();
+            }
+            FreezeGame(true);
+        }
+    }
+
+    public int ReturnP1Health()
+    {
+        return (heartScript.returnHealth());
+    }
+
+    public int ReturnP2Health()
+    {
+        return (heartScript.returnHealth());
+    }
+
+    public void FreezeGame(bool loadMainMenu)
+    {
+        if (loadMainMenu)
+        {
+            StartCoroutine(LoadMainMenuReset());
+        }
+    }
+
+    IEnumerator LoadMainMenuReset()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("GameMenu");
     }
 }
