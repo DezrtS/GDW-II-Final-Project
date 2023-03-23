@@ -25,14 +25,29 @@ public class Trail : MonoBehaviour
         StartCoroutine(UpdateTrail());
     }
 
+    public void Restart(GameObject trail)
+    {
+        spriteShapeController = trail.GetComponent<SpriteShapeController>();
+        StartCoroutine(UpdateTrail());
+    }
+
     private void FixedUpdate()
     {
-        spriteShapeController.spline.SetPosition(spriteShapeController.spline.GetPointCount() - 1, transform.position - trail.transform.position - transform.up * 0.25f);
+        if (spriteShapeController != null)
+        {
+            spriteShapeController.spline.SetPosition(spriteShapeController.spline.GetPointCount() - 1, transform.position - trail.transform.position - transform.up * 0.25f);
+        }
     }
 
     public void SetTrailLength(int amount)
     {
         trailLength = amount;
+    }
+
+    public void PlaceTrail()
+    {
+        StopAllCoroutines();
+        spriteShapeController = null;
     }
 
     IEnumerator UpdateTrail()
