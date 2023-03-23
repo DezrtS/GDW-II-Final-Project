@@ -37,6 +37,7 @@ public class Ball : MonoBehaviour
     public Vector3 start2 = new Vector3(8, 0, 0);
 
     public bool respawnfullreset;
+    bool playCountdown;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +73,7 @@ public class Ball : MonoBehaviour
     {
         GetMagnitude();
         Color();
+        PlayCountdownFunction();
     }
 
     void FixedUpdate()
@@ -214,7 +216,19 @@ public class Ball : MonoBehaviour
                 }
                 SceneManager.LoadScene("GameMenu");
             }
+            ShakeBehaviour.instance.TriggerShake();
+            //PlayCountdown();
+            playCountdown = true;
+            
+        }
+    }
+    void PlayCountdownFunction()
+    {
+
+        if (ShakeBehaviour.instance.shakeDuration == 0 && playCountdown) 
+        { 
             animator.Play("");
+            playCountdown = false;
         }
     }
 }

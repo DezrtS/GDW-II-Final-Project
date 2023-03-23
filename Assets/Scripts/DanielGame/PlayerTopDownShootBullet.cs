@@ -17,6 +17,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     Vector2 startPosition;
     public int bulletNum;
 
+    bool playCountdown;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     void Update()
     {
         Shoot();
+        PlayCountdownFunction();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -84,7 +86,17 @@ public class PlayerTopDownShootBullet : MonoBehaviour
             }
             SceneManager.LoadScene("GameMenu");
         }
-        animator.Play("");
+        ShakeBehaviour.instance.TriggerShake();
+        //animator.Play("");
+        playCountdown = true;
+    }
+    void PlayCountdownFunction()
+    {
 
+        if (ShakeBehaviour.instance.shakeDuration == 0 && playCountdown)
+        {
+            animator.Play("");
+            playCountdown = false;
+        }
     }
 }
