@@ -4,19 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 20f;
+    public float speed = 10f;
     private float screenWidth;
-    private Vector3 originalVelocity;
-
-    public float speed1 = 10f;
-    public float lifeTime = 2f;
-
-    private Rigidbody2D rb;
-
-    private float startingTime;
-
-    int player1Health = 3;
-    int player2Health = 3;
 
     [SerializeField] private bool isPlayerOne;
 
@@ -25,31 +14,6 @@ public class Projectile : MonoBehaviour
     private void Start()
     {
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
-        originalVelocity = GetComponent<Rigidbody2D>().velocity;
-        rb = GetComponent<Rigidbody2D>();
-
-        if (isPlayerOne)
-        {
-            if (GameObject.Find("Player1").GetComponent<SpriteRenderer>().flipX)
-            {
-                rb.velocity = -transform.right * speed1;
-            }
-            else
-            {
-                rb.velocity = transform.right * speed1;
-            }
-        }
-        else
-        {
-            if (GameObject.Find("Player2").GetComponent<SpriteRenderer>().flipX)
-            {
-                rb.velocity = -transform.right * speed1;
-            }
-            else
-            {
-                rb.velocity = transform.right * speed1;
-            }
-        }
         heartScript = gameObject.GetComponent<Hearts>();
         //Destroy(gameObject, lifeTime);
     }
@@ -64,34 +28,14 @@ public class Projectile : MonoBehaviour
         {
             transform.position = new Vector3(screenWidth, transform.position.y, transform.position.z);
         }
-        else if (transform.position.y > Camera.main.orthographicSize)
-        {
-            transform.position = new Vector3(transform.position.x, -Camera.main.orthographicSize, transform.position.z);
-        }
-        else if (transform.position.y < -Camera.main.orthographicSize)
-        {
-            transform.position = new Vector3(transform.position.x, Camera.main.orthographicSize, transform.position.z);
-        }
-    }
-
-
-    private void Update()
-    {
-        Vector3 direction = Vector3.zero;
-
-        //if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.R))
+        //else if (transform.position.y > Camera.main.orthographicSize)
         //{
-        //    direction += transform.right;
+        //    transform.position = new Vector3(transform.position.x, -Camera.main.orthographicSize, transform.position.z);
         //}
-        //if (Input.GetKey(KeyCode.R))
+        //else if (transform.position.y < -Camera.main.orthographicSize)
         //{
-        //    direction += transform.right;
+        //    transform.position = new Vector3(transform.position.x, Camera.main.orthographicSize, transform.position.z);
         //}
-        /*if (Input.GetKey(KeyCode.R))
-        {
-            direction += Vector3.up;
-        }*/
-        transform.position += direction * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

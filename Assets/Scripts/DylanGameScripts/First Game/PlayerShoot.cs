@@ -35,8 +35,8 @@ public class PlayerShoot : MonoBehaviour
             float facingDirection = Mathf.Sign(transform.localScale.x);
             projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(facingDirection * projectile.speed, 0f);
             anim.SetTrigger("isShooting2");
-            //SoundManager.Instance.playShootSound();
-            Debug.Log("Scale x: " + transform.localScale.x);
+            SoundManager.Instance.playShootSound();
+            //Debug.Log("Scale x: " + transform.localScale.x);
 
         }
     }

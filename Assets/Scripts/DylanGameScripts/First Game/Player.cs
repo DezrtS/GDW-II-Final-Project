@@ -110,7 +110,8 @@ public class Player : MonoBehaviour
             {
                 anim.SetTrigger("takeOff2");
             }
-                //anim.SetTrigger("Player1Jump");
+            //anim.SetTrigger("Player1Jump");
+            rig.velocity = new Vector2(rig.velocity.x, 0);
                 rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
             // anim.SetBool("isJumping", false);
         }
