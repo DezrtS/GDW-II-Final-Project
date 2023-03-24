@@ -67,12 +67,13 @@ public class PushMovement : MonoBehaviour
     {
         if (knockedBack)
         {
-            if (rig.velocity.magnitude <= 1f)
+            if (rig.velocity.magnitude <= 2f)
             {
                 knockedBack = false;
             }
         }
         Vector2 moveVelocity = transform.up * verticalMovement * movementSpeed;
+        //rig.MovePosition(rig.position + moveVelocity * Time.fixedDeltaTime);
         if (!knockedBack)
         {
             rig.velocity = moveVelocity;

@@ -8,8 +8,9 @@ public class PlayerPush : MonoBehaviour
     private Animator pushAnimator;
 
     [SerializeField] private float pushDelay = 1.2f;
+    private float pushDuration = 0.3f;
 
-    [SerializeField] private int pushPower = 3;
+    [SerializeField] private int pushPower = 5;
 
     private bool isPushing;
     private bool canPush = true;
@@ -21,7 +22,7 @@ public class PlayerPush : MonoBehaviour
 
     public void ResetPushPower()
     {
-        pushPower = 3;
+        pushPower = 5;
     }
 
     public void Push()
@@ -31,19 +32,27 @@ public class PlayerPush : MonoBehaviour
             //isPushing = true;
             canPush = false;
             //pushAnimator.SetBool("IsPushing", isPushing);
-            pushAnimator.SetBool("CanPush", canPush);
+            pushAnimator.SetBool("IsPushing", true);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(pushObject.transform.position, 1);
             foreach (Collider2D collider in colliders)
             {
                 if ((collider.tag == "Player1" || collider.tag == "Player2") && collider.gameObject != gameObject)
                 {
                     collider.gameObject.GetComponent<PushMovement>().KnockBack(transform.up, pushPower);
-                    pushPower = pushPower + 4;
+                    pushPower = pushPower + 3;
                 }
             }
-            StartCoroutine(PushCooldown());
+            StartCoroutine(EndPush());
         }
     }
+
+    IEnumerator EndPush()
+    {
+        yield return new WaitForSeconds(pushDuration);
+        pushAnimator.SetBool("IsPushing", false);
+        StartCoroutine(PushCooldown());
+    }
+
 
     IEnumerator PushCooldown()
     {
@@ -55,7 +64,6 @@ public class PlayerPush : MonoBehaviour
         //yield return new WaitForSeconds(pushDelay / 2f);
         //canPush = true;
         //pushAnimator.SetBool("IsPushing", isPushing);
-        pushAnimator.SetBool("CanPush", canPush);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -50,7 +50,8 @@ public class Respawn : MonoBehaviour
     private void RespawnPlayer()
     {
         body.velocity = Vector2.zero;
-        GetComponent<PlayerPush>().ResetPushPower();
+        PushGameController.instance.GetClosestPlayer(gameObject).GetComponent<PlayerPush>().ResetPushPower();
+        
 
         if (mainCamera == null)
         {
@@ -60,14 +61,16 @@ public class Respawn : MonoBehaviour
 
         Vector3 cameraPos = mainCamera.transform.position;
         transform.position = new Vector3(cameraPos.x, cameraPos.y, transform.position.z);
-
-        if (isPlayerOne)
+        if (!GameEnder.instance.IsGameEnding())
         {
-            heartScript.subtractHealth();
-        }
-        else
-        {
-            heartScript.subtractHealth();
+            if (isPlayerOne)
+            {
+                heartScript.subtractHealth();
+            }
+            else
+            {
+                heartScript.subtractHealth();
+            }
         }
 
         if (heartScript.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())

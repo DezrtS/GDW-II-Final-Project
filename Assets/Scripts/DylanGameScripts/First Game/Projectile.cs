@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
         //Destroy(gameObject, lifeTime);
     }
 
-    private void OnBecameInvisible()
+    private void FixedUpdate()
     {
         if (transform.position.x > screenWidth)
         {
