@@ -18,7 +18,6 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKey(KeyCode.Return)) 
         {
             Shoot();
-            anim.SetTrigger("isShooting2");
         }
 
         /*if (Input.GetKeyDown(KeyCode.Space) && Input.GetKeyDown(KeyCode.UpArrow))
@@ -33,21 +32,14 @@ public class PlayerShoot : MonoBehaviour
         {
             timeSinceLastShot = Time.time;
             Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-            projectile.GetComponent<Rigidbody2D>().velocity = (transform.right * transform.localScale.x) * projectile.speed;
+            float facingDirection = Mathf.Sign(transform.localScale.x);
+            projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(facingDirection * projectile.speed, 0f);
+            anim.SetTrigger("isShooting2");
+            //SoundManager.Instance.playShootSound();
+            Debug.Log("Scale x: " + transform.localScale.x);
+
         }
     }
-
-
-    /*private void Shoot()
-    {
-        if (Time.time - timeSinceLastShot >= 3f)
-        {
-            timeSinceLastShot = Time.time;
-            Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-            projectile.GetComponent<Rigidbody2D>().velocity = transform.localScale.x * Vector2.right * projectile.speed;
-        }
-    }*/
-
 
     private void ShootVertically()
     {

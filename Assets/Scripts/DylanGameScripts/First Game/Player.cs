@@ -102,13 +102,44 @@ public class Player : MonoBehaviour
 
         if (grounded && jumpInput > 0)
         {
-            //anim.SetTrigger("Player1Jump");
-            rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
+            if (isPlayerOne)
+            {
+                anim.SetTrigger("takeOff");
+            }
+            else
+            {
+                anim.SetTrigger("takeOff2");
+            }
+                //anim.SetTrigger("Player1Jump");
+                rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
             // anim.SetBool("isJumping", false);
         }
         else
         {
             //anim.SetBool("isJumping", true);
+        }
+
+        if (grounded == true)
+        {
+            if (isPlayerOne)
+            {
+                anim.SetBool("isJumping", false);
+            }
+            else
+            {
+                anim.SetBool("isJumping2", false);
+            }
+        }
+        else
+        {
+            if (isPlayerOne)
+            {
+                anim.SetBool("isJumping", true);
+            }
+            else
+            {
+                anim.SetBool("isJumping2", true);
+            }
         }
         transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
     }
