@@ -52,4 +52,9 @@ public class LoadGame1 : MonoBehaviour
         SceneManager.LoadScene("TrailTrappers");
     }
 
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
 }

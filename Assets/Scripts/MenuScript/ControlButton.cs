@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ControlButton : MonoBehaviour
 {
+
+ 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,4 +24,6 @@ public class ControlButton : MonoBehaviour
     {
         SceneManager.LoadScene("Controls");
     }
+
+   
 }

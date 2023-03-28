@@ -26,6 +26,7 @@ public class Button : MonoBehaviour
         
         if(collision.gameObject.tag == "P1")
         {
+            SoundManager.Instance.PlayBulletButtonClick();
           canNum.SetTarget(2);
             sprite.sprite = Red;
             
@@ -33,8 +34,9 @@ public class Button : MonoBehaviour
 
        if (collision.gameObject.tag == "P2")
         {
-        
-          canNum.SetTarget(1);
+
+            SoundManager.Instance.PlayBulletButtonClick();
+            canNum.SetTarget(1);
             sprite.sprite = Blue;
         }
      
