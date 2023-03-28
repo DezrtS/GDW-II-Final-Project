@@ -20,11 +20,6 @@ public class PlayerBounce2 : MonoBehaviour
         originalBounciness = originalMaterial.bounciness;
     }
 
-    void Update()
-    {
-
-    }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (Input.GetKey(KeyCode.F))
@@ -32,9 +27,12 @@ public class PlayerBounce2 : MonoBehaviour
             if (collision.gameObject == otherPlayer) 
             {
                 Debug.Log("Collision detected with other player");
-                var material = new PhysicsMaterial2D();
-                material.bounciness = collision.gameObject.GetComponent<Rigidbody2D>().sharedMaterial.bounciness * bounceIncrease;
-                collision.gameObject.GetComponent<Rigidbody2D>().sharedMaterial = material;
+                collision.gameObject.GetComponent<PushMovement>().KnockBack((collision.transform.position - transform.position).normalized * 10f, 0.5f);
+                bounceIncrease = bounceIncrease * 2;
+
+                //var material = new PhysicsMaterial2D();
+                //material.bounciness = collision.gameObject.GetComponent<Rigidbody2D>().sharedMaterial.bounciness * bounceIncrease;
+                //collision.gameObject.GetComponent<Rigidbody2D>().sharedMaterial = material;
             }
         }
     }

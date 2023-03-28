@@ -10,7 +10,7 @@ public class PlayerBounce : MonoBehaviour
     private bool isBouncing = false;
     private Camera mainCamera;
 
-    public float bounceIncrease = 2;
+    public float bouncePower;
     public GameObject otherPlayer; 
 
     void Start()
@@ -33,9 +33,13 @@ public class PlayerBounce : MonoBehaviour
             if (collision.gameObject == otherPlayer) 
             {
                 Debug.Log("Collision detected with other player");
-                var material = new PhysicsMaterial2D();
-                material.bounciness = collision.gameObject.GetComponent<Rigidbody2D>().sharedMaterial.bounciness * bounceIncrease;
-                collision.gameObject.GetComponent<Rigidbody2D>().sharedMaterial = material;
+                collision.gameObject.GetComponent<PushMovement>().KnockBack((collision.transform.position - transform.position).normalized, 0.5f);
+                    //GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position).normalized * bounceIncrease * 10f, ForceMode2D.Impulse);
+                //bounceIncrease = bounceIncrease * 2;
+
+                //var material = new PhysicsMaterial2D();
+                //material.bounciness = collision.gameObject.GetComponent<Rigidbody2D>().sharedMaterial.bounciness * bounceIncrease;
+                //collision.gameObject.GetComponent<Rigidbody2D>().sharedMaterial = material;
             }
         }
     }

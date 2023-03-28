@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerShoot1 : MonoBehaviour
 {
     public Projectile projectilePrefab;
-    private float timeSinceLastShot;
+    private float timeSinceLastShot = -3f;
 
     private Animator anim;
 
@@ -19,7 +19,6 @@ public class PlayerShoot1 : MonoBehaviour
         if (Input.GetKey(KeyCode.F))
         {
             Shoot();
-            anim.SetTrigger("isShooting");
         }
 
         /*if (Input.GetKeyDown(KeyCode.Space) && Input.GetKeyDown(KeyCode.UpArrow))
@@ -33,8 +32,11 @@ public class PlayerShoot1 : MonoBehaviour
         if (Time.time - timeSinceLastShot >= 3f)
         {
             timeSinceLastShot = Time.time;
-            Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-            projectile.GetComponent<Rigidbody2D>().velocity = transform.right * projectile.speed;
+            float facingDirection = Mathf.Sign(transform.localScale.x);
+            Projectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0, 0, 90 * -facingDirection));
+            projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(facingDirection * projectile.speed, 0f);
+            anim.SetTrigger("isShooting");
+            SoundManager.Instance.playShootSound();
         }
     }
 

@@ -10,16 +10,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpPower = 1;
     [SerializeField] private bool isPlayerOne;
     private bool grounded;
-    private bool ragdollActive;
     private Vector3 groundNormal = Vector3.right;
-    private float startingTime;
-    private Vector3 gravityVelocity;
-    private float knockback;
     private float screenWidth;
-    private int score = 0;
     public Vector3 startingPosition;
 
-    float jump;
     private GameObject projectileReference;
 
     private Animator anim;
@@ -48,6 +42,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        rig.velocity = new Vector2(0, rig.velocity.y);
+
         float movementInput;
         float jumpInput;
 
@@ -102,62 +98,70 @@ public class Player : MonoBehaviour
 
         if (grounded && jumpInput > 0)
         {
+            if (isPlayerOne)
+            {
+                anim.SetTrigger("takeOff");
+            }
+            else
+            {
+                anim.SetTrigger("takeOff2");
+            }
             //anim.SetTrigger("Player1Jump");
-            rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
+            rig.velocity = new Vector2(rig.velocity.x, 0);
+                rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
             // anim.SetBool("isJumping", false);
         }
         else
         {
             //anim.SetBool("isJumping", true);
         }
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
-    }
 
-    public void ApplyKnockback(float knockback)
-    {
-        //this.knockback = knockback;
-        rig.AddForce(Vector3.right * knockback, ForceMode2D.Impulse);
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        ContactPoint2D[] contactPoints = new ContactPoint2D[1];
-        collision.GetContacts(contactPoints);
-        ContactPoint2D groundContactPoint = new ContactPoint2D();
-        foreach (ContactPoint2D contactPoint in contactPoints)
+        if (grounded == true)
         {
-            if (contactPoint.collider.tag == "Rotating Paddle")
+            if (isPlayerOne)
             {
-                groundContactPoint = contactPoint;
-                break;
-            }
-            else if (contactPoint.collider.tag != "player")
-            {
-                groundContactPoint = contactPoint;
+                anim.SetBool("isJumping", false);
             }
             else
             {
-                groundContactPoint = contactPoint;
-            }
-        }
-
-        groundNormal = Quaternion.Euler(0, 0, -90) * groundContactPoint.normal;
-        //Debug.Log(groundContactPoint.collider.gameObject.name);
-        if (groundContactPoint.normal.y < 0.60f)
-        {
-            grounded = false;
-            groundNormal = Vector3.right;
-            if (ragdollActive == false && collision.gameObject.tag == "Rotating Paddle")
-            {
-                //ragdollActive = true;
+                anim.SetBool("isJumping2", false);
             }
         }
         else
         {
-            startingTime = Time.timeSinceLevelLoad;
-            ragdollActive = false;
+            if (isPlayerOne)
+            {
+                anim.SetBool("isJumping", true);
+            }
+            else
+            {
+                anim.SetBool("isJumping2", true);
+            }
+        }
+        //rig.velocity = new Vector2(movementInput * speed, rig.velocity.y);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Vector2 groundContactNormal = Vector2.right;
+        for (int i = 0; i < collision.contacts.Length; i++)
+        {
+            if (collision.contacts[i].normal.y > 0.5f)
+            {
+                groundContactNormal = collision.contacts[i].normal;
+                break;
+            }
+        }
+
+        groundNormal = Quaternion.Euler(0, 0, -90) * groundContactNormal;
+        if (groundContactNormal.y < 0.5f)
+        {
+            groundNormal = Vector3.right;
+        }
+        else
+        {
             grounded = true;
-            jump = 0;
         }
     }
 

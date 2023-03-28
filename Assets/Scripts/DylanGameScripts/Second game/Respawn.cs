@@ -11,8 +11,8 @@ public class Respawn : MonoBehaviour
     int player2Health = 3;
 
     private Rigidbody2D body;
-    private PhysicsMaterial2D originalMaterial;
-    private float originalBounciness;
+    //private PhysicsMaterial2D originalMaterial;
+    //private float originalBounciness;
 
     [SerializeField] private bool isPlayerOne;
 
@@ -22,8 +22,8 @@ public class Respawn : MonoBehaviour
     {
         mainCamera = Camera.main;
         body = GetComponent<Rigidbody2D>();
-        originalMaterial = body.sharedMaterial;
-        originalBounciness = originalMaterial.bounciness;
+        //originalMaterial = body.sharedMaterial;
+        //originalBounciness = originalMaterial.bounciness;
         heartScript = gameObject.GetComponent<Hearts>();
     }
 
@@ -41,14 +41,18 @@ public class Respawn : MonoBehaviour
         {
             RespawnPlayer();
             Debug.Log("Player left the screen, resetting bounciness.");
-            var material = new PhysicsMaterial2D();
-            material.bounciness = originalBounciness;
-            body.sharedMaterial = material;
+            //var material = new PhysicsMaterial2D();
+            //material.bounciness = originalBounciness;
+            //body.sharedMaterial = material;
         }
     }
 
     private void RespawnPlayer()
     {
+        body.velocity = Vector2.zero;
+        PushGameController.Instance.GetClosestPlayer(gameObject).GetComponent<PlayerPush>().ResetPushPower();
+        
+
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
@@ -57,14 +61,16 @@ public class Respawn : MonoBehaviour
 
         Vector3 cameraPos = mainCamera.transform.position;
         transform.position = new Vector3(cameraPos.x, cameraPos.y, transform.position.z);
-
-        if (isPlayerOne)
+        if (!GameEnder.instance.IsGameEnding())
         {
-            heartScript.subtractHealth();
-        }
-        else
-        {
-            heartScript.subtractHealth();
+            if (isPlayerOne)
+            {
+                heartScript.subtractHealth();
+            }
+            else
+            {
+                heartScript.subtractHealth();
+            }
         }
 
         if (heartScript.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
