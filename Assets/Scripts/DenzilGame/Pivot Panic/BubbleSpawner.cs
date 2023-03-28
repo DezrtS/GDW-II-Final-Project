@@ -10,9 +10,41 @@ public class BubbleSpawner : MonoBehaviour
     [SerializeField] private float oscillationSpeed = 1;
     [SerializeField] private float oscillationStrength = 1;
 
-    void Start()
+    private GameTimer bubbleTimer;
+
+    private void Awake()
     {
-        StartCoroutine(SpawnBubble());
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        bubbleTimer = new GameTimer(Random.Range(0.1f, 3f), false);
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            bubbleTimer.PauseTimer(false);
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            bubbleTimer.PauseTimer(true);
+        }
+    }
+
+    private void Update()
+    {
+        if (bubbleTimer.UpdateTimer())
+        {
+            SpawnBubble();
+            bubbleTimer.RestartTimer();
+            bubbleTimer.SetTimeTillCompletion(Random.Range(0.1f, 3f));
+        }
     }
 
     private void FixedUpdate()
@@ -20,10 +52,8 @@ public class BubbleSpawner : MonoBehaviour
         transform.position = transform.position + new Vector3(0, oscillationStrength * Mathf.Sin(Time.timeSinceLevelLoad * oscillationSpeed), 0);
     }
 
-    IEnumerator SpawnBubble()
+    public void SpawnBubble()
     {
-        yield return new WaitForSeconds(Random.Range(0.1f, 3f));
         Instantiate(bubble, new Vector3(Random.Range(-spawningRange, spawningRange), transform.position.y, 0), Quaternion.identity, transform);
-        StartCoroutine(SpawnBubble());
     }
 }

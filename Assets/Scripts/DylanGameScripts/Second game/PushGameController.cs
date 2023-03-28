@@ -2,19 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushGameController : MonoBehaviour
+public class PushGameController : Singleton<PushGameController>
 {
-    public static PushGameController instance;
-
     [SerializeField] GameObject[] players;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
 
     public GameObject GetClosestPlayer(GameObject originalPlayer)
     {
