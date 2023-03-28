@@ -50,7 +50,7 @@ public class Respawn : MonoBehaviour
     private void RespawnPlayer()
     {
         body.velocity = Vector2.zero;
-        PushGameController.instance.GetClosestPlayer(gameObject).GetComponent<PlayerPush>().ResetPushPower();
+        PushGameController.Instance.GetClosestPlayer(gameObject).GetComponent<PlayerPush>().ResetPushPower();
         
 
         if (mainCamera == null)

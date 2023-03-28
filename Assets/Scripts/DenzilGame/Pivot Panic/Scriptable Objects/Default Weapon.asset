@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b75460894dc44b4f8b12deff1effb1a, type: 3}
-  m_Name: Debug Weapon
+  m_Name: Default Weapon
   m_EditorClassIdentifier: 
-  weaponName: Debug
+  weaponName: Default Attack
   knockbackAmount: 7
   timeTillAttack: 0.5
   attackRadius: 1

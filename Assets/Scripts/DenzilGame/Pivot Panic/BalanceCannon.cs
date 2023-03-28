@@ -6,20 +6,48 @@ public class BalanceCannon : MonoBehaviour
 {
     [SerializeField] GameObject barrel;
     [SerializeField] ParticleSystem cannonFire;
+    
+    private GameTimer shootTimer;
 
-    private void Start()
+    private void Awake()
     {
-        StartCoroutine(Shoot());
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        shootTimer = new GameTimer(3 + Random.Range(-100, 100) / 100f, false);
     }
 
-    public IEnumerator Shoot()
+    private void OnDestroy()
     {
-        yield return new WaitForSeconds(3 + Random.Range(-100, 100) / 100f);
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            shootTimer.PauseTimer(false);
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            shootTimer.PauseTimer(true);
+        }
+    }
+
+    private void Update()
+    {
+        if (shootTimer.UpdateTimer())
+        {
+            Shoot();
+            shootTimer.RestartTimer();
+            shootTimer.SetTimeTillCompletion(3 + Random.Range(-100, 100) / 100f);
+        }
+    }
+
+    public void Shoot()
+    {
         GameObject newBarrel = Instantiate(barrel, transform.position, Quaternion.identity);
         newBarrel.GetComponent<Rigidbody2D>().AddForce(transform.right / (8 + Random.Range(0, 8)), ForceMode2D.Impulse);
         cannonFire.Play();
-        StartCoroutine(Shoot());
     }
-
-
 }
