@@ -1,33 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class TronMovement : MonoBehaviour
+public class TrailMovement : MonoBehaviour
 {
-    public bool isPlayerOne;
-    string horizontal1 = "Horizontal", horizontal2 = "Horizontal2", vertical1 = "Vertical", vertical2 = "Vertical2";
-    string horizontalInput, verticalInput;
-    public KeyCode attackButton;
+    private string horizontal1 = "Horizontal", horizontal2 = "Horizontal2", vertical1 = "Vertical", vertical2 = "Vertical2", button1 = "Fire1", button2 = "Fire2";
+    private string horizontalInputString, verticalInputString, actionInputString;
 
-    Rigidbody2D rig;
+    private Rigidbody2D rig;
 
-    [SerializeField] float regularSpeed = 5;
-    [SerializeField] float fasterSpeed = 10;
-    [SerializeField] float rotationSpeed = 5;
-
-    [SerializeField] Hearts heartScript;
+    [SerializeField] private float regularSpeed = 5;
+    [SerializeField] private float fasterSpeed = 10;
+    [SerializeField] private float rotationSpeed = 5;
 
     [SerializeField] public HeartsKeeper heartsKeeper;
 
     [SerializeField] public Trail trail;
 
+    private Hearts heartScript;
+
     public bool canMove = true;
+    public bool isPlayerOne;
 
-    bool canDropTail = true;
+    private bool canDropTail = true;
 
-    void Start()
+    private float horizontalInput;
+    private float verticalInput;
+
+    private GameTimer tailDropTimer;
+
+    private void Awake()
     {
+        rig = GetComponent<Rigidbody2D>();
+        heartScript = gameObject.GetComponent<Hearts>();
+        SetupPlayerInput();
+
+        tailDropTimer = new GameTimer(1f, true);
+
         if (heartsKeeper.resetHealths)
         {
             heartsKeeper.ResetHealth();
@@ -36,24 +45,73 @@ public class TronMovement : MonoBehaviour
         {
             heartsKeeper.resetHealths = true;
             heartsKeeper.otherPlayerReset = false;
-        } else
+        }
+        else
         {
             heartsKeeper.otherPlayerReset = true;
         }
-        rig = GetComponent<Rigidbody2D>();
-        SetupPlayerInput();
-        heartScript = gameObject.GetComponent<Hearts>();
         heartScript.setHealth(heartsKeeper.GetHealth(isPlayerOne));
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            rig.simulated = true;
+            if (!canDropTail)
+            {
+                tailDropTimer.PauseTimer(false);
+            }
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            rig.simulated = false;
+            tailDropTimer.PauseTimer(true);
+        }
+    }
+
+    void SetupPlayerInput()
+    {
+        if (isPlayerOne)
+        {
+            horizontalInputString = horizontal1;
+            verticalInputString = vertical1;
+            actionInputString = button1;
+        }
+        else
+        {
+            horizontalInputString = horizontal2;
+            verticalInputString = vertical2;
+            actionInputString = button2;
+        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(attackButton) && canDropTail && Time.timeScale == 1)
+        verticalInput = Input.GetAxis(verticalInputString);
+        horizontalInput = Input.GetAxis(horizontalInputString);
+
+        if (Input.GetButtonDown(actionInputString) && canDropTail && Time.timeScale == 1)
         {
             trail.PlaceTrail(isPlayerOne);
             trail.ShrinkTailNow(2);
             canDropTail = false;
-            StartCoroutine(DropTailCooldwon());
+            tailDropTimer.PauseTimer(false);
+        }
+
+        if (tailDropTimer.UpdateTimer())
+        {
+            canDropTail = true;
+            tailDropTimer.RestartTimer();
         }
     }
 
@@ -62,26 +120,12 @@ public class TronMovement : MonoBehaviour
         Move();
     }
 
-    void SetupPlayerInput()
-    {
-        if (isPlayerOne)
-        {
-            horizontalInput = horizontal1;
-            verticalInput = vertical1;
-        }
-        else
-        {
-            horizontalInput = horizontal2;
-            verticalInput = vertical2;
-        }
-    }
-
-    void Move()
+    private void Move()
     {
         if (canMove)
         {
             float speed;
-            if (Input.GetAxis(verticalInput) > 0)
+            if (verticalInput > 0)
             {
                 speed = fasterSpeed;
             }
@@ -90,7 +134,7 @@ public class TronMovement : MonoBehaviour
                 speed = regularSpeed;
             }
             rig.MovePosition(rig.position + (Vector2)transform.up * speed * Time.fixedDeltaTime);
-            transform.Rotate(0f, 0f, -Input.GetAxis(horizontalInput) * rotationSpeed, Space.Self);
+            transform.Rotate(0f, 0f, -horizontalInput * rotationSpeed, Space.Self);
         }
     }
 
@@ -105,7 +149,8 @@ public class TronMovement : MonoBehaviour
             trail.StopAllCoroutines();
             TrailGameController.instance.FreezeGame();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        } else if (collision.gameObject.tag == "Trail")
+        } 
+        else if (collision.gameObject.tag == "Trail")
         {
             if (heartsKeeper.BothPlayersAlive() && heartsKeeper.canTakeAwayHealth)
             {
@@ -139,11 +184,5 @@ public class TronMovement : MonoBehaviour
             }
             heartsKeeper.canTakeAwayHealth = false;
         }
-    }
-
-    IEnumerator DropTailCooldwon()
-    {
-        yield return new WaitForSeconds(1f);
-        canDropTail = true;
     }
 }

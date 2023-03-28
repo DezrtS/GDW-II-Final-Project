@@ -7,8 +7,8 @@ public class TrailGameController : MonoBehaviour
 {
     public static TrailGameController instance;
 
-    [SerializeField] private TronMovement playerOneMovement;
-    [SerializeField] private TronMovement playerTwoMovement;
+    [SerializeField] private TrailMovement playerOneMovement;
+    [SerializeField] private TrailMovement playerTwoMovement;
 
     [SerializeField] public GameObject playerOneTrailPrefab;
     [SerializeField] public GameObject playerTwoTrailPrefab;

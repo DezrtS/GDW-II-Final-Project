@@ -132,7 +132,7 @@ public class PivotPlayer : MonoBehaviour
         verticalInput = Input.GetAxis(verticalInputString);
         horizontalInput = Input.GetAxis(horizontalInputString);
         
-        if (Input.GetButtonDown(actionInputString) && !isAttacking)
+        if (Input.GetButtonDown(actionInputString) && !isAttacking && Time.timeScale == 1)
         {
             isAttacking = true;
             playerAnimator.SetBool("IsAttacking", true);

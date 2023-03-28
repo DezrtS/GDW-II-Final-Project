@@ -26,6 +26,7 @@ public class GameTimer
 
         if (!timerAlreadyFinished && currentTimeDifference >= timeTillCompletion)
         {
+            timerCompletionCount++;
             timerAlreadyFinished = true;
         }
         currentTimeDifference = Time.timeSinceLevelLoad - startingTime;
@@ -42,7 +43,6 @@ public class GameTimer
         //Debug.Log("The timer was " + (currentTimeDifference - timeTillCompletion) + " seconds off");
         currentTimeDifference = 0f;
         startingTime = Time.timeSinceLevelLoad;
-        timerCompletionCount++;
         timerAlreadyFinished = false;
     }
 

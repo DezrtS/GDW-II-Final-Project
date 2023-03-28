@@ -26,11 +26,19 @@ public class BalanceCannon : MonoBehaviour
         {
             enabled = true;
             shootTimer.PauseTimer(false);
+            if (cannonFire.isPaused)
+            {
+                cannonFire.Play();
+            }
         }
         else if (newGameState == GameState.Paused)
         {
             enabled = false;
             shootTimer.PauseTimer(true);
+            if (cannonFire.isPlaying)
+            {
+                cannonFire.Pause();
+            }
         }
     }
 
