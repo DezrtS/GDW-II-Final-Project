@@ -15,12 +15,35 @@ public class MovementP2 : MonoBehaviour
     public Transform trans;
     public Vector2 faceDirection;
 
-    void Start()
+    private void Awake()
     {
-        body = gameObject.GetComponent<Rigidbody2D>();
-        heartScript = gameObject.GetComponent<Hearts>();
+        body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
 
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            body.simulated = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            body.simulated = false;
+        }
+    }
+
+    public void Start()
+    {
+        heartScript = gameObject.GetComponent<Hearts>();
     }
 
     // Update is called once per frame
@@ -77,7 +100,7 @@ public class MovementP2 : MonoBehaviour
         {
             SoundManager.Instance.playHitSound();
             heartScript.subtractHealth();
-            ShakeBehaviour.instance.TriggerShake();
+            ShakeBehaviour.Instance.TriggerShake();
         }
     }
 

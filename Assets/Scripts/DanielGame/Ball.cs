@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Ball : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMeshProUGUI;
     [SerializeField] TextMeshPro textMeshPro;
-    [SerializeField] Animator animator;
     //test above
     public playermovementballgame movementscript;
     public Hearts heartScript;
@@ -37,29 +32,25 @@ public class Ball : MonoBehaviour
     public Vector3 start2 = new Vector3(8, 0, 0);
 
     public bool respawnfullreset;
-    bool playCountdown;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        
         body = GetComponent<Rigidbody2D>();
-        ballHitBox = GetComponent<Collider2D>();
+        partsys = GetComponent<ParticleSystem>();
         trans = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
-        partsys = GetComponent<ParticleSystem>();
-        
-        
+
         mag = body.velocity.magnitude;
-        
+
         int randomNum = Random.Range(1, 3);
-        if (randomNum == 2) 
+        if (randomNum == 2)
         {
             isRedPlayer1 = false;
             //sprite.color = Color.blue;
             //sprite.sprite = player2spriteBlue;
             trans.position = start2;
-        } 
-        else if( randomNum == 1)
+        }
+        else if (randomNum == 1)
         {
             isRedPlayer1 = true;
             //sprite.color = Color.red;
@@ -67,6 +58,47 @@ public class Ball : MonoBehaviour
             trans.position = start1;
         }
         Color();
+        MagText();
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            body.simulated = true;
+            if (partsys.isPaused)
+            {
+                partsys.Play();
+            }
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            body.simulated = false;
+            if (partsys.isPlaying)
+            {
+                partsys.Pause();
+            }
+            Color();
+            MagText();
+        }
+    }
+
+
+    void Start()
+    {
+        
+        ballHitBox = GetComponent<Collider2D>();
+        
+       
 
         //Testing Sound
         SoundManager.Instance.pauseTitleMusic();
@@ -79,7 +111,6 @@ public class Ball : MonoBehaviour
     {
         GetMagnitude();
         Color();
-        PlayCountdownFunction();
     }
 
     void FixedUpdate()
@@ -101,7 +132,7 @@ public class Ball : MonoBehaviour
         targetMag = targetMag + inc;
         body.velocity = vecNorm * targetMag;
         SoundManager.Instance.playBounceSound();
-        UnityEngine.Debug.Log("attackhit");
+        //UnityEngine.Debug.Log("attackhit");
         //partsys.emissionRate = 10 + 2*targetMag;
         //partsys.Play();
     }
@@ -193,7 +224,7 @@ public class Ball : MonoBehaviour
         else
         {
             SoundManager.Instance.playBounceSound();
-            UnityEngine.Debug.Log("hit");
+            //UnityEngine.Debug.Log("hit");
             //player reset
             player.transform.position = movementscript.startPos;
             player.transform.rotation = movementscript.startRot;
@@ -220,34 +251,23 @@ public class Ball : MonoBehaviour
             if(heartScript.returnHealth() == 0 && !GameEnder.Instance.IsGameEnding())
             {
                 GameEnder.Instance.StartEndGame();
-                UnityEngine.Debug.Log("PLayer loses");
                 if (movementscript.isPlayer1)
                 {
+                    Debug.Log("Player 1 Lost");
                     P2Score.Instance.AddScore();
                 }
                 else
                 {
+                    Debug.Log("Player 2 Lost");
                     P1Score.Instance.AddScore();
                 }
 
             }
             else
             {
-                ShakeBehaviour.instance.TriggerShake();playCountdown = true;
+                ShakeBehaviour.Instance.TriggerShake();
+                CountdownManager.Instance.RestartCountdown();
             }
-            
-            //PlayCountdown();
-            
-            
-        }
-    }
-    void PlayCountdownFunction()
-    {
-
-        if (ShakeBehaviour.instance.shakeDuration == 0 && playCountdown) 
-        {
-            playCountdown = false; 
-            animator.Play("");
         }
     }
 }

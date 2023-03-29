@@ -29,6 +29,7 @@ public class TransitionManager : MonoBehaviour
     [SerializeField] private GameObject plainLongCube;
     [Space(10)]
     [SerializeField] private bool playOnStart = true;
+    [SerializeField] private bool freezeOnStart = true;
     [SerializeField] private bool initiateGameUIAnimation = true;
     [SerializeField] private int currentAnimation = 0;
 
@@ -40,7 +41,10 @@ public class TransitionManager : MonoBehaviour
 
     private void Start()
     {
-        GameStateManager.Instance.SetState(GameState.Paused);
+        if (freezeOnStart)
+        {
+            GameStateManager.Instance.SetState(GameState.Paused);
+        }
 
         if (playOnStart)
         {
@@ -232,16 +236,16 @@ public class TransitionManager : MonoBehaviour
         {
             if (CheckEvenOrOdd(onEven, i_x))
             {
-                Instantiate(growCube, new Vector3(i_x * 2, y * 2, 0), Quaternion.identity, transform);
-                Instantiate(growCube, new Vector3(i_x * 2, -y * 2, 0), Quaternion.identity, transform);
+                Instantiate(growCube, new Vector3(i_x * 2, y * 2, 0) + transform.position, Quaternion.identity, transform);
+                Instantiate(growCube, new Vector3(i_x * 2, -y * 2, 0) + transform.position, Quaternion.identity, transform);
             }
         }
         for (int i_y = -y + 1; i_y < y; i_y++)
         {
             if (CheckEvenOrOdd(onEven, i_y))
             {
-                Instantiate(growCube, new Vector3(x * 2, i_y * 2, 0), Quaternion.identity, transform);
-                Instantiate(growCube, new Vector3(-x * 2, i_y * 2, 0), Quaternion.identity, transform);
+                Instantiate(growCube, new Vector3(x * 2, i_y * 2, 0) + transform.position, Quaternion.identity, transform);
+                Instantiate(growCube, new Vector3(-x * 2, i_y * 2, 0) + transform.position, Quaternion.identity, transform);
             }
         }
         yield return new WaitForSeconds(0.15f);
@@ -249,16 +253,16 @@ public class TransitionManager : MonoBehaviour
         {
             if (CheckEvenOrOdd(!onEven, i_x)) 
             {
-                Instantiate(growCube, new Vector3(i_x * 2, y * 2, 0), Quaternion.identity, transform);
-                Instantiate(growCube, new Vector3(i_x * 2, -y * 2, 0), Quaternion.identity, transform);
+                Instantiate(growCube, new Vector3(i_x * 2, y * 2, 0) + transform.position, Quaternion.identity, transform);
+                Instantiate(growCube, new Vector3(i_x * 2, -y * 2, 0) + transform.position, Quaternion.identity, transform);
             }
         }
         for (int i_y = -y + 1; i_y < y; i_y++)
         {
             if (CheckEvenOrOdd(!onEven, i_y))
             {
-                Instantiate(growCube, new Vector3(x * 2, i_y * 2, 0), Quaternion.identity, transform);
-                Instantiate(growCube, new Vector3(-x * 2, i_y * 2, 0), Quaternion.identity, transform);
+                Instantiate(growCube, new Vector3(x * 2, i_y * 2, 0) + transform.position, Quaternion.identity, transform);
+                Instantiate(growCube, new Vector3(-x * 2, i_y * 2, 0) + transform.position, Quaternion.identity, transform);
             }
         }
         x++;
@@ -287,7 +291,7 @@ public class TransitionManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.005f);
         int index = Random.Range(0, positions.Count);
-        Instantiate(growCube, positions[index] * 2, Quaternion.identity, transform);
+        Instantiate(growCube, positions[index] * 2 + (Vector2)transform.position, Quaternion.identity, transform);
         positions.RemoveAt(index);
         if (positions.Count > 0)
         {
@@ -310,7 +314,7 @@ public class TransitionManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.075f);
         int index = Random.Range(0, positions.Count);
-        Instantiate(growCoverCube, positions[index] * 2, Quaternion.identity, transform);
+        Instantiate(growCoverCube, positions[index] * 2 + (Vector2)transform.position, Quaternion.identity, transform);
         positions.RemoveAt(index);
         if (positions.Count > 0)
         {
@@ -336,7 +340,7 @@ public class TransitionManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
         int index = Random.Range(0, positions.Count);
-        Instantiate(shutDoor, Quaternion.Euler(rotation) * positions[index] * 2, Quaternion.Euler(rotation), transform);
+        Instantiate(shutDoor, Quaternion.Euler(rotation) * positions[index] * 2 + transform.position, Quaternion.Euler(rotation), transform);
         positions.RemoveAt(index);
         if (positions.Count > 0)
         {
@@ -358,7 +362,7 @@ public class TransitionManager : MonoBehaviour
                 cubes[i_x] = new GameObject[21];
                 for (int i_y = 0; i_y < 21; i_y++)
                 {
-                    cubes[i_x][i_y] = Instantiate(plainCube, new Vector3((i_x - 10) * 2, (i_y - 10) * 2, 0), Quaternion.identity, transform);
+                    cubes[i_x][i_y] = Instantiate(plainCube, new Vector3((i_x - 10) * 2, (i_y - 10) * 2, 0) + transform.position, Quaternion.identity, transform);
                 }
             }
         }
@@ -369,8 +373,8 @@ public class TransitionManager : MonoBehaviour
             {
                 Destroy(cubes[i_x + 10][y + 10]);
                 Destroy(cubes[i_x + 10][-y + 10]);
-                Instantiate(shrinkCube, new Vector3(i_x * 2, y * 2, 0), Quaternion.identity, transform);
-                Instantiate(shrinkCube, new Vector3(i_x * 2, -y * 2, 0), Quaternion.identity, transform);
+                Instantiate(shrinkCube, new Vector3(i_x * 2, y * 2, 0) + transform.position, Quaternion.identity, transform);
+                Instantiate(shrinkCube, new Vector3(i_x * 2, -y * 2, 0) + transform.position, Quaternion.identity, transform);
             }
         }
         for (int i_y = -y + 1; i_y < y; i_y++)
@@ -379,8 +383,8 @@ public class TransitionManager : MonoBehaviour
             {
                 Destroy(cubes[x + 10][i_y + 10]);
                 Destroy(cubes[-x + 10][i_y + 10]);
-                Instantiate(shrinkCube, new Vector3(x * 2, i_y * 2, 0), Quaternion.identity, transform);
-                Instantiate(shrinkCube, new Vector3(-x * 2, i_y * 2, 0), Quaternion.identity, transform);
+                Instantiate(shrinkCube, new Vector3(x * 2, i_y * 2, 0) + transform.position, Quaternion.identity, transform);
+                Instantiate(shrinkCube, new Vector3(-x * 2, i_y * 2, 0) + transform.position, Quaternion.identity, transform);
             }
         }
         yield return new WaitForSeconds(0.15f);
@@ -390,8 +394,8 @@ public class TransitionManager : MonoBehaviour
             {
                 Destroy(cubes[i_x + 10][y + 10]);
                 Destroy(cubes[i_x + 10][-y + 10]);
-                Instantiate(shrinkCube, new Vector3(i_x * 2, y * 2, 0), Quaternion.identity, transform);
-                Instantiate(shrinkCube, new Vector3(i_x * 2, -y * 2, 0), Quaternion.identity, transform);
+                Instantiate(shrinkCube, new Vector3(i_x * 2, y * 2, 0) + transform.position, Quaternion.identity, transform);
+                Instantiate(shrinkCube, new Vector3(i_x * 2, -y * 2, 0) + transform.position, Quaternion.identity, transform);
             }
         }
         for (int i_y = -y + 1; i_y < y; i_y++)
@@ -400,8 +404,8 @@ public class TransitionManager : MonoBehaviour
             {
                 Destroy(cubes[x + 10][i_y + 10]);
                 Destroy(cubes[-x + 10][i_y + 10]);
-                Instantiate(shrinkCube, new Vector3(x * 2, i_y * 2, 0), Quaternion.identity, transform);
-                Instantiate(shrinkCube, new Vector3(-x * 2, i_y * 2, 0), Quaternion.identity, transform);
+                Instantiate(shrinkCube, new Vector3(x * 2, i_y * 2, 0) + transform.position, Quaternion.identity, transform);
+                Instantiate(shrinkCube, new Vector3(-x * 2, i_y * 2, 0) + transform.position, Quaternion.identity, transform);
             }
         }
         x--;
@@ -427,13 +431,13 @@ public class TransitionManager : MonoBehaviour
                 for (int y = -5; y <= 5; y++)
                 {
                     positions.Add(new Vector2(x, y));
-                    cubes.Add(Instantiate(plainCube, new Vector2(x, y) * 2, Quaternion.identity, transform));
+                    cubes.Add(Instantiate(plainCube, new Vector2(x, y) * 2 + (Vector2)transform.position, Quaternion.identity, transform));
                 }
             }
         }
         yield return new WaitForSeconds(0.005f);
         int index = Random.Range(0, positions.Count);
-        Instantiate(shrinkCube, positions[index] * 2, Quaternion.identity, transform);
+        Instantiate(shrinkCube, positions[index] * 2 + (Vector2)transform.position, Quaternion.identity, transform);
         positions.RemoveAt(index);
         GameObject removeCube = cubes[index];
         cubes.RemoveAt(index);
@@ -457,12 +461,12 @@ public class TransitionManager : MonoBehaviour
             for (int y = -5; y <= 5; y++)
             {
                 positions.Add(new Vector2(0, y));
-                longCubes.Add(Instantiate(plainLongCube, new Vector2(0, y) * 2, Quaternion.identity, transform));
+                longCubes.Add(Instantiate(plainLongCube, new Vector2(0, y) * 2 + (Vector2)transform.position, Quaternion.identity, transform));
             }
         }
         yield return new WaitForSeconds(0.075f);
         int index = Random.Range(0, positions.Count);
-        Instantiate(shrinkCoverCube, positions[index] * 2, Quaternion.identity, transform);
+        Instantiate(shrinkCoverCube, positions[index] * 2 + (Vector2)transform.position, Quaternion.identity, transform);
         positions.RemoveAt(index);
         GameObject removeLongCube = longCubes[index];
         longCubes.RemoveAt(index);
@@ -488,12 +492,12 @@ public class TransitionManager : MonoBehaviour
             for (int y = -10; y <= 10; y++)
             {
                 positions.Add(new Vector2(0, y));
-                longCubes.Add(Instantiate(plainLongCube, Quaternion.Euler(rotation) * new Vector2(0, y) * 2, Quaternion.Euler(rotation), transform));
+                longCubes.Add(Instantiate(plainLongCube, Quaternion.Euler(rotation) * new Vector2(0, y) * 2 + transform.position, Quaternion.Euler(rotation), transform));
             }
         }
         yield return new WaitForSeconds(0.1f);
         int index = Random.Range(0, positions.Count);
-        Instantiate(openDoor, Quaternion.Euler(rotation) * positions[index] * 2, Quaternion.Euler(rotation), transform);
+        Instantiate(openDoor, Quaternion.Euler(rotation) * positions[index] * 2 + transform.position, Quaternion.Euler(rotation), transform);
         positions.RemoveAt(index);
         GameObject removeLongCube = longCubes[index];
         longCubes.RemoveAt(index);

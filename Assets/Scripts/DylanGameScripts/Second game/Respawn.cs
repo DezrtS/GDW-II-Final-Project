@@ -18,6 +18,28 @@ public class Respawn : MonoBehaviour
 
     [SerializeField] Hearts heartScript;
 
+    private void Awake()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+        }
+    }
+
     private void Start()
     {
         mainCamera = Camera.main;

@@ -61,6 +61,7 @@ public class CountdownManager : Singleton<CountdownManager>
     {
         if (!isSpawning && !isCounting)
         {
+            GameStateManager.Instance.SetState(GameState.Paused);
             isCounting = true;
             countdownAnimator.SetBool("IsCounting", true);
             countdownTimer.PauseTimer(false);
