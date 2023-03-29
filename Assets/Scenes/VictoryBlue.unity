@@ -15109,71 +15109,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &636638983
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2411754760950989197, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_Name
-      value: TransitionManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989234, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: currentAnimation
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989234, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: initiateGameUIAnimation
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
 --- !u!1 &665330655
 GameObject:
   m_ObjectHideFlags: 0
@@ -16046,7 +15981,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Red Wins!!!!
+  m_text: Blue Wins!!!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

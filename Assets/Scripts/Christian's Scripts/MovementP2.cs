@@ -11,7 +11,7 @@ public class MovementP2 : MonoBehaviour
 
     Vector2 move;
 
-    int p2Health = 3;
+   // int p2Health = 3;
     public Transform trans;
     public Vector2 faceDirection;
 

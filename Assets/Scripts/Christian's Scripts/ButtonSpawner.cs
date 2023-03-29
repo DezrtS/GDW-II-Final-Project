@@ -5,7 +5,7 @@ using UnityEngine;
 public class ButtonSpawner : MonoBehaviour
 {
     Vector2 RandomPos;
-    int whileBreaker = 0;
+    //int whileBreaker = 0;
 
     public void SpawnButton(GameObject [] buttonsList, int counter)
     {
