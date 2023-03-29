@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TransitionManager : MonoBehaviour
 {
-    public static TransitionManager instance;
+    public static TransitionManager Instance { get; private set; }
 
     [SerializeField] private Color transitionColor = Color.black;
     [SerializeField] private Material transitionMaterial;
@@ -28,26 +28,28 @@ public class TransitionManager : MonoBehaviour
     [SerializeField] private GameObject plainCube;
     [SerializeField] private GameObject plainLongCube;
     [Space(10)]
-    [SerializeField] bool playOnStart = true;
-    [SerializeField] int currentAnimation = 0;
+    [SerializeField] private bool playOnStart = true;
+    [SerializeField] private bool initiateGameUIAnimation = true;
+    [SerializeField] private int currentAnimation = 0;
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        Instance = this;
         transitionMaterial.color = transitionColor;
     }
 
     private void Start()
     {
-        //PlayEnterTransition(currentAnimation);
+        GameStateManager.Instance.SetState(GameState.Paused);
+
         if (playOnStart)
         {
             PlayExitTransition(currentAnimation);
         }
     }
+
+    public delegate void TransitionEndHandler(bool isExitTransition);
+    public event TransitionEndHandler OnTransitionEnded;
 
     public void SetTransitionColor(Color transitionColor)
     {
@@ -56,11 +58,11 @@ public class TransitionManager : MonoBehaviour
 
     private void OnPlayEnterTransitionEnd()
     {
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
-        //PlayExitTransition(currentAnimation);
+        //foreach (Transform child in transform)
+        //{
+        //    Destroy(child.gameObject);
+        //}
+        OnTransitionEnded?.Invoke(false);
         //Debug.Log("Enter Transtion Ended");
     }
 
@@ -70,8 +72,12 @@ public class TransitionManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        //currentAnimation++;
-        //PlayEnterTransition(currentAnimation);
+        if (initiateGameUIAnimation)
+        {
+            CountdownManager.Instance.SpawnAndStartCountdown();
+            GameUIManager.Instance.ShowUI();
+        }
+        OnTransitionEnded?.Invoke(true);
         //Debug.Log("Exit Transtion Ended");
     }
 
@@ -127,30 +133,42 @@ public class TransitionManager : MonoBehaviour
         switch (transition)
         {
             case 0:
+                // Multiple Small Squares Grow From Center Of Screen
+                //
                 StartCoroutine(GrowCubesFromCenter(0, 0, true));
                 break;
             case 1:
+                // Circle Grows From Center Of Screen
                 Instantiate(growCircle, transform.position, Quaternion.identity, transform);
                 StartCoroutine(OnTransitionEndTimer(2, true));
                 break;
             case 2:
+                // Square Slides Across Screen From Any Angle
                 Instantiate(slideCube, transform.position, Quaternion.Euler(0, 0, GetRandomRotation(false)), transform);
                 StartCoroutine(OnTransitionEndTimer(2, true));
                 break;
             case 3:
+                // Squares Cross Over Screen At Any Angle
                 Instantiate(cubeCrossCover, transform.position, Quaternion.Euler(0, 0, GetRandomRotation(false)), transform);
                 StartCoroutine(OnTransitionEndTimer(2, true));
                 break;
             case 4:
+                // Randomly Placed Small Squares Grow 
+                //
                 StartCoroutine(PlaceCubesRandomly(new List<Vector2>(), true));
                 break;
             case 5:
+                // Multiple Stacked Squares Grow Horizontally Across Screen
+                //
                 StartCoroutine(GrowCoverCubes(new List<Vector2>(), true));
                 break;
             case 6:
+                // Multiple Stacked Squares At Any Angle Close Off At Center Of Screen
+                //
                 StartCoroutine(ShutDoor(new List<Vector2>(), Vector3.zero, true));
                 break;
             default:
+                // Plays Any Transition
                 PlayRandomEnterTransition();
                 break;
         }

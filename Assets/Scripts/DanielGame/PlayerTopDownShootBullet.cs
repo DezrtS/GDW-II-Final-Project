@@ -74,7 +74,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     {
         transform.position = startPosition;
         hearts.subtractHealth();
-        if (hearts.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
+        if (hearts.returnHealth() <= 0 && !GameEnder.Instance.IsGameEnding())
         {
             UnityEngine.Debug.Log("PLayer loses");
             if (playermovementballgame.isPlayer1)
@@ -85,7 +85,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
             {
                 P1Score.Instance.AddScore();
             }
-            GameEnder.instance.StartEndGame();
+            GameEnder.Instance.StartEndGame();
         }
         else
         {

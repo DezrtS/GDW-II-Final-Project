@@ -61,7 +61,7 @@ public class Respawn : MonoBehaviour
 
         Vector3 cameraPos = mainCamera.transform.position;
         transform.position = new Vector3(cameraPos.x, cameraPos.y, transform.position.z);
-        if (!GameEnder.instance.IsGameEnding())
+        if (!GameEnder.Instance.IsGameEnding())
         {
             if (isPlayerOne)
             {
@@ -73,7 +73,7 @@ public class Respawn : MonoBehaviour
             }
         }
 
-        if (heartScript.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
+        if (heartScript.returnHealth() <= 0 && !GameEnder.Instance.IsGameEnding())
         {
             if (isPlayerOne)
             {
@@ -85,7 +85,7 @@ public class Respawn : MonoBehaviour
                 Debug.Log("Player One Wins");
                 P1Score.Instance.AddScore();
             }
-            GameEnder.instance.StartEndGame();
+            GameEnder.Instance.StartEndGame();
         }
     }
 

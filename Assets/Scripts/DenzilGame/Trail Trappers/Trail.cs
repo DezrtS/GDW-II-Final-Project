@@ -129,10 +129,10 @@ public class Trail : MonoBehaviour
         GameObject placedTrail;
         if (isPlayerOne)
         {
-            placedTrail = Instantiate(TrailGameController.instance.playerOneTrailPrefab);
+            placedTrail = Instantiate(TrailGameController.Instance.playerOneTrailPrefab);
         } else
         {
-            placedTrail = Instantiate(TrailGameController.instance.playerTwoTrailPrefab);
+            placedTrail = Instantiate(TrailGameController.Instance.playerTwoTrailPrefab);
         }
         SpriteShapeController spriteShape = placedTrail.GetComponent<SpriteShapeController>();
         int a = spriteShape.spline.GetPointCount() - 1;

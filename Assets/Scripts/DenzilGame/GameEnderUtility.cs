@@ -6,6 +6,6 @@ public class GameEnderUtility : MonoBehaviour
 {
     private void OnEnable()
     {
-        GameEnder.instance.LoadMainMenuScene();
+        GameEnder.Instance.LoadMainMenuScene();
     }
 }

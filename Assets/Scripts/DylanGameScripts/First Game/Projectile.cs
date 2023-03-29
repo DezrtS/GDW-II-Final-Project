@@ -4,18 +4,40 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    private Rigidbody2D rig;
+
     public float speed = 10f;
     private float screenWidth;
 
-    [SerializeField] private bool isPlayerOne;
+    private void Awake()
+    {
+        rig = GetComponent<Rigidbody2D>();
 
-    [SerializeField] Hearts heartScript;
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            rig.simulated = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            rig.simulated = false;
+        }
+    }
 
     private void Start()
     {
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
-        heartScript = gameObject.GetComponent<Hearts>();
-        //Destroy(gameObject, lifeTime);
     }
 
     private void FixedUpdate()
@@ -47,12 +69,6 @@ public class Projectile : MonoBehaviour
                 PlayerScoreManager.UpdatePlayerScore("Player2");
                 Destroy(gameObject);
                 SoundManager.Instance.playDeathSound();
-
-                if (!isPlayerOne)
-                {
-                    heartScript.subtractHealth();
-                }
-
                 // Destroy all other projectiles in the scene
                 Projectile[] allProjectiles = FindObjectsOfType<Projectile>();
                 foreach (Projectile projectile in allProjectiles)
@@ -74,11 +90,6 @@ public class Projectile : MonoBehaviour
                 Destroy(gameObject);
                 SoundManager.Instance.playDeathSound();
 
-                if (isPlayerOne)
-                {
-                    heartScript.subtractHealth();
-                }
-
                 // Destroy all other projectiles in the scene
                 Projectile[] allProjectiles = FindObjectsOfType<Projectile>();
                 foreach (Projectile projectile in allProjectiles)
@@ -92,15 +103,5 @@ public class Projectile : MonoBehaviour
                 Camera.main.GetComponent<ShakeBehaviour>().TriggerShake();
             }
         }
-    }
-
-    public int ReturnP1Health()
-    {
-        return (heartScript.returnHealth());
-    }
-
-    public int ReturnP2Health()
-    {
-        return (heartScript.returnHealth());
     }
 }

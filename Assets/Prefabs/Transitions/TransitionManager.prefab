@@ -60,4 +60,6 @@ MonoBehaviour:
   openDoor: {fileID: 7247428125955912492, guid: 60e69c0e0f2367140953f5d27537e412, type: 3}
   plainCube: {fileID: 1964512142447624745, guid: b27397504a6d5f14ba28055cae00f070, type: 3}
   plainLongCube: {fileID: 1964512142447624745, guid: 0a32b6ed08c973f4c93606d3c761f248, type: 3}
-  currentAnimation: 0
+  playOnStart: 1
+  initiateGameUIAnimation: 1
+  currentAnimation: -1

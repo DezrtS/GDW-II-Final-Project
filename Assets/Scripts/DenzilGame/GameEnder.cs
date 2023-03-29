@@ -1,49 +1,78 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameEnder : MonoBehaviour
 {
-    public static GameEnder instance;
+    public static GameEnder Instance;
 
-    private Animator freezeTimeAnimator;
+    [SerializeField] private bool pauseGameOnEnd = false;
 
-    [SerializeField] private bool freezeTime = false;
-
-    [SerializeField] private float unfrozenWaitTime = 1f;
+    private GameTimer hideUITimer;
+    private GameTimer endGameTimer;
 
     private bool gameEnding = false;
 
 
     private void Awake()
     {
-        if (instance == null)
+        hideUITimer = new GameTimer(1.1f, true);
+        endGameTimer = new GameTimer(1, true);
+
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        freezeTimeAnimator = GetComponent<Animator>();
+    }
+
+    private void OnDestroy()
+    {
+        TransitionManager.Instance.OnTransitionEnded -= OnTransitionEnded;
+    }
+
+    private void OnTransitionEnded(bool isExitTransition)
+    {
+        if (gameEnding && !isExitTransition)
+        {
+            LoadMainMenuScene();
+        }
+    }
+
+    private void Start()
+    {
+        TransitionManager.Instance.OnTransitionEnded += OnTransitionEnded;
     }
 
     public void StartEndGame()
     {
         gameEnding = true;
-        if (freezeTime)
+        endGameTimer.PauseTimer(false);
+        if (pauseGameOnEnd)
         {
-            Time.timeScale = 0;
-            if (ShakeBehaviour.instance != null)
-            {
-                ShakeBehaviour.instance.RemoveShake();
-            }
-            freezeTimeAnimator.SetBool("CanEndGame", true);
-        } else
-        {
-            StartCoroutine(EndGameIn());
+            GameStateManager.Instance.SetState(GameState.Paused);
         }
-
-        // Play End Game Animation Here... (Adjust waitFor variable and/or EndGame animation length) (Make sure animation is Time.scaled independent)
     }
 
+    private void Update()
+    {
+        if (endGameTimer.UpdateTimer())
+        {
+            if (!endGameTimer.GetTimerAlreadyFinished())
+            {
+                GameUIManager.Instance.HideUI();
+                hideUITimer.PauseTimer(false);
+            }
+
+
+            if (hideUITimer.UpdateTimer())
+            {
+                TransitionManager.Instance.PlayRandomEnterTransition();
+                endGameTimer.RestartTimer();
+                endGameTimer.PauseTimer(true);
+                hideUITimer.RestartTimer();
+                hideUITimer.PauseTimer(true);
+            }
+        }
+    }
 
     public bool IsGameEnding()
     {
@@ -53,11 +82,5 @@ public class GameEnder : MonoBehaviour
     public void LoadMainMenuScene()
     {
         SceneManager.LoadScene("GameMenu");
-    }
-
-    IEnumerator EndGameIn()
-    {
-        yield return new WaitForSeconds(unfrozenWaitTime);
-        LoadMainMenuScene();
     }
 }
