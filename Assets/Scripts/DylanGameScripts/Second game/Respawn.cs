@@ -39,6 +39,7 @@ public class Respawn : MonoBehaviour
 
         if (screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height)
         {
+            SoundManager.Instance.playDeathSound();
             RespawnPlayer();
             Debug.Log("Player left the screen, resetting bounciness.");
             //var material = new PhysicsMaterial2D();

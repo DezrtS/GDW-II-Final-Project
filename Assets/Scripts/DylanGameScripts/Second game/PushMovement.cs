@@ -54,6 +54,7 @@ public class PushMovement : MonoBehaviour
 
         if (actionButton)
         {
+            SoundManager.Instance.playAttackSound();
             playerPush.Push();
         }
     }
