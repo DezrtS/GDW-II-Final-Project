@@ -137,7 +137,7 @@ public class PivotPlayer : MonoBehaviour
             isAttacking = true;
             playerAnimator.SetBool("IsAttacking", true);
 
-            attackDirection = Mathf.Sign((PivotGameController.instance.GetClosestPlayer(gameObject).transform.position - transform.position).x);
+            attackDirection = Mathf.Sign((PivotGameController.Instance.GetClosestPlayer(gameObject).transform.position - transform.position).x);
             keepRotation = true;
             if (attackDirection > 0)
             {
@@ -155,7 +155,6 @@ public class PivotPlayer : MonoBehaviour
         {
             if (!playerTimer.GetTimerAlreadyFinished())
             {
-                Debug.Log(name + " slash plays");
                 SoundManager.Instance.playAttackSound();
                 slashAnimator.SetBool("IsAttacking", true);
                 //slashTimer.RestartTimer();
@@ -328,7 +327,7 @@ public class PivotPlayer : MonoBehaviour
                     Debug.Log("Player One Wins");
                     P1Score.Instance.AddScore();
                 }
-                GameEnder.instance.StartEndGame();
+                GameEnder.Instance.StartEndGame();
             }
             else
             {

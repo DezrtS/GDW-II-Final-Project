@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Object : MonoBehaviour
 {
-    Rigidbody2D rig;
+    private Rigidbody2D rig;
 
     private void Awake()
     {

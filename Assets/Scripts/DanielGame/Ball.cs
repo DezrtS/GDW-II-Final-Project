@@ -211,9 +211,9 @@ public class Ball : MonoBehaviour
 
             heartScript.subtractHealth();
 
-            if(heartScript.returnHealth() == 0 && !GameEnder.instance.IsGameEnding())
+            if(heartScript.returnHealth() == 0 && !GameEnder.Instance.IsGameEnding())
             {
-                GameEnder.instance.StartEndGame();
+                GameEnder.Instance.StartEndGame();
                 UnityEngine.Debug.Log("PLayer loses");
                 if (movementscript.isPlayer1)
                 {

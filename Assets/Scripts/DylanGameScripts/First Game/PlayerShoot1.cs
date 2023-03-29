@@ -9,9 +9,30 @@ public class PlayerShoot1 : MonoBehaviour
 
     private Animator anim;
 
-    private void Start()
+    private void Awake()
     {
         anim = GetComponent<Animator>();
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            anim.speed = 1;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            anim.speed = 0;
+        }
     }
 
     private void Update()
