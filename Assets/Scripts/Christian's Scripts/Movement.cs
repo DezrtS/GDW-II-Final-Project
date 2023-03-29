@@ -9,7 +9,9 @@ public class Movement : MonoBehaviour
      public Rigidbody2D  body;
 
     [SerializeField] Hearts heartScript;
-   // [SerializeField] Animator animator;
+    public Transform trans;
+    // [SerializeField] Animator animator;
+    public Vector2 faceDirection;
 
 
     int p1Health;
@@ -20,24 +22,29 @@ public class Movement : MonoBehaviour
     {
         body = gameObject.GetComponent<Rigidbody2D>();
         heartScript = gameObject.GetComponent<Hearts>();
+        trans = GetComponent<Transform>();
     }
 
     // Update is called once per frame
     public void Update()
     {
+        
         if(Input.GetKey(KeyCode.A))
         {
             move.x = -1;
+            FaceForward();
         }
 
         else if(Input.GetKey(KeyCode.D))
         {
             move.x = 1;
+            FaceForward();
         }
 
         else
         {
             move.x = 0;
+            
         }
         // move.x = Input.GetAxisRaw("Horizontal");
         // move.y = Input.GetAxisRaw("Vertical");
@@ -45,11 +52,14 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             move.y = 1;
+            FaceForward();
         }
 
         else if (Input.GetKey(KeyCode.S))
         {
+
             move.y = -1;
+            FaceForward();
         }
 
         else
@@ -87,6 +97,16 @@ public class Movement : MonoBehaviour
         return( heartScript.returnHealth());
     }
 
+    void FaceForward()
+    {
+        Vector2 movedirection = move;
+        faceDirection = movedirection;
+       // if(move.x == 0 && move.y == 0)
+      //  { 
 
+           
+        Quaternion rotationdirection = Quaternion.LookRotation(Vector3.forward, faceDirection);
+        trans.rotation = Quaternion.RotateTowards(trans.rotation, rotationdirection, 1);
+    }
 
 }

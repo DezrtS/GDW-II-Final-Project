@@ -12,11 +12,15 @@ public class MovementP2 : MonoBehaviour
     Vector2 move;
 
     int p2Health = 3;
+    public Transform trans;
+    public Vector2 faceDirection;
 
     void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
         heartScript = gameObject.GetComponent<Hearts>();
+        trans = GetComponent<Transform>();
+
     }
 
     // Update is called once per frame
@@ -25,11 +29,13 @@ public class MovementP2 : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             move.x = -1;
+            FaceForward();
         }
 
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             move.x = 1;
+            FaceForward();
         }
 
         else
@@ -42,11 +48,13 @@ public class MovementP2 : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             move.y = 1;
+            FaceForward();
         }
 
         else if (Input.GetKey(KeyCode.DownArrow))
         {
             move.y = -1;
+            FaceForward();
         }
 
         else
@@ -77,5 +85,17 @@ public class MovementP2 : MonoBehaviour
     public int ReturnP2Health()
     {
         return (heartScript.returnHealth());
+    }
+
+    void FaceForward()
+    {
+        Vector2 movedirection = move;
+        faceDirection = movedirection;
+        // if(move.x == 0 && move.y == 0)
+        //  { 
+
+
+        Quaternion rotationdirection = Quaternion.LookRotation(Vector3.forward, faceDirection);
+        trans.rotation = Quaternion.RotateTowards(trans.rotation, rotationdirection, 1);
     }
 }

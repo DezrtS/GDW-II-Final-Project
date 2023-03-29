@@ -21,6 +21,8 @@ public class GM : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.Instance.pauseTitleMusic();
+        SoundManager.Instance.playGameMusicSound();
         spawner = GetComponent<ButtonSpawner>();
     }
 

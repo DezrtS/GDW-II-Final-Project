@@ -48,6 +48,7 @@ public class Ball : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         partsys = GetComponent<ParticleSystem>();
         
+        
         mag = body.velocity.magnitude;
         
         int randomNum = Random.Range(1, 3);
@@ -66,6 +67,11 @@ public class Ball : MonoBehaviour
             trans.position = start1;
         }
         Color();
+
+        //Testing Sound
+        SoundManager.Instance.pauseTitleMusic();
+        SoundManager.Instance.playGameMusicSound2();
+        //Remove Here if needed
     }
 
     // Update is called once per frame

@@ -28,9 +28,11 @@ public class StartUp : MonoBehaviour
     {
         if (Camera.main.orthographicSize > 9)
         {
-
+            
             Camera.main.orthographicSize -= size;
         }
+
+       
 
         if(Mathf.Round(Camera.main.orthographicSize) == 18)
         {
@@ -80,8 +82,14 @@ public class StartUp : MonoBehaviour
 
         yield return new WaitForSeconds(3);
         titleLogo.enabled = true;
-        music.Play();
+        SoundManager.Instance.playTitleMusic();
         startButton.SetActive(true);
+    }
+
+    IEnumerator StartPause(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Debug.Log("Test");
     }
 
     
