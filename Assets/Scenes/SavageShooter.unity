@@ -20056,7 +20056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  jumpPower: 6.5
+  jumpPower: 8
   isPlayerOne: 0
   startingPosition: {x: 3.4416, y: -7.2419, z: -0.03097891}
 --- !u!114 &1418462216
@@ -20279,7 +20279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  jumpPower: 6.5
+  jumpPower: 8
   isPlayerOne: 1
   startingPosition: {x: -4.5564, y: -7.2256, z: -0.03097891}
 --- !u!114 &1459507586
