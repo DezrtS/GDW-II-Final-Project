@@ -18,7 +18,7 @@ public class P2Score : Singleton<P2Score>
     {
         if(score == 3 && once)
         {
-            SceneManager.LoadScene("VictoryBlue");
+            //SceneManager.LoadScene("VictoryBlue");
             once = false;
         }
     }

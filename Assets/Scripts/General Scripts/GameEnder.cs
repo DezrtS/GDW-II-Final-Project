@@ -33,7 +33,16 @@ public class GameEnder : MonoBehaviour
     {
         if (gameEnding && !isExitTransition)
         {
-            LoadMainMenuScene();
+            if (P1Score.Instance.ReturnScore() >= 3)
+            {
+                SceneManager.LoadScene("VictoryBlue");
+            } else if (P2Score.Instance.ReturnScore() >= 3)
+            {
+                SceneManager.LoadScene("VictoryRed");
+            } else
+            {
+                LoadMainMenuScene();
+            }
         }
     }
 
