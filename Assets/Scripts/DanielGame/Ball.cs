@@ -101,8 +101,10 @@ public class Ball : MonoBehaviour
        
 
         //Testing Sound
-        SoundManager.Instance.pauseTitleMusic();
-        SoundManager.Instance.playGameMusicSound2();
+        //SoundManager.Instance.pauseTitleMusic();
+        //SoundManager.Instance.playGameMusicSound2();
+       // SoundManager.Instance.pauseTitleMusic();
+        //SoundManager.Instance.playGameMusicSound();
         //Remove Here if needed
     }
 

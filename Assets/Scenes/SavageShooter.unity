@@ -19985,7 +19985,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 846e9edc9eed6c046ae7158746afcc8b, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -20056,7 +20056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  jumpPower: 8
+  jumpPower: 15
   isPlayerOne: 0
   startingPosition: {x: 3.4416, y: -7.2419, z: -0.03097891}
 --- !u!114 &1418462216
@@ -20208,7 +20208,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 846e9edc9eed6c046ae7158746afcc8b, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -20279,7 +20279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  jumpPower: 8
+  jumpPower: 15
   isPlayerOne: 1
   startingPosition: {x: -4.5564, y: -7.2256, z: -0.03097891}
 --- !u!114 &1459507586

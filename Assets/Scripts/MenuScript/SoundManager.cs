@@ -17,6 +17,10 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource GameMusic2;
     public AudioSource BulletButtonClick;
 
+    public float fade = 0.5f;
+    float volume;
+    int i = 0;
+
     //public AudioClip attackClip;
     //public AudioClip hitClip;
     // public AudioClip bounceClip;
@@ -91,14 +95,46 @@ public class SoundManager : Singleton<SoundManager>
         Title.Stop();
     }
 
+    public IEnumerator fadeTitleMusicOut()
+    {
+        volume = Title.volume;
+        while(Title.volume > 0)
+        {
+            Title.volume -= 0.7f * Time.deltaTime / fade;
+            yield return null;
+            i++;
+            if(i == 1000)
+            {
+                break;
+            }
+        }
+       
+    }
+
     public void playButtonClickSound()
     {
         ButtonClick.Play();
     }
 
-    public void playGameMusicSound()
+    public IEnumerator fadeGameMusicSoundIn()
     {
+        
+        Debug.Log("In");
+        i = 0;
+        GameMusic.volume = 0;
+        volume = GameMusic.volume;
         GameMusic.Play();
+        while (GameMusic.volume < 1)
+        {
+            GameMusic.volume += 0.7f * Time.deltaTime / fade;
+            yield return null;
+            i++;
+            if (i == 1000)
+            {
+                break;
+            }
+        }
+
     }
 
     public void stopGameMusicSound()
@@ -119,5 +155,11 @@ public class SoundManager : Singleton<SoundManager>
     public void PlayBulletButtonClick()
     {
         BulletButtonClick.Play();
+    }
+
+    public void StopAllGameMusic()
+    {
+        GameMusic.Stop();
+        GameMusic2.Stop();
     }
 }

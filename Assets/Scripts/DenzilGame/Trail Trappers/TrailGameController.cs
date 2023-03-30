@@ -60,6 +60,8 @@ public class TrailGameController : MonoBehaviour
             GameUIManager.Instance.ShowUINow();
             CountdownManager.Instance.RestartCountdown();
         }
+
+       
     }
 
     private void Update()
