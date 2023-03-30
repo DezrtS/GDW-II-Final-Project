@@ -130,13 +130,14 @@ public class SoundManager : Singleton<SoundManager>
                 break;
             }
         }
+        Title.Stop();
        
     }
 
     public IEnumerator fadeTitleMusicSoundIn()
     {
 
-        Debug.Log("In");
+        Debug.Log("Enter Title Music Fade In");
         i = 0;
         Title.volume = 0;
         volume = Title.volume;
@@ -280,17 +281,17 @@ public class SoundManager : Singleton<SoundManager>
     {
         if(ButtonDodgeballMusic.isPlaying == true)
         {
-            fadeButtonDodgeballMusicOut();
+            StartCoroutine(fadeButtonDodgeballMusicOut());
         }
 
         if(TrailRumbleMusic.isPlaying == true)
         {
-            fadeTrailRumbleMusicOut();
+            StartCoroutine(fadeTrailRumbleMusicOut());
         }
 
         if(SideViewMusic.isPlaying == true)
         {
-            fadeSideViewMusicOut();
+            StartCoroutine(fadeSideViewMusicOut());
         }
     }
  

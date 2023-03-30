@@ -21,8 +21,8 @@ public class GM : MonoBehaviour
 
     private void Awake()
     {
-
         spawnerTimer = new GameTimer(timeLimit, false);
+        StartCoroutine(SoundManager.Instance.fadeButtonDodgeballMusicIn());
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
@@ -47,13 +47,6 @@ public class GM : MonoBehaviour
 
     private void Start()
     {
-        //SoundManager.Instance.pauseTitleMusic();
-        //SoundManager.Instance.playGameMusicSound();
-
-        //SoundManager.Instance.fadeTitleMusic();
-        StartCoroutine(SoundManager.Instance.fadeTitleMusicOut());
-        
-        StartCoroutine(SoundManager.Instance.fadeGameMusicSoundIn());
         spawner = GetComponent<ButtonSpawner>();
     }
 

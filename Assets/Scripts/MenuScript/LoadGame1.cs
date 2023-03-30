@@ -6,50 +6,109 @@ using UnityEngine.SceneManagement;
 
 public class LoadGame1 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private int loadGame;
+    private bool loading;
+
+    private void Awake()
     {
-        
+        TransitionManager.Instance.OnTransitionEnded += OnTransitionEnded;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        TransitionManager.Instance.OnTransitionEnded -= OnTransitionEnded;
+    }
+
+    private void OnTransitionEnded(bool isExitTransition)
+    {
+        if (!isExitTransition)
+        {
+            LoadNextGame();
+        }
+    }
+
+    private void Start()
+    {
+        if (!SoundManager.Instance.Title.isPlaying)
+        {
+            StartCoroutine(SoundManager.Instance.fadeTitleMusicSoundIn());
+        }
+    }
+
+    public void LoadNextGame()
+    {
+        switch (loadGame)
+        {
+            case 0:
+                SceneManager.LoadScene("DangerDodgeBall");
+                break;
+            case 1:
+                SceneManager.LoadScene("PivotPanic");
+                break;
+            case 2:
+                SceneManager.LoadScene("Bullet Buttons");
+                break;
+            case 3:
+                SceneManager.LoadScene("PilotPush");
+                break;
+            case 4:
+                SceneManager.LoadScene("RicohetRumble");
+                break;
+            case 5:
+                SceneManager.LoadScene("SavageShooter");
+                break;
+            case 6:
+                SceneManager.LoadScene("TrailTrappers");
+                break;
+            default:
+                loading = false;
+                break;
+        }
+    }
+
+    public void SetNextGameToLoad(int loadGame)
+    {
+        if (loading)
+        {
+            return;
+        }
+        loading = true;
+        this.loadGame = loadGame;
+        TransitionManager.Instance.PlayRandomEnterTransition();
     }
 
     public void LoadDangerDodgeball ()
     {
-        SceneManager.LoadScene("DangerDodgeBall");
+        SetNextGameToLoad(0);
     }
 
     public void LoadPivotPanic()
     {
-        SceneManager.LoadScene("PivotPanic");
+        SetNextGameToLoad(1);
     }
     public void LoadButtonBullets()
     {
-        SceneManager.LoadScene("Bullet Buttons");
+        SetNextGameToLoad(2);
     }
 
     public void LoadPilotPush()
     {
-        SceneManager.LoadScene("PilotPush");
+        SetNextGameToLoad(3);
     }
 
     public void LoadRichochetRumbel()
     {
-        SceneManager.LoadScene("RicohetRumble");
+        SetNextGameToLoad(4);
     }
 
     public void LoadSavageShooter()
     {
-        SceneManager.LoadScene("SavageShooter");
+        SetNextGameToLoad(5);
     }
 
     public void TrailTrapper()
     {
-        SceneManager.LoadScene("TrailTrappers");
+        SetNextGameToLoad(6);
     }
 
     public void Credits()

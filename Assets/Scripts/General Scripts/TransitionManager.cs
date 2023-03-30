@@ -129,11 +129,13 @@ public class TransitionManager : MonoBehaviour
 
     public void PlayRandomEnterTransition()
     {
+        StartCoroutine(SoundManager.Instance.fadeTitleMusicOut());
         PlayEnterTransition(Random.Range(0, 7));
     }
 
     public void PlayEnterTransition(int transition)
     {
+        StartCoroutine(SoundManager.Instance.fadeTitleMusicOut());
         switch (transition)
         {
             case 0:

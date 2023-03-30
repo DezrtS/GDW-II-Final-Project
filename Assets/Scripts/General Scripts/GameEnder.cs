@@ -59,6 +59,7 @@ public class GameEnder : MonoBehaviour
         {
             GameStateManager.Instance.SetState(GameState.Paused);
         }
+
     }
 
     private void Update()
@@ -74,6 +75,7 @@ public class GameEnder : MonoBehaviour
 
             if (hideUITimer.UpdateTimer())
             {
+                SoundManager.Instance.FadeGameMusic();
                 TransitionManager.Instance.PlayRandomEnterTransition();
                 endGameTimer.RestartTimer();
                 endGameTimer.PauseTimer(true);
