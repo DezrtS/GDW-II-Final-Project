@@ -17,7 +17,7 @@ public class P1Score : Singleton<P1Score>
     {
         if (score == 3 && once)
         {
-            SceneManager.LoadScene("VictoryRed");
+            //SceneManager.LoadScene("VictoryRed");
             once = false;
         }
     }
