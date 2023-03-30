@@ -35,6 +35,8 @@ public class Ball : MonoBehaviour
 
     private void Awake()
     {
+        StartCoroutine(SoundManager.Instance.fadeButtonDodgeballMusicIn());
+
         body = GetComponent<Rigidbody2D>();
         partsys = GetComponent<ParticleSystem>();
         trans = GetComponent<Transform>();

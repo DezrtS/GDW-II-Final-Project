@@ -75,6 +75,7 @@ public class GameEnder : MonoBehaviour
 
             if (hideUITimer.UpdateTimer())
             {
+                SoundManager.Instance.FadeGameMusic();
                 TransitionManager.Instance.PlayRandomEnterTransition();
                 endGameTimer.RestartTimer();
                 endGameTimer.PauseTimer(true);

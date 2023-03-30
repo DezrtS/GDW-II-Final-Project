@@ -38,6 +38,7 @@ public class PivotGameController : MonoBehaviour
 
         if (heartsKeeper.isNewGame)
         {
+            StartCoroutine(SoundManager.Instance.fadeSideViewMusicIn());
             TransitionManager.Instance.PlayRandomExitTransition();
         } else
         {

@@ -53,6 +53,8 @@ public class TrailGameController : MonoBehaviour
 
         if (heartsKeeper.isNewGame)
         {
+
+            StartCoroutine(SoundManager.Instance.fadeTrailRumbleMusicIn());
             TransitionManager.Instance.PlayRandomExitTransition();
         }
         else
