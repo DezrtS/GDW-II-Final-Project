@@ -70,22 +70,18 @@ public class playertopdownattack : MonoBehaviour
             canAttack = false;
             attackBox.enabled = true;
             attackTimer.PauseTimer(false);
-            Debug.Log("Started Attack");
         }
 
         if (attackTimer.UpdateTimer())
         {
             if (!attackTimer.GetTimerAlreadyFinished())
             {
-                Debug.Log("Attack Box Enabled");
                 cooldownTimer.PauseTimer(false);
                 attackBox.enabled = false;
             }
 
             if (cooldownTimer.UpdateTimer())
             {
-                Debug.Log("Ended Attack");
-
                 canAttack = true;
                 attackTimer.RestartTimer();
                 cooldownTimer.RestartTimer();
