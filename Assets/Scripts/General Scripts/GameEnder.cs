@@ -59,6 +59,7 @@ public class GameEnder : MonoBehaviour
         {
             GameStateManager.Instance.SetState(GameState.Paused);
         }
+
     }
 
     private void Update()
