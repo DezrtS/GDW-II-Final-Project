@@ -13,9 +13,12 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource Shoot;
     public AudioSource Title;
     public AudioSource ButtonClick;
-    public AudioSource GameMusic;
-    public AudioSource GameMusic2;
+    public AudioSource ButtonDodgeballMusic;
+    public AudioSource TrailRumbleMusic;
     public AudioSource BulletButtonClick;
+    public AudioSource Confetti;
+    public AudioSource SideViewMusic;
+
 
     public float fade = 0.5f;
     float volume;
@@ -95,6 +98,23 @@ public class SoundManager : Singleton<SoundManager>
         Title.Stop();
     }
 
+    public void playButtonClickSound()
+    {
+        ButtonClick.Play();
+    }
+
+    public void playConfettiSound()
+    {
+        Confetti.Play();
+    }
+
+
+    public void PlayBulletButtonClick()
+    {
+        BulletButtonClick.Play();
+    }
+
+
     public IEnumerator fadeTitleMusicOut()
     {
         volume = Title.volume;
@@ -111,22 +131,17 @@ public class SoundManager : Singleton<SoundManager>
        
     }
 
-    public void playButtonClickSound()
+    public IEnumerator fadeTitleMusicSoundIn()
     {
-        ButtonClick.Play();
-    }
 
-    public IEnumerator fadeGameMusicSoundIn()
-    {
-        
         Debug.Log("In");
         i = 0;
-        GameMusic.volume = 0;
-        volume = GameMusic.volume;
-        GameMusic.Play();
-        while (GameMusic.volume < 1)
+        Title.volume = 0;
+        volume = Title.volume;
+        Title.Play();
+        while (Title.volume < 1)
         {
-            GameMusic.volume += 0.7f * Time.deltaTime / fade;
+            Title.volume += 0.7f * Time.deltaTime / fade;
             yield return null;
             i++;
             if (i == 1000)
@@ -137,29 +152,122 @@ public class SoundManager : Singleton<SoundManager>
 
     }
 
-    public void stopGameMusicSound()
+
+
+    public IEnumerator fadeButtonDodgeballMusicIn()
     {
-        GameMusic.Stop();
+        
+        Debug.Log("In");
+        i = 0;
+        ButtonDodgeballMusic.volume = 0;
+        volume = ButtonDodgeballMusic.volume;
+        ButtonDodgeballMusic.Play();
+        while (ButtonDodgeballMusic.volume < 1)
+        {
+            ButtonDodgeballMusic.volume += 0.7f * Time.deltaTime / fade;
+            yield return null;
+            i++;
+            if (i == 1000)
+            {
+                break;
+            }
+        }
+
     }
 
-    public void playGameMusicSound2()
+    public IEnumerator fadeButtonDodgeballMusicOut()
     {
-        GameMusic2.Play();
+        volume = ButtonDodgeballMusic.volume;
+        while (ButtonDodgeballMusic.volume > 0)
+        {
+            ButtonDodgeballMusic.volume -= 0.7f * Time.deltaTime / fade;
+            yield return null;
+            i++;
+            if (i == 1000)
+            {
+                break;
+            }
+        }
     }
 
-    public void stopGameMusicSound2()
+    public IEnumerator fadeTrailRumbleMusicIn()
     {
-        GameMusic2.Stop();
+
+        Debug.Log("In");
+        i = 0;
+        TrailRumbleMusic.volume = 0;
+        volume = TrailRumbleMusic.volume;
+        TrailRumbleMusic.Play();
+        while (TrailRumbleMusic.volume < 1)
+        {
+            TrailRumbleMusic.volume += 0.7f * Time.deltaTime / fade;
+            yield return null;
+            i++;
+            if (i == 1000)
+            {
+                break;
+            }
+        }
+
     }
 
-    public void PlayBulletButtonClick()
+    public IEnumerator fadeTrailRumbleMusicOut()
     {
-        BulletButtonClick.Play();
+        volume = TrailRumbleMusic.volume;
+        while (TrailRumbleMusic.volume > 0)
+        {
+            TrailRumbleMusic.volume -= 0.7f * Time.deltaTime / fade;
+            yield return null;
+            i++;
+            if (i == 1000)
+            {
+                break;
+            }
+        }
     }
+
+    public IEnumerator fadeSideViewMusicIn()
+    {
+
+        Debug.Log("In");
+        i = 0;
+        SideViewMusic.volume = 0;
+        volume = SideViewMusic.volume;
+        SideViewMusic.Play();
+        while (SideViewMusic.volume < 1)
+        {
+            SideViewMusic.volume += 0.7f * Time.deltaTime / fade;
+            yield return null;
+            i++;
+            if (i == 1000)
+            {
+                break;
+            }
+        }
+
+    }
+
+    public IEnumerator fadeSideViewMusicOut()
+    {
+        volume = SideViewMusic.volume;
+        while (SideViewMusic.volume > 0)
+        {
+            SideViewMusic.volume -= 0.7f * Time.deltaTime / fade;
+            yield return null;
+            i++;
+            if (i == 1000)
+            {
+                break;
+            }
+        }
+    }
+
 
     public void StopAllGameMusic()
     {
-        GameMusic.Stop();
-        GameMusic2.Stop();
+        //GameMusic.Stop();
+        //GameMusic2.Stop();
     }
+
+ 
 }

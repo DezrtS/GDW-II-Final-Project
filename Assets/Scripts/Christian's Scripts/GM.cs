@@ -53,7 +53,7 @@ public class GM : MonoBehaviour
         //SoundManager.Instance.fadeTitleMusic();
         StartCoroutine(SoundManager.Instance.fadeTitleMusicOut());
         
-        StartCoroutine(SoundManager.Instance.fadeGameMusicSoundIn());
+        //StartCoroutine(SoundManager.Instance.fadeGameMusicSoundIn());
         spawner = GetComponent<ButtonSpawner>();
     }
 
