@@ -18,6 +18,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource BulletButtonClick;
     public AudioSource Confetti;
     public AudioSource SideViewMusic;
+    public AudioSource VicorySound;
 
 
     public float fade = 0.5f;
@@ -56,6 +57,7 @@ public class SoundManager : Singleton<SoundManager>
     {
         //  playAttack.clip = attackClip;
         Attack.Play();
+       
     }
 
     public void playHitSound()
@@ -269,5 +271,27 @@ public class SoundManager : Singleton<SoundManager>
         //GameMusic2.Stop();
     }
 
+    public void PlayVictorySound()
+    {
+        VicorySound.Play();
+    }
+
+    public void FadeGameMusic()
+    {
+        if(ButtonDodgeballMusic.isPlaying == true)
+        {
+            fadeButtonDodgeballMusicOut();
+        }
+
+        if(TrailRumbleMusic.isPlaying == true)
+        {
+            fadeTrailRumbleMusicOut();
+        }
+
+        if(SideViewMusic.isPlaying == true)
+        {
+            fadeSideViewMusicOut();
+        }
+    }
  
 }
