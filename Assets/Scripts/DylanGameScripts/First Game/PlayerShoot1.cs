@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerShoot1 : MonoBehaviour
 {
     public Projectile projectilePrefab;
-    private float timeSinceLastShot = -3f;
-
+    private float timeSinceLastShot = -3;
     private Animator anim;
 
     private void Awake()
