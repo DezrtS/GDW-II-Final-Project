@@ -250,6 +250,7 @@ public class Ball : MonoBehaviour
 
             if(heartScript.returnHealth() == 0 && !GameEnder.Instance.IsGameEnding())
             {
+                ShakeBehaviour.Instance.TriggerShake();
                 GameEnder.Instance.StartEndGame();
                 if (movementscript.isPlayer1)
                 {
@@ -266,7 +267,10 @@ public class Ball : MonoBehaviour
             else
             {
                 ShakeBehaviour.Instance.TriggerShake();
-                CountdownManager.Instance.RestartCountdown();
+                if (!GameEnder.Instance.IsGameEnding())
+                {
+                    CountdownManager.Instance.RestartCountdown();
+                }
             }
         }
     }
