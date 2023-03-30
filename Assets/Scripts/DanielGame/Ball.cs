@@ -69,8 +69,10 @@ public class Ball : MonoBehaviour
         Color();
 
         //Testing Sound
-        SoundManager.Instance.pauseTitleMusic();
-        SoundManager.Instance.playGameMusicSound2();
+        //SoundManager.Instance.pauseTitleMusic();
+        //SoundManager.Instance.playGameMusicSound2();
+       // SoundManager.Instance.pauseTitleMusic();
+        //SoundManager.Instance.playGameMusicSound();
         //Remove Here if needed
     }
 

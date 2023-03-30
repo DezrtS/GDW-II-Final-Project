@@ -21,8 +21,13 @@ public class GM : MonoBehaviour
 
     private void Start()
     {
-        SoundManager.Instance.pauseTitleMusic();
-        SoundManager.Instance.playGameMusicSound();
+        //SoundManager.Instance.pauseTitleMusic();
+        //SoundManager.Instance.playGameMusicSound();
+
+        //SoundManager.Instance.fadeTitleMusic();
+        StartCoroutine(SoundManager.Instance.fadeTitleMusicOut());
+        
+        StartCoroutine(SoundManager.Instance.fadeGameMusicSoundIn());
         spawner = GetComponent<ButtonSpawner>();
     }
 
