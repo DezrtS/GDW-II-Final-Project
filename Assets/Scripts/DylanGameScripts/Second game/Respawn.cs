@@ -18,6 +18,28 @@ public class Respawn : MonoBehaviour
 
     [SerializeField] Hearts heartScript;
 
+    private void Awake()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+        }
+    }
+
     private void Start()
     {
         mainCamera = Camera.main;
@@ -39,6 +61,7 @@ public class Respawn : MonoBehaviour
 
         if (screenPos.x < 0 || screenPos.x > Screen.width || screenPos.y < 0 || screenPos.y > Screen.height)
         {
+            SoundManager.Instance.playDeathSound();
             RespawnPlayer();
             Debug.Log("Player left the screen, resetting bounciness.");
             //var material = new PhysicsMaterial2D();

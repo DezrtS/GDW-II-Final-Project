@@ -18,11 +18,35 @@ public class Movement : MonoBehaviour
     
     Vector2 move;
 
+    private void Awake()
+    {
+        body = GetComponent<Rigidbody2D>();
+        trans = GetComponent<Transform>();
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            body.simulated = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            body.simulated = false;
+        }
+    }
+
     public void Start()
     {
-        body = gameObject.GetComponent<Rigidbody2D>();
         heartScript = gameObject.GetComponent<Hearts>();
-        trans = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -82,7 +106,7 @@ public class Movement : MonoBehaviour
             SoundManager.Instance.playHitSound();
            // SoundManager.Instance.playHitSound();
             heartScript.subtractHealth();
-            ShakeBehaviour.instance.TriggerShake();
+            ShakeBehaviour.Instance.TriggerShake();
             //animator.Play("");
 
             //Hearts.Instance.subtractHealth();

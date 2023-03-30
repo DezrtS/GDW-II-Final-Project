@@ -8,10 +8,30 @@ public class Bullet : MonoBehaviour
     Rigidbody2D body;
     Transform trans;
 
-    private void Start()
+    private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            body.simulated = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            body.simulated = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,9 +50,9 @@ public class Bullet : MonoBehaviour
     }
 
      void Update()
-    {
+     {
         FaceForward();
-    }
+     }
 
     
 

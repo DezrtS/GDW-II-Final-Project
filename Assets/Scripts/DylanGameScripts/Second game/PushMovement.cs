@@ -23,9 +23,33 @@ public class PushMovement : MonoBehaviour
 
     private bool knockedBack;
 
-    private void Start()
+    private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            rig.simulated = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            rig.simulated = false;
+        }
+    }
+
+    private void Start()
+    {
         playerPush = GetComponent<PlayerPush>();
         SetupInputs();
     }
@@ -54,6 +78,7 @@ public class PushMovement : MonoBehaviour
 
         if (actionButton)
         {
+            SoundManager.Instance.playAttackSound();
             playerPush.Push();
         }
     }

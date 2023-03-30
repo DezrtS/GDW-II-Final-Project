@@ -1995,6 +1995,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ricohet Rumble Bullet 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1952321501426077351, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3214647244370789988, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
       propertyPath: m_LinearDrag
       value: 100
@@ -2132,6 +2136,14 @@ PrefabInstance:
     - target: {fileID: 2411754760950989197, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
       propertyPath: m_Name
       value: TransitionManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2411754760950989234, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
+      propertyPath: playOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2411754760950989234, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
+      propertyPath: freezeOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
       propertyPath: m_RootOrder
@@ -2483,7 +2495,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1952321501426077351, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
   shootPosition: {fileID: 2112744515}
-  animator: {fileID: 0}
   bulletNum: 0
 --- !u!114 &827899695
 MonoBehaviour:
@@ -10827,7 +10838,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1952321501426077351, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
   shootPosition: {fileID: 1686599387}
-  animator: {fileID: 0}
   bulletNum: 0
 --- !u!114 &1098498228
 MonoBehaviour:
@@ -25843,6 +25853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ricohet Rumble Bullet 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1952321501426077351, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3214647244370789988, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
       propertyPath: m_LinearDrag
       value: 100
@@ -26148,6 +26162,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ricohet Rumble Bullet 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1952321501426077351, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3214647244370789988, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
       propertyPath: m_LinearDrag
       value: 100
@@ -26413,6 +26431,10 @@ PrefabInstance:
     - target: {fileID: 1952321501426077351, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
       propertyPath: m_Name
       value: Ricohet Rumble Bullet 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1952321501426077351, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3214647244370789988, guid: bcf8adbc9cbdf7547a2efaf9e6105c92, type: 3}
       propertyPath: m_LinearDrag

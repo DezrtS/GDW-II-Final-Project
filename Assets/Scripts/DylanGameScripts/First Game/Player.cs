@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed = 1;
     [SerializeField] private float jumpPower = 1;
     [SerializeField] private bool isPlayerOne;
+
     private bool grounded;
     private Vector3 groundNormal = Vector3.right;
     private float screenWidth;
@@ -165,8 +166,8 @@ public class Player : MonoBehaviour
                 anim.SetBool("isJumping2", true);
             }
         }
-        //rig.velocity = new Vector2(movementInput * speed, rig.velocity.y);
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
+        rig.velocity = new Vector2(movementInput * speed, rig.velocity.y);
+        //transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
     }
 
     private void OnCollisionStay2D(Collision2D collision)

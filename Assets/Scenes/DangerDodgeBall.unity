@@ -5640,7 +5640,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -18417,7 +18417,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_Sprite: {fileID: -1756772321, guid: 7509976d1f9fa3d479caf987c0fe536a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -18972,7 +18972,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -20724,6 +20724,14 @@ PrefabInstance:
     - target: {fileID: 2411754760950989197, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
       propertyPath: m_Name
       value: TransitionManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2411754760950989234, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
+      propertyPath: playOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2411754760950989234, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
+      propertyPath: freezeOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2411754760950989235, guid: 228b3bfe052ce6142829e4f5e8bdab7e, type: 3}
       propertyPath: m_RootOrder
@@ -25825,7 +25833,7 @@ GameObject:
   - component: {fileID: 2062219413}
   - component: {fileID: 2062219420}
   m_Layer: 0
-  m_Name: player 2
+  m_Name: Player 2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25967,7 +25975,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_Sprite: {fileID: -1800677078, guid: a87ef2fc6549e284ab36b5b81e986282, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -26175,7 +26183,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshProUGUI: {fileID: 0}
   textMeshPro: {fileID: 167682458}
-  animator: {fileID: 0}
   movementscript: {fileID: 0}
   heartScript: {fileID: 0}
   ballHitBox: {fileID: 0}

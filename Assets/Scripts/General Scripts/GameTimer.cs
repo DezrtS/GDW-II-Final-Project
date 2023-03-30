@@ -57,6 +57,11 @@ public class GameTimer
         return timerCompletionCount;
     }
 
+    public float GetCurrentTimerTime()
+    {
+        return currentTimeDifference;
+    }
+
     public bool GetTimerAlreadyFinished()
     {
         return timerAlreadyFinished;

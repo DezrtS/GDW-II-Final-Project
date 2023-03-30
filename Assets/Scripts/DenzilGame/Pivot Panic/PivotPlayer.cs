@@ -297,7 +297,7 @@ public class PivotPlayer : MonoBehaviour
         if (collision.gameObject.tag == "Lava")
         {
             SoundManager.Instance.playDeathSound();
-            ShakeBehaviour.instance.TriggerShake();
+            ShakeBehaviour.Instance.TriggerShake();
             lavaSplash.Play();
             rig.drag = 25;
             gameObject.layer = 12;

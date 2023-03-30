@@ -148,7 +148,7 @@ public class TrailMovement : MonoBehaviour
 
             heartScript.subtractHealth();
             heartsKeeper.TakeAwayHealth(isPlayerOne);
-            ShakeBehaviour.instance.TriggerShake();
+            ShakeBehaviour.Instance.TriggerShake();
 
             if (heartScript.returnHealth() <= 0)
             {

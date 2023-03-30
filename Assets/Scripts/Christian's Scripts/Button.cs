@@ -9,7 +9,29 @@ public class Button : MonoBehaviour
     public Cannon canNum;
     public Sprite Red;
     public Sprite Blue;
-    
+
+
+    private void Awake()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+        }
+    }
 
     void Start()
     {

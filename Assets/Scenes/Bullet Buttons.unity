@@ -7783,7 +7783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p1: {fileID: 80320638}
   p2: {fileID: 560974130}
-  spawner: {fileID: 0}
+  spawner: {fileID: 1506473595}
   buttons:
   - {fileID: 1028233685}
   - {fileID: 242753378}

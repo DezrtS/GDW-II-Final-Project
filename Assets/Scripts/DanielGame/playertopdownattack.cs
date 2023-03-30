@@ -19,20 +19,77 @@ public class playertopdownattack : MonoBehaviour
     public float attackCoolOffMax;
     public Vector2 upDirection;
 
+    private GameTimer attackTimer;
+    private GameTimer cooldownTimer;
+
     public float startTime;
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();
+
+        attackTimer = new GameTimer(0.5f, true);
+        cooldownTimer = new GameTimer(1f, true);
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            animator.speed = 1;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            animator.speed = 0;
+        }
+    }
+
     void Start() 
     {
         playermovementballgame = GetComponent<playermovementballgame>();
         attackBox = attackBoxObject.GetComponentInChildren<Collider2D>();
         attackBoxRend = attackBoxObject.GetComponentInChildren<SpriteRenderer>();
-        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Attack();
+        //Attack();
+        
+        if (playermovementballgame.buttonInput && canAttack)
+        {
+            canAttack = false;
+            attackBox.enabled = true;
+            attackTimer.PauseTimer(false);
+        }
+
+        if (attackTimer.UpdateTimer())
+        {
+            if (!attackTimer.GetTimerAlreadyFinished())
+            {
+                cooldownTimer.PauseTimer(false);
+                attackBox.enabled = false;
+            }
+
+            if (cooldownTimer.UpdateTimer())
+            {
+                canAttack = true;
+                attackTimer.RestartTimer();
+                cooldownTimer.RestartTimer();
+                attackTimer.PauseTimer(true);
+                cooldownTimer.PauseTimer(true);
+            }
+        }
+
         AttackBoxReady();
     }
     void AttackBoxReady()
