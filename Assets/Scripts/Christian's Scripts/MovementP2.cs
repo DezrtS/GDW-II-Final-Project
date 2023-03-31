@@ -11,11 +11,38 @@ public class MovementP2 : MonoBehaviour
 
     Vector2 move;
 
-    int p2Health = 3;
+   // int p2Health = 3;
+    public Transform trans;
+    public Vector2 faceDirection;
 
-    void Start()
+    private void Awake()
     {
-        body = gameObject.GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody2D>();
+        trans = GetComponent<Transform>();
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            body.simulated = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            body.simulated = false;
+        }
+    }
+
+    public void Start()
+    {
         heartScript = gameObject.GetComponent<Hearts>();
     }
 
@@ -25,11 +52,13 @@ public class MovementP2 : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             move.x = -1;
+            FaceForward();
         }
 
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             move.x = 1;
+            FaceForward();
         }
 
         else
@@ -42,11 +71,13 @@ public class MovementP2 : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             move.y = 1;
+            FaceForward();
         }
 
         else if (Input.GetKey(KeyCode.DownArrow))
         {
             move.y = -1;
+            FaceForward();
         }
 
         else
@@ -69,7 +100,7 @@ public class MovementP2 : MonoBehaviour
         {
             SoundManager.Instance.playHitSound();
             heartScript.subtractHealth();
-            ShakeBehaviour.instance.TriggerShake();
+            ShakeBehaviour.Instance.TriggerShake();
         }
     }
 
@@ -77,5 +108,17 @@ public class MovementP2 : MonoBehaviour
     public int ReturnP2Health()
     {
         return (heartScript.returnHealth());
+    }
+
+    void FaceForward()
+    {
+        Vector2 movedirection = move;
+        faceDirection = movedirection;
+        // if(move.x == 0 && move.y == 0)
+        //  { 
+
+
+        Quaternion rotationdirection = Quaternion.LookRotation(Vector3.forward, faceDirection);
+        trans.rotation = Quaternion.RotateTowards(trans.rotation, rotationdirection, 1);
     }
 }

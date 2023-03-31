@@ -1,22 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PivotGameController : MonoBehaviour
 {
-    public static PivotGameController instance;
+    public static PivotGameController Instance;
+
 
     [SerializeField] private List<GameObject> players = new List<GameObject>();
-    [SerializeField] private List<GameObject> cannons = new List<GameObject>();
-    [SerializeField] private List<GameObject> platformEnds = new List<GameObject>();
-    [SerializeField] private GameObject rotatingPlatform;
+    [SerializeField] private HeartsKeeper heartsKeeper;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        TransitionManager.Instance.OnTransitionEnded -= OnTransitionEnded;
+    }
+
+    private void OnTransitionEnded(bool isExitTransition)
+    {
+        if (isExitTransition)
+        {
+            GameUIManager.Instance.ShowUI();
+            CountdownManager.Instance.SpawnAndStartCountdown();
+        }
+    }
+
+    private void Start()
+    {
+        TransitionManager.Instance.OnTransitionEnded += OnTransitionEnded;
+
+        if (heartsKeeper.isNewGame)
+        {
+            StartCoroutine(SoundManager.Instance.fadeSideViewMusicIn());
+            TransitionManager.Instance.PlayRandomExitTransition();
+        } else
+        {
+            GameUIManager.Instance.ShowUINow();
+            CountdownManager.Instance.RestartCountdown();
         }
     }
 

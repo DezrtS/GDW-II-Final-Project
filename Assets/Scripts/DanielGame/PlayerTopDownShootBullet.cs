@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerTopDownShootBullet : MonoBehaviour
 {
@@ -10,15 +9,33 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     //ricohetBulletScript ricohetBulletScript;
     [SerializeField] GameObject Bullet;
     public Transform shootPosition;
-
-    [SerializeField] Animator animator;
     Hearts hearts;
 
     Vector2 startPosition;
     public int bulletNum;
 
-    bool playCountdown;
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+        }
+    }
+
     void Start()
     {
         bulletsUI = GetComponent<bulletsUI>();
@@ -27,11 +44,9 @@ public class PlayerTopDownShootBullet : MonoBehaviour
         hearts = GetComponent<Hearts>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Shoot();
-        PlayCountdownFunction();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -74,9 +89,10 @@ public class PlayerTopDownShootBullet : MonoBehaviour
     {
         transform.position = startPosition;
         hearts.subtractHealth();
-        if (hearts.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
+        if (hearts.returnHealth() <= 0 && !GameEnder.Instance.IsGameEnding())
         {
             UnityEngine.Debug.Log("PLayer loses");
+            ShakeBehaviour.Instance.TriggerShake();
             if (playermovementballgame.isPlayer1)
             {
                 P2Score.Instance.AddScore();
@@ -85,23 +101,12 @@ public class PlayerTopDownShootBullet : MonoBehaviour
             {
                 P1Score.Instance.AddScore();
             }
-            GameEnder.instance.StartEndGame();
+            GameEnder.Instance.StartEndGame();
         }
-        else
+        else if (!GameEnder.Instance.IsGameEnding())
         {
-            ShakeBehaviour.instance.TriggerShake();playCountdown = true;
-        }
-        
-        //animator.Play("");
-        
-    }
-    void PlayCountdownFunction()
-    {
-
-        if (ShakeBehaviour.instance.shakeDuration == 0 && playCountdown)
-        {
-            animator.Play("");
-            playCountdown = false;
-        }
+            ShakeBehaviour.Instance.TriggerShake();
+            CountdownManager.Instance.RestartCountdown();
+        } 
     }
 }

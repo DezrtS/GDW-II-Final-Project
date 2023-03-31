@@ -1,11 +1,6 @@
-using System;
-using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Security.Cryptography;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class playermovementballgame : MonoBehaviour
@@ -47,6 +42,33 @@ public class playermovementballgame : MonoBehaviour
     public bool isPlayer1;
     string horizontal1 = "Horizontal",horizontal2 = "Horizontal2", vertical1 = "Vertical", vertical2 = "Vertical2", button1 = "Fire1", button2= "Fire2";
     string horizontalInput, verticalInput, fireInput;
+
+    private void Awake()
+    {
+        body = GetComponent<Rigidbody2D>();
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            body.simulated = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            body.simulated = false;
+        }
+    }
+
+
     void StartGetInputs()
     {
         if (isPlayer1)
@@ -70,7 +92,6 @@ public class playermovementballgame : MonoBehaviour
         StartGetInputs();
         hitBox = GetComponent<CircleCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
-        body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         heartScript = gameObject.GetComponent<Hearts>();
         animator = GetComponent<Animator>();

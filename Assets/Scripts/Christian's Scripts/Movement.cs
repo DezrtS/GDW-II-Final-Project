@@ -9,35 +9,66 @@ public class Movement : MonoBehaviour
      public Rigidbody2D  body;
 
     [SerializeField] Hearts heartScript;
-   // [SerializeField] Animator animator;
+    public Transform trans;
+    // [SerializeField] Animator animator;
+    public Vector2 faceDirection;
 
 
     int p1Health;
     
     Vector2 move;
 
+    private void Awake()
+    {
+        body = GetComponent<Rigidbody2D>();
+        trans = GetComponent<Transform>();
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            body.simulated = true;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            body.simulated = false;
+        }
+    }
+
     public void Start()
     {
-        body = gameObject.GetComponent<Rigidbody2D>();
         heartScript = gameObject.GetComponent<Hearts>();
     }
 
     // Update is called once per frame
     public void Update()
     {
+        
         if(Input.GetKey(KeyCode.A))
         {
             move.x = -1;
+            FaceForward();
         }
 
         else if(Input.GetKey(KeyCode.D))
         {
             move.x = 1;
+            FaceForward();
         }
 
         else
         {
             move.x = 0;
+            
         }
         // move.x = Input.GetAxisRaw("Horizontal");
         // move.y = Input.GetAxisRaw("Vertical");
@@ -45,11 +76,14 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             move.y = 1;
+            FaceForward();
         }
 
         else if (Input.GetKey(KeyCode.S))
         {
+
             move.y = -1;
+            FaceForward();
         }
 
         else
@@ -72,7 +106,7 @@ public class Movement : MonoBehaviour
             SoundManager.Instance.playHitSound();
            // SoundManager.Instance.playHitSound();
             heartScript.subtractHealth();
-            ShakeBehaviour.instance.TriggerShake();
+            ShakeBehaviour.Instance.TriggerShake();
             //animator.Play("");
 
             //Hearts.Instance.subtractHealth();
@@ -87,6 +121,16 @@ public class Movement : MonoBehaviour
         return( heartScript.returnHealth());
     }
 
+    void FaceForward()
+    {
+        Vector2 movedirection = move;
+        faceDirection = movedirection;
+       // if(move.x == 0 && move.y == 0)
+      //  { 
 
+           
+        Quaternion rotationdirection = Quaternion.LookRotation(Vector3.forward, faceDirection);
+        trans.rotation = Quaternion.RotateTowards(trans.rotation, rotationdirection, 1);
+    }
 
 }

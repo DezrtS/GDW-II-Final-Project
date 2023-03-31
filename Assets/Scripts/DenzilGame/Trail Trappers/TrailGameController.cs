@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TrailGameController : MonoBehaviour
 {
-    public static TrailGameController instance;
+    public static TrailGameController Instance;
 
     [SerializeField] private TrailMovement playerOneMovement;
     [SerializeField] private TrailMovement playerTwoMovement;
@@ -13,56 +13,89 @@ public class TrailGameController : MonoBehaviour
     [SerializeField] public GameObject playerOneTrailPrefab;
     [SerializeField] public GameObject playerTwoTrailPrefab;
 
+    [SerializeField] private GameObject playerOneTrailExtender;
+    [SerializeField] private GameObject playerTwoTrailExtender;
+
+    [SerializeField] private HeartsKeeper heartsKeeper;
+
+    private GameTimer resetGameTimer;
+
+    private bool isResetting;
+
     private void Awake()
     {
-        if (instance == null)
+        resetGameTimer = new GameTimer(1.5f, true);
+
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }  
     }
 
-    public void ShortenOtherPlayerTail(bool isPlayerOne)
+    private void OnDestroy()
     {
-        if (isPlayerOne)
+        TransitionManager.Instance.OnTransitionEnded -= OnTransitionEnded;
+    }
+
+    private void OnTransitionEnded(bool isExitTransition)
+    {
+        if (isExitTransition)
         {
-            playerTwoMovement.trail.SetTrailLength(2);
-        } else
-        {
-            playerOneMovement.trail.SetTrailLength(2);
+            GameUIManager.Instance.ShowUI();
+            CountdownManager.Instance.SpawnAndStartCountdown();
         }
     }
 
-    public void FreezeGame()
+    private void Start()
     {
-        playerOneMovement.canMove = false;
-        playerTwoMovement.canMove = false;
-        ShakeBehaviour.instance.TriggerShake();
-        StartCoroutine(ResetGame());
+
+        TransitionManager.Instance.OnTransitionEnded += OnTransitionEnded;
+
+        if (heartsKeeper.isNewGame)
+        {
+
+            StartCoroutine(SoundManager.Instance.fadeTrailRumbleMusicIn());
+            TransitionManager.Instance.PlayRandomExitTransition();
+        }
+        else
+        {
+            GameUIManager.Instance.ShowUINow();
+            CountdownManager.Instance.RestartCountdown();
+        }
+
+       
     }
 
-    public void FreezeGame(bool loadMainMenu)
+    private void Update()
     {
-        playerOneMovement.canMove = false;
-        playerTwoMovement.canMove = false;
-        ShakeBehaviour.instance.TriggerShake();
-        if (loadMainMenu)
+        if (resetGameTimer.UpdateTimer())
         {
-            GameEnder.instance.StartEndGame();
-            //StartCoroutine(LoadMainMenuReset());
+            playerOneMovement.heartsKeeper.resetHealths = false;
+            playerOneMovement.heartsKeeper.canTakeAwayHealth = true;
+            resetGameTimer.RestartTimer();
+            resetGameTimer.PauseTimer(true);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
         }
     }
 
-    IEnumerator ResetGame()
+    public void ResetGame()
     {
-        yield return new WaitForSeconds(1f);
-        playerOneMovement.heartsKeeper.resetHealths = false;
-        playerOneMovement.heartsKeeper.canTakeAwayHealth = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (!isResetting)
+        {
+            resetGameTimer.PauseTimer(false);
+            isResetting = true;
+            FreezePlayers();
+        }
     }
 
-    IEnumerator LoadMainMenuReset()
+    public void FreezePlayers()
     {
-        yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene("GameMenu");
+        playerOneMovement.FreezePlayer();
+        playerTwoMovement.FreezePlayer();
+    }
+
+    public bool IsResetting()
+    {
+        return isResetting;
     }
 }

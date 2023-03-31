@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -9,24 +8,53 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed = 1;
     [SerializeField] private float jumpPower = 1;
     [SerializeField] private bool isPlayerOne;
+
     private bool grounded;
     private Vector3 groundNormal = Vector3.right;
     private float screenWidth;
     public Vector3 startingPosition;
 
-    private GameObject projectileReference;
-
     private Animator anim;
 
-    [SerializeField] Hearts heartScript;
+    private Hearts heartScript;
+
+    private void Awake()
+    {
+        rig = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        heartScript = gameObject.GetComponent<Hearts>();
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            rig.simulated = true;
+            anim.speed = 1;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            rig.simulated = false;
+            anim.speed = 0;
+        }
+    }
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
-        rig = GetComponent<Rigidbody2D>();
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
-        heartScript = gameObject.GetComponent<Hearts>();
     }
+
+    
 
     private void OnBecameInvisible()
     {
@@ -108,7 +136,7 @@ public class Player : MonoBehaviour
             }
             //anim.SetTrigger("Player1Jump");
             rig.velocity = new Vector2(rig.velocity.x, 0);
-                rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
+            rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
             // anim.SetBool("isJumping", false);
         }
         else
@@ -138,8 +166,8 @@ public class Player : MonoBehaviour
                 anim.SetBool("isJumping2", true);
             }
         }
-        //rig.velocity = new Vector2(movementInput * speed, rig.velocity.y);
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
+        rig.velocity = new Vector2(movementInput * speed, rig.velocity.y);
+        //transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -185,7 +213,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (heartScript.returnHealth() <= 0 && !GameEnder.instance.IsGameEnding())
+        if (heartScript.returnHealth() <= 0 && !GameEnder.Instance.IsGameEnding())
         {
             if (isPlayerOne)
             {
@@ -197,7 +225,7 @@ public class Player : MonoBehaviour
                 Debug.Log("Player One Wins");
                 P1Score.Instance.AddScore();
             }
-            GameEnder.instance.StartEndGame();
+            GameEnder.Instance.StartEndGame();
         }
     }
 

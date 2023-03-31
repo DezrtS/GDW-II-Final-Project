@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ShakeBehaviour : MonoBehaviour
 {
-    public static ShakeBehaviour instance;
-    // Transform of the GameObject you want to shake
-    private Transform transform;
+    public static ShakeBehaviour Instance;
 
     // Desired duration of the shake effect
     public float shakeDuration = 0f;
@@ -22,14 +20,9 @@ public class ShakeBehaviour : MonoBehaviour
 
     void Awake()
     {
-        if (transform == null)
+        if (Instance == null)
         {
-            transform = GetComponent(typeof(Transform)) as Transform;
-        }
-
-        if (instance == null)
-        {
-            instance = this;
+            Instance = this;
         }
     }
 

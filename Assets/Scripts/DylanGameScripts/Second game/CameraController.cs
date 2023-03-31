@@ -9,7 +9,34 @@ public class CameraController : MonoBehaviour
     public float moveTime = 3f;
 
     private Vector3 targetPosition;
-    private bool isMoving = false;
+
+    private GameTimer moveTimer;
+
+    private void Awake()
+    {
+        moveTimer = new GameTimer(3, false);
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            moveTimer.PauseTimer(false);
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            moveTimer.PauseTimer(true);
+        }
+    }
 
     private void Start()
     {
@@ -18,29 +45,14 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (!isMoving)
+        if (!moveTimer.UpdateTimer())
         {
-            StartCoroutine(MoveToPosition(targetPosition));
-        }
-    }
-
-    private IEnumerator MoveToPosition(Vector3 position)
-    {
-        isMoving = true;
-
-        float elapsedTime = 0f;
-        Vector3 startingPosition = transform.position;
-
-        while (elapsedTime < moveTime)
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime / moveSpeed);
+        } else
         {
-            transform.position = Vector3.Lerp(startingPosition, position, elapsedTime / moveTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            moveTimer.RestartTimer();
+            targetPosition = GetRandomPosition();
         }
-
-        transform.position = position;
-        targetPosition = GetRandomPosition();
-        isMoving = false;
     }
 
     private Vector3 GetRandomPosition()

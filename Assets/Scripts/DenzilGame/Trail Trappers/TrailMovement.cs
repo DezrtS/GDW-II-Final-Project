@@ -79,7 +79,7 @@ public class TrailMovement : MonoBehaviour
         }
     }
 
-    void SetupPlayerInput()
+    private void SetupPlayerInput()
     {
         if (isPlayerOne)
         {
@@ -95,7 +95,7 @@ public class TrailMovement : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         verticalInput = Input.GetAxis(verticalInputString);
         horizontalInput = Input.GetAxis(horizontalInputString);
@@ -122,42 +122,33 @@ public class TrailMovement : MonoBehaviour
 
     private void Move()
     {
-        if (canMove)
+        float speed;
+        if (verticalInput > 0)
         {
-            float speed;
-            if (verticalInput > 0)
-            {
-                speed = fasterSpeed;
-            }
-            else
-            {
-                speed = regularSpeed;
-            }
-            rig.MovePosition(rig.position + (Vector2)transform.up * speed * Time.fixedDeltaTime);
-            transform.Rotate(0f, 0f, -horizontalInput * rotationSpeed, Space.Self);
+            speed = fasterSpeed;
         }
+        else
+        {
+            speed = regularSpeed;
+        }
+        rig.MovePosition(rig.position + (Vector2)transform.up * speed * Time.fixedDeltaTime);
+        transform.Rotate(0f, 0f, -horizontalInput * rotationSpeed, Space.Self);
+    }
+
+    public void FreezePlayer()
+    {
+        OnGameStateChanged(GameState.Paused);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if ((collision.gameObject.tag == "Player" || collision.gameObject.tag == "Trail") && heartsKeeper.canTakeAwayHealth)
         {
-            Debug.Log("Tie");
-            SoundManager.Instance.playHitSound();
             heartsKeeper.canTakeAwayHealth = false;
-            //heartsKeeper.resetHealths = false;
-            trail.StopAllCoroutines();
-            TrailGameController.instance.FreezeGame();
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        } 
-        else if (collision.gameObject.tag == "Trail")
-        {
-            if (heartsKeeper.BothPlayersAlive() && heartsKeeper.canTakeAwayHealth)
-            {
-                heartScript.subtractHealth();
-                heartsKeeper.TakeAwayHealth(isPlayerOne);
-            
-            }
+
+            heartScript.subtractHealth();
+            heartsKeeper.TakeAwayHealth(isPlayerOne);
+            ShakeBehaviour.Instance.TriggerShake();
 
             if (heartScript.returnHealth() <= 0)
             {
@@ -172,17 +163,15 @@ public class TrailMovement : MonoBehaviour
                     Debug.Log("Player One Wins");
                     P1Score.Instance.AddScore();
                 }
-                TrailGameController.instance.FreezeGame(true);
+                GameEnder.Instance.StartEndGame();
+                TrailGameController.Instance.FreezePlayers();
             }
-            else if (heartsKeeper.BothPlayersAlive())
+            else
             {
-                //heartsKeeper.resetHealths = false;
                 SoundManager.Instance.playHitSound();
                 trail.StopAllCoroutines();
-                TrailGameController.instance.FreezeGame();
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                TrailGameController.Instance.ResetGame();
             }
-            heartsKeeper.canTakeAwayHealth = false;
         }
     }
 }

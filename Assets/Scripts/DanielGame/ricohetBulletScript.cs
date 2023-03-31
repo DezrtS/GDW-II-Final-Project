@@ -19,13 +19,42 @@ public class ricohetBulletScript : MonoBehaviour
     public bool canKill;
     public bool canPickup;
 
+    float timeDifference = 0;
+
+    private void Awake()
+    {
+        body = GetComponent<Rigidbody2D>();
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            body.simulated = true;
+            startTime = Time.time - LethalTime;
+            timeDifference = 0;
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            body.simulated = false;
+            timeDifference = LethalTime;
+        }
+    }
+
     [SerializeField] Sprite active,inactive;
 
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<SpriteRenderer>();
-        body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         collider2D = GetComponent<Collider2D>();
         body.velocity = (trans.up * speed);

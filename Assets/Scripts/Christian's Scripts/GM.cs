@@ -15,9 +15,35 @@ public class GM : MonoBehaviour
     public GameObject[] buttons;
     public GameObject[] cannons;
 
-
     public float timeLimit = 5;
-    public float time = 0;
+
+    private GameTimer spawnerTimer;
+
+    private void Awake()
+    {
+        spawnerTimer = new GameTimer(timeLimit, false);
+        StartCoroutine(SoundManager.Instance.fadeButtonDodgeballMusicIn());
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState newGameState)
+    {
+        if (newGameState == GameState.Gameplay)
+        {
+            enabled = true;
+            spawnerTimer.PauseTimer(false);
+        }
+        else if (newGameState == GameState.Paused)
+        {
+            enabled = false;
+            spawnerTimer.PauseTimer(true);
+        }
+    }
 
     private void Start()
     {
@@ -28,30 +54,29 @@ public class GM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-
-        if (time >= timeLimit && counter < 8)
+        if (spawnerTimer.UpdateTimer() && counter < 8)
         {
 
             spawner.SpawnButton(buttons, counter);
             counter++;
-            time = 0;
+            
+            spawnerTimer.RestartTimer();
 
         }
 
-        if (p1.ReturnP1Health() <= 0 && !GameEnder.instance.IsGameEnding())
+        if (p1.ReturnP1Health() <= 0 && !GameEnder.Instance.IsGameEnding())
         {
             P2Score.Instance.AddScore();
-            GameEnder.instance.StartEndGame();
+            GameEnder.Instance.StartEndGame();
             
             
         }
 
-        if(p2.ReturnP2Health() <= 0 && !GameEnder.instance.IsGameEnding())
+        if(p2.ReturnP2Health() <= 0 && !GameEnder.Instance.IsGameEnding())
         {
             
             P1Score.Instance.AddScore();
-            GameEnder.instance.StartEndGame();
+            GameEnder.Instance.StartEndGame();
         }
         
     }

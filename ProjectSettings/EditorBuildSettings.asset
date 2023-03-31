@@ -35,4 +35,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PivotPanic.unity
     guid: 33ae4f963f4f48f4a995c75ac8a84517
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: f95c0a6978ce6744c951d72e1131af64
+  - enabled: 1
+    path: Assets/Scenes/VictoryRed.unity
+    guid: a1a7b62d8d2715a499ca4f8eb4ee04dd
+  - enabled: 1
+    path: Assets/Scenes/VictoryBlue.unity
+    guid: d38798f0b5c93574684079af515adc14
   m_configObjects: {}
