@@ -192,6 +192,8 @@ MonoBehaviour:
   playerSpeed: 10
   body: {fileID: 0}
   heartScript: {fileID: 0}
+  trans: {fileID: 0}
+  faceDirection: {x: 0, y: 0}
 --- !u!50 &145248926
 Rigidbody2D:
   serializedVersion: 4
@@ -295,6 +297,8 @@ MonoBehaviour:
   playerSpeed: 10
   body: {fileID: 0}
   heartScript: {fileID: 0}
+  trans: {fileID: 0}
+  faceDirection: {x: 0, y: 0}
 --- !u!1 &558042071
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +351,8 @@ MonoBehaviour:
   playerSpeed: 10
   body: {fileID: 0}
   heartScript: {fileID: 0}
+  trans: {fileID: 0}
+  faceDirection: {x: 0, y: 0}
 --- !u!50 &558042074
 Rigidbody2D:
   serializedVersion: 4
@@ -450,6 +456,8 @@ MonoBehaviour:
   playerSpeed: 10
   body: {fileID: 0}
   heartScript: {fileID: 0}
+  trans: {fileID: 0}
+  faceDirection: {x: 0, y: 0}
 --- !u!1 &689821532
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +469,7 @@ GameObject:
   - component: {fileID: 689821535}
   - component: {fileID: 689821534}
   - component: {fileID: 689821533}
+  - component: {fileID: 689821536}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -503,7 +512,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9
+  orthographic size: 0.1
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -534,6 +543,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &689821536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689821532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd385eb9232bc341b806b73183dda6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &716910690
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,6 +703,7 @@ GameObject:
   - component: {fileID: 910090544}
   - component: {fileID: 910090543}
   - component: {fileID: 910090547}
+  - component: {fileID: 910090548}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -785,6 +807,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98490c4ec83f1a74d97a5275d451cb2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &910090548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910090542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67dea53d643267b45badf90fa1800e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomTransitionDuration: 2
+  zoomInto: {x: 0, y: 0, z: 0}
+  doTransitionOnStart: 1
+  resetMusicOnTransition: 0
 --- !u!1 &1002047428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,9 +1051,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 910090547}
-        m_TargetAssemblyTypeName: BackButton, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 910090548}
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: LoadGameSelectMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54250e0fc01d2c49a6361ca982413b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionColor: {r: 0, g: 0, b: 0, a: 1}
+  transitionColor: {r: 0.054901965, g: 0.054901965, b: 0.054901965, a: 1}
   transitionMaterial: {fileID: 2100000, guid: b887b2583589e314f8218bfaa7025d0a, type: 2}
   growCube: {fileID: 4191567810224775235, guid: 2f7cd67164258e246943f5182a4a5b81, type: 3}
   growCircle: {fileID: 2389992934241799691, guid: 4eae99bdf0bf08944adad884b5a06b07, type: 3}
@@ -61,5 +61,6 @@ MonoBehaviour:
   plainCube: {fileID: 1964512142447624745, guid: b27397504a6d5f14ba28055cae00f070, type: 3}
   plainLongCube: {fileID: 1964512142447624745, guid: 0a32b6ed08c973f4c93606d3c761f248, type: 3}
   playOnStart: 1
+  freezeOnStart: 1
   initiateGameUIAnimation: 1
   currentAnimation: -1
