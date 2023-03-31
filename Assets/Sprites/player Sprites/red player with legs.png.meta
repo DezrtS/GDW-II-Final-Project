@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a87ef2fc6549e284ab36b5b81e986282
+guid: c00e30b585783b1408e52189d793e0eb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,85 +105,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: topdown1_bluesheet_0
+      name: red player with legs_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 3
         width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 72
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5555556}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbebe50db42bcf143af78c535df1133e
-      internalID: -1800677078
+      spriteID: f5bb92bd1cb7d774e880c6e60def8ffa
+      internalID: -1176769980
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: topdown1_bluesheet_1
+      name: red player with legs_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 3
         width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 72
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5555556}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e470319e6b2939f44838db859e9ccc14
-      internalID: 256741149
+      spriteID: e50bd9a47e27a2d4ca680c9533a04355
+      internalID: -1561661890
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: topdown1_bluesheet_2
+      name: red player with legs_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 64
+        y: 3
         width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 72
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5555556}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17740392f076f984e98426c00f5a0cc5
-      internalID: 1402454260
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: topdown1_bluesheet_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ee997565183aa147b9e36f7273eb94b
-      internalID: -1106371765
+      spriteID: 562e52809f169e84aa581c24e302cfa5
+      internalID: -464469100
       vertices: []
       indices: 
       edges: []
@@ -199,10 +178,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      topdown1_bluesheet_3: -1106371765
-      topdown1_bluesheet_1: 256741149
-      topdown1_bluesheet_0: -1800677078
-      topdown1_bluesheet_2: 1402454260
+      red player with legs_2: -464469100
+      red player with legs_0: -1176769980
+      red player with legs_1: -1561661890
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

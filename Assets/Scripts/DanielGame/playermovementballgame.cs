@@ -18,7 +18,8 @@ public class playermovementballgame : MonoBehaviour
     Rigidbody2D body;
     Transform trans;
     public SpriteRenderer sprite;
-    
+    Animator animator;
+        
     ////Attack values
     //[SerializeField] GameObject attackBoxObject;
     //SpriteRenderer attackBoxRend;
@@ -72,19 +73,21 @@ public class playermovementballgame : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         heartScript = gameObject.GetComponent<Hearts>();
+        animator = GetComponent<Animator>();
         startPos = trans.position;
         startRot = trans.rotation;
         //attackBox = attackBoxObject.GetComponentInChildren<PolygonCollider2D>();
         //attackBoxRend = attackBoxObject.GetComponentInChildren<SpriteRenderer>();
-
-        if (isPlayer1)
-        {
-            //use character red sprite
-        }
-        else
-        {
-            //use character blue sprite
-        }
+        animator.SetBool("isredplayer1", isPlayer1);
+        //if (isPlayer1)
+        //{
+            
+        //    //use character red sprite
+        //}
+        //else
+        //{
+        //    //use character blue sprite
+        //}
     }
 
     // Update is called once per frame
@@ -135,6 +138,7 @@ public class playermovementballgame : MonoBehaviour
     //}
     void Movement()
     {
+        AnimatorMethod();
         body.MovePosition(body.position + upDirection * moveInput * speed * Time.fixedDeltaTime);
         //body.MoveRotation(body.rotation + (-steeringInput1 * rotationStr));
         trans.Rotate(0f,0f,-steeringInput * rotationStr,Space.Self);
@@ -206,5 +210,8 @@ public class playermovementballgame : MonoBehaviour
     //        attackBoxRend.color = Color.grey;//when on cool down
     //    }
     //}
-
+    void AnimatorMethod()
+    {
+        animator.SetFloat("animeinputvertical", moveInput);
+    }
 }

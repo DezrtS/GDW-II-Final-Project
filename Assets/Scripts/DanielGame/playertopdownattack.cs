@@ -26,7 +26,7 @@ public class playertopdownattack : MonoBehaviour
         playermovementballgame = GetComponent<playermovementballgame>();
         attackBox = attackBoxObject.GetComponentInChildren<Collider2D>();
         attackBoxRend = attackBoxObject.GetComponentInChildren<SpriteRenderer>();
-        animator = GetComponentInChildren<Animator>();
+        animator = attackBoxObject.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame

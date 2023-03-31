@@ -19,6 +19,8 @@ public class ricohetBulletScript : MonoBehaviour
     public bool canKill;
     public bool canPickup;
 
+    [SerializeField] Sprite active,inactive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -131,23 +133,26 @@ public class ricohetBulletScript : MonoBehaviour
 
     void SpriteStuff()
     {
-        color = Color.white;
+        //color = Color.white;
         if (!canKill)
         {
             if (canPickup)
             {
-                color.a = 1f;
+                //color.a = 1f;
+                rend.sprite = active;
             }
             else
             {
-                color.a = 0.5f;
+                //color.a = 0.5f;
+                rend.sprite = inactive;
             }
             
         }
         else
         {
-            color.a = 1f;
+            //color.a = 1f;
+            rend.sprite = active;
         }
-        rend.color = color;
+        //rend.color = color;
     }
 }

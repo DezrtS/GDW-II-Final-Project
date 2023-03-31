@@ -141,3 +141,5 @@ MonoBehaviour:
   LethalTimeMax: 3
   canKill: 0
   canPickup: 0
+  active: {fileID: 21300000, guid: cfb8881972b7a4968b7cc7cb25a12b1d, type: 3}
+  inactive: {fileID: 21300000, guid: cd40ec1402b29ad48ab68d85170d6552, type: 3}
