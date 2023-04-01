@@ -7,8 +7,8 @@ public class Respawn : MonoBehaviour
 {
     private Camera mainCamera;
 
-    int player1Health = 3;
-    int player2Health = 3;
+    //int player1Health = 3;
+    //int player2Health = 3;
 
     private Rigidbody2D body;
     //private PhysicsMaterial2D originalMaterial;

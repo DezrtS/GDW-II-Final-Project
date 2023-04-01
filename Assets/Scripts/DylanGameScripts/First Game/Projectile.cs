@@ -8,6 +8,9 @@ public class Projectile : MonoBehaviour
 
     public float speed = 10f;
     private float screenWidth;
+    //public float knockbackForce = 500;
+   // public ParticleSystem explosionParticles;
+
 
     private void Awake()
     {
@@ -38,6 +41,7 @@ public class Projectile : MonoBehaviour
     private void Start()
     {
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
+       // explosionParticles = GetComponentInChildren<ParticleSystem>();
     }
 
     private void FixedUpdate()
@@ -69,6 +73,8 @@ public class Projectile : MonoBehaviour
                 PlayerScoreManager.UpdatePlayerScore("Player2");
                 Destroy(gameObject);
                 SoundManager.Instance.playDeathSound();
+                //collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position).normalized * knockbackForce, ForceMode2D.Impulse);
+
                 // Destroy all other projectiles in the scene
                 Projectile[] allProjectiles = FindObjectsOfType<Projectile>();
                 foreach (Projectile projectile in allProjectiles)
@@ -76,6 +82,11 @@ public class Projectile : MonoBehaviour
                     if (projectile.gameObject != gameObject)
                     {
                         Destroy(projectile.gameObject);
+
+                        /*if (explosionParticles != null)
+                        {
+                            explosionParticles.Play();
+                        }*/
                     }
                 }
 
@@ -89,6 +100,7 @@ public class Projectile : MonoBehaviour
                 PlayerScoreManager.UpdatePlayerScore("Player1");
                 Destroy(gameObject);
                 SoundManager.Instance.playDeathSound();
+                //collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position).normalized * knockbackForce, ForceMode2D.Impulse);
 
                 // Destroy all other projectiles in the scene
                 Projectile[] allProjectiles = FindObjectsOfType<Projectile>();
@@ -97,6 +109,11 @@ public class Projectile : MonoBehaviour
                     if (projectile.gameObject != gameObject)
                     {
                         Destroy(projectile.gameObject);
+
+                        /*if (explosionParticles != null)
+                        {
+                            explosionParticles.Play();
+                        }*/
                     }
                 }
 
