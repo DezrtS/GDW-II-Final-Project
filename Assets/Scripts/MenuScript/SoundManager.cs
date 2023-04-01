@@ -21,7 +21,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource VicorySound;
 
 
-    public float fade = 0.5f;
+     float fade = 0.9f;
     float volume;
     int i = 0;
 
