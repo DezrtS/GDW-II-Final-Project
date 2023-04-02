@@ -125,10 +125,30 @@ public class TrailMovement : MonoBehaviour
         float speed;
         if (verticalInput > 0)
         {
+            if (SoundManager.Instance.TrailSpeedUp.isPlaying == false && isPlayerOne)
+            {
+                SoundManager.Instance.playTrailSpeedUp();
+            }
+            
+
+            if(SoundManager.Instance.TrailSpeedUp2.isPlaying == false && !isPlayerOne)
+            {
+                SoundManager.Instance.playTrailSpeedUp2();
+            }
+
             speed = fasterSpeed;
         }
         else
         {
+            if (isPlayerOne)
+            {
+                SoundManager.Instance.stopTrailSpeedUp();
+            }
+
+            else
+            {
+                SoundManager.Instance.stopTrailSpeedUp2();
+            }
             speed = regularSpeed;
         }
         rig.MovePosition(rig.position + (Vector2)transform.up * speed * Time.fixedDeltaTime);
@@ -168,6 +188,8 @@ public class TrailMovement : MonoBehaviour
             }
             else
             {
+                SoundManager.Instance.stopTrailSpeedUp();
+                SoundManager.Instance.stopTrailSpeedUp2();
                 SoundManager.Instance.playHitSound();
                 trail.StopAllCoroutines();
                 TrailGameController.Instance.ResetGame();

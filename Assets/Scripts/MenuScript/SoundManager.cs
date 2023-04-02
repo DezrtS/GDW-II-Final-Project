@@ -19,9 +19,10 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource Confetti;
     public AudioSource SideViewMusic;
     public AudioSource VicorySound;
+    public AudioSource TrailSpeedUp;
+    public AudioSource TrailSpeedUp2;
 
-
-     float fade = 0.9f;
+    float fade = 0.9f;
     float volume;
     int i = 0;
 
@@ -294,5 +295,25 @@ public class SoundManager : Singleton<SoundManager>
             StartCoroutine(fadeSideViewMusicOut());
         }
     }
- 
+
+    public void playTrailSpeedUp()
+    {
+        TrailSpeedUp.Play();
+    }
+
+    public void stopTrailSpeedUp()
+    {
+        TrailSpeedUp.Stop();
+    }
+
+    public void playTrailSpeedUp2()
+    {
+        TrailSpeedUp2.Play();
+    }
+
+    public void stopTrailSpeedUp2()
+    {
+        TrailSpeedUp2.Stop();
+    }
+
 }
