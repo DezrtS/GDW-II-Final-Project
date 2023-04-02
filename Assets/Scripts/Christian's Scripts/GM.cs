@@ -67,7 +67,7 @@ public class GM : MonoBehaviour
         if (p1.ReturnP1Health() <= 0 && !GameEnder.Instance.IsGameEnding())
         {
             P2Score.Instance.AddScore();
-            GameEnder.Instance.StartEndGame();
+            GameEnder.Instance.StartEndGame(false);
             
             
         }
@@ -76,7 +76,7 @@ public class GM : MonoBehaviour
         {
             
             P1Score.Instance.AddScore();
-            GameEnder.Instance.StartEndGame();
+            GameEnder.Instance.StartEndGame(true);
         }
         
     }

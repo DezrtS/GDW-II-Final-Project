@@ -163,7 +163,7 @@ public class TrailMovement : MonoBehaviour
                     Debug.Log("Player One Wins");
                     P1Score.Instance.AddScore();
                 }
-                GameEnder.Instance.StartEndGame();
+                GameEnder.Instance.StartEndGame(!isPlayerOne);
                 TrailGameController.Instance.FreezePlayers();
             }
             else

@@ -44,5 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38caef869e6df2145b8e6c72431f8aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeTime: 0
-  unfrozenWaitTime: 1
+  pauseGameOnEnd: 1

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class ScoreIncreaseManager : MonoBehaviour
+public class ScoreIncreaseManager : Singleton<ScoreIncreaseManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] TextMeshProUGUI redScore;
+    [SerializeField] TextMeshProUGUI blueScore;
+
+    private void Awake()
     {
-        
+        UpdateScoreText();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateScoreText()
     {
-        
+        redScore.text = P1Score.Instance.ReturnScore().ToString();
+        blueScore.text = P2Score.Instance.ReturnScore().ToString();
     }
 }
