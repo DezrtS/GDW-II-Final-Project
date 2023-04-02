@@ -7,7 +7,7 @@ public class PlayerBounce : MonoBehaviour
     private Rigidbody2D body;
     private PhysicsMaterial2D originalMaterial;
     private float originalBounciness;
-    private bool isBouncing = false;
+    //private bool isBouncing = false;
     private Camera mainCamera;
 
     public float bouncePower;

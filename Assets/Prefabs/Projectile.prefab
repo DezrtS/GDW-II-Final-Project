@@ -69,8 +69,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  isPlayerOne: 1
-  heartScript: {fileID: 0}
 --- !u!60 &-311588012841251969
 PolygonCollider2D:
   m_ObjectHideFlags: 0
