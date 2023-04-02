@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class GameStateManager
 {
     private static GameStateManager instance;
@@ -28,7 +30,7 @@ public class GameStateManager
     {
         if (newGameState == CurrentGameState)
         {
-            return;
+            //return;
         }
 
         CurrentGameState = newGameState;

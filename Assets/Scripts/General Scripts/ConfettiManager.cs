@@ -5,36 +5,46 @@ using UnityEngine;
 public class ConfettiManager : Singleton<ConfettiManager>
 {
     private Animator cannonAnimator;
-    private GameTimer fireConfettiTimer;
+    private GameTimer increaseScoreTimer;
+    private GameTimer shrinkTextTimer;
+
+    private bool redWon;
 
     private void Awake()
     {
-        fireConfettiTimer = new GameTimer(0.5f, true);
+        increaseScoreTimer = new GameTimer(3f, true);
+        shrinkTextTimer = new GameTimer(3f, true);
         cannonAnimator = GetComponent<Animator>();
     }
 
-    private void Start()
+    public void StartConfetti(bool redWon)
     {
-        StartConfetti();
-    }
+        this.redWon = redWon;
 
-    public void StartConfetti()
-    {
         SoundManager.Instance.PlayVictorySound();
+        SoundManager.Instance.FadeGameMusic();
         cannonAnimator.SetBool("Activated", true);
-        fireConfettiTimer.PauseTimer(false);
-
-
+        increaseScoreTimer.PauseTimer(false);
     }
 
     private void Update()
     {
-        if (fireConfettiTimer.UpdateTimer())
+        if (increaseScoreTimer.UpdateTimer())
         {
-            SoundManager.Instance.FadeGameMusic();
-            fireConfettiTimer.SetTimeTillCompletion(1.5f);
-            fireConfettiTimer.RestartTimer();
-            fireConfettiTimer.PauseTimer(true);
+            if (!increaseScoreTimer.GetTimerAlreadyFinished())
+            {
+                GameUIManager.Instance.IncreaseScore(redWon);
+                shrinkTextTimer.PauseTimer(false);
+            }
+
+            if (shrinkTextTimer.UpdateTimer())
+            {
+                TransitionManager.Instance.PlayRandomEnterTransition();
+                increaseScoreTimer.RestartTimer();
+                shrinkTextTimer.RestartTimer();
+                increaseScoreTimer.PauseTimer(true);
+                shrinkTextTimer.PauseTimer(true);
+            }
         }
     }
 }

@@ -54,7 +54,7 @@ public class Cannon : MonoBehaviour
     void Start()
     {
         spawn = gameObject.GetComponent<Transform>();
-        bulletPre = GameObject.Find("Bullet");
+        //bulletPre = GameObject.Find("Bullet");
        
     }
 
@@ -72,7 +72,7 @@ public class Cannon : MonoBehaviour
                 SoundManager.Instance.playShootSound();
                 var bullet = Instantiate(bulletPre, spawn.position, Quaternion.Euler(0, 0, 0));
                 bullet.GetComponent<Rigidbody2D>().velocity = distance * bulletSpeed;
-                Destroy(bullet, 3);
+                //Destroy(bullet, 3);
             }
 
 
@@ -81,7 +81,7 @@ public class Cannon : MonoBehaviour
                 SoundManager.Instance.playShootSound();
                 var bulletP2 = Instantiate(bulletPre, spawn.position, Quaternion.Euler(0, 0, 0));
                 bulletP2.GetComponent<Rigidbody2D>().velocity = distanceP2 * bulletSpeed;
-                Destroy(bulletP2, 3);
+                //Destroy(bulletP2, 3);
             }
 
             fireTimer.RestartTimer();

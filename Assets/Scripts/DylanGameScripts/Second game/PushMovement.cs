@@ -13,7 +13,7 @@ public class PushMovement : MonoBehaviour
 
     [SerializeField] private bool isPlayerOne;
 
-    [SerializeField] private float maxSpeed = 10f;
+    //[SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float rotationStrength = 5f;
 

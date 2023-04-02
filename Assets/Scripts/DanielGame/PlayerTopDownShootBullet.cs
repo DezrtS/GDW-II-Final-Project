@@ -101,7 +101,7 @@ public class PlayerTopDownShootBullet : MonoBehaviour
             {
                 P1Score.Instance.AddScore();
             }
-            GameEnder.Instance.StartEndGame();
+            GameEnder.Instance.StartEndGame(!playermovementballgame.isPlayer1);
         }
         else if (!GameEnder.Instance.IsGameEnding())
         {
