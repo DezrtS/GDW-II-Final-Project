@@ -47,6 +47,9 @@ public class playermovementballgame : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        animator = GetComponent<Animator>();
+        animator.SetBool("isredplayer1", isPlayer1);
+
     }
 
     private void OnDestroy()
@@ -94,12 +97,12 @@ public class playermovementballgame : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         trans = GetComponent<Transform>();
         heartScript = gameObject.GetComponent<Hearts>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         startPos = trans.position;
         startRot = trans.rotation;
         //attackBox = attackBoxObject.GetComponentInChildren<PolygonCollider2D>();
         //attackBoxRend = attackBoxObject.GetComponentInChildren<SpriteRenderer>();
-        animator.SetBool("isredplayer1", isPlayer1);
+        //animator.SetBool("isredplayer1", isPlayer1);
         //if (isPlayer1)
         //{
             
