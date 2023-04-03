@@ -255,7 +255,7 @@ public class Ball : MonoBehaviour
             if(heartScript.returnHealth() == 0 && !GameEnder.Instance.IsGameEnding())
             {
                 ShakeBehaviour.Instance.TriggerShake();
-                GameEnder.Instance.StartEndGame();
+                GameEnder.Instance.StartEndGame(!movementscript.isPlayer1);
                 if (movementscript.isPlayer1)
                 {
                     Debug.Log("Player 1 Lost");

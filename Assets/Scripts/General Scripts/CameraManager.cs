@@ -15,24 +15,26 @@ public class CameraManager : Singleton<CameraManager>
         cam = GetComponent<Camera>();
     }
 
-    public void MoveCameraTo(Vector2 targetPosition, float time)
+    public bool MoveCameraTo(Vector2 targetPosition, float time)
     {
         if (isMoving)
         {
-            return;
+            return false;
         }
         isMoving = true;
         StartCoroutine(MoveTo(targetPosition, time));
+        return true;
     }
 
-    public void ZoomCameraTo(float size, float time)
+    public bool ZoomCameraTo(float size, float time)
     {
         if (isZooming)
         {
-            return;
+            return false;
         }
         isZooming = true;
         StartCoroutine(ZoomTo(size, time));
+        return true;
     }
 
     private float SmoothValue(float startingTime, float timeTillCompletion)

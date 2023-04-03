@@ -12,6 +12,8 @@ public class GameEnder : MonoBehaviour
 
     private bool gameEnding = false;
 
+    private bool redWon;
+
 
     private void Awake()
     {
@@ -35,10 +37,10 @@ public class GameEnder : MonoBehaviour
         {
             if (P1Score.Instance.ReturnScore() >= 3)
             {
-                SceneManager.LoadScene("VictoryBlue");
+                SceneManager.LoadScene("VictoryRed");
             } else if (P2Score.Instance.ReturnScore() >= 3)
             {
-                SceneManager.LoadScene("VictoryRed");
+                SceneManager.LoadScene("VictoryBlue");
             } else
             {
                 LoadMainMenuScene();
@@ -51,8 +53,10 @@ public class GameEnder : MonoBehaviour
         TransitionManager.Instance.OnTransitionEnded += OnTransitionEnded;
     }
 
-    public void StartEndGame()
+    public void StartEndGame(bool redWon)
     {
+        this.redWon = redWon;
+
         gameEnding = true;
         endGameTimer.PauseTimer(false);
         if (pauseGameOnEnd)
@@ -69,6 +73,7 @@ public class GameEnder : MonoBehaviour
             if (!endGameTimer.GetTimerAlreadyFinished())
             {
                 GameUIManager.Instance.HideUI();
+                ConfettiManager.Instance.StartConfetti(redWon);
                 hideUITimer.PauseTimer(false);
             }
 
@@ -76,7 +81,7 @@ public class GameEnder : MonoBehaviour
             if (hideUITimer.UpdateTimer())
             {
                 SoundManager.Instance.FadeGameMusic();
-                TransitionManager.Instance.PlayRandomEnterTransition();
+                //TransitionManager.Instance.PlayRandomEnterTransition();
                 endGameTimer.RestartTimer();
                 endGameTimer.PauseTimer(true);
                 hideUITimer.RestartTimer();

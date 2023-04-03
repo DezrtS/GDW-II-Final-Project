@@ -40,4 +40,21 @@ public class GameUIManager : Singleton<GameUIManager>
     {
         gameUIAnimator.SetBool("HideUI", true);
     }
+
+    public void IncreaseScore(bool redScore)
+    {
+        if (redScore)
+        {
+            gameUIAnimator.SetBool("IncreaseRedScore", true);
+        } 
+        else
+        {
+            gameUIAnimator.SetBool("IncreaseBlueScore", true);
+        }
+    }
+
+    public void ShrinkScores()
+    {
+        gameUIAnimator.SetBool("ShrinkScores", true);
+    }
 }

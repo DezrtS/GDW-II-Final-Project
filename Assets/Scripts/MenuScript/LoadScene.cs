@@ -73,14 +73,16 @@ public class LoadScene : MonoBehaviour
         {
             return;
         }
-        loading = true;
-        this.loadScene = loadScene;
-        CameraManager.Instance.ZoomCameraTo(0.1f, zoomTransitionDuration);
-        CameraManager.Instance.MoveCameraTo(zoomInto, zoomTransitionDuration);
-        StartCoroutine(ZoomTransition());
-        if (resetMusicOnTransition && loadScene < 7)
+        
+        if (CameraManager.Instance.ZoomCameraTo(0.1f, zoomTransitionDuration) && CameraManager.Instance.MoveCameraTo(zoomInto, zoomTransitionDuration))
         {
-            StartCoroutine(SoundManager.Instance.fadeTitleMusicOut());
+            loading = true;
+            this.loadScene = loadScene;
+            StartCoroutine(ZoomTransition());
+            if (resetMusicOnTransition && loadScene < 7)
+            {
+                StartCoroutine(SoundManager.Instance.fadeTitleMusicOut());
+            }
         }
     }
 

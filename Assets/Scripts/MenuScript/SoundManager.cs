@@ -21,7 +21,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource VicorySound;
 
 
-    public float fade = 0.5f;
+     float fade = 0.9f;
     float volume;
     int i = 0;
 
@@ -137,7 +137,7 @@ public class SoundManager : Singleton<SoundManager>
     public IEnumerator fadeTitleMusicSoundIn()
     {
 
-        Debug.Log("Enter Title Music Fade In");
+        //Debug.Log("Enter Title Music Fade In");
         i = 0;
         Title.volume = 0;
         volume = Title.volume;
@@ -160,7 +160,7 @@ public class SoundManager : Singleton<SoundManager>
     public IEnumerator fadeButtonDodgeballMusicIn()
     {
         
-        Debug.Log("In");
+        //Debug.Log("In");
         i = 0;
         ButtonDodgeballMusic.volume = 0;
         volume = ButtonDodgeballMusic.volume;
@@ -196,7 +196,7 @@ public class SoundManager : Singleton<SoundManager>
     public IEnumerator fadeTrailRumbleMusicIn()
     {
 
-        Debug.Log("In");
+        //Debug.Log("In");
         i = 0;
         TrailRumbleMusic.volume = 0;
         volume = TrailRumbleMusic.volume;
@@ -232,7 +232,7 @@ public class SoundManager : Singleton<SoundManager>
     public IEnumerator fadeSideViewMusicIn()
     {
 
-        Debug.Log("In");
+        //Debug.Log("In");
         i = 0;
         SideViewMusic.volume = 0;
         volume = SideViewMusic.volume;
