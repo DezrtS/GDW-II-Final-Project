@@ -58,7 +58,6 @@ public class PlayerShoot : MonoBehaviour
             //Play animations/sound
             anim.SetTrigger("isShooting2");
             SoundManager.Instance.playShootSound();
-
         }
     }
 }
