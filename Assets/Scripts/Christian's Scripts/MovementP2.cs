@@ -14,12 +14,15 @@ public class MovementP2 : MonoBehaviour
    // int p2Health = 3;
     public Transform trans;
     public Vector2 faceDirection;
+    Animator animator;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        animator = GetComponent<Animator>();
+        animator.SetBool("isredplayer1", false);
     }
 
     private void OnDestroy()
@@ -51,12 +54,14 @@ public class MovementP2 : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+            animator.SetFloat("animeinputvertical", 1);
             move.x = -1;
             FaceForward();
         }
 
         else if (Input.GetKey(KeyCode.RightArrow))
         {
+            animator.SetFloat("animeinputvertical", 1);
             move.x = 1;
             FaceForward();
         }
@@ -70,12 +75,14 @@ public class MovementP2 : MonoBehaviour
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
+            animator.SetFloat("animeinputvertical", 1);
             move.y = 1;
             FaceForward();
         }
 
         else if (Input.GetKey(KeyCode.DownArrow))
         {
+            animator.SetFloat("animeinputvertical", 1);
             move.y = -1;
             FaceForward();
         }
@@ -85,6 +92,10 @@ public class MovementP2 : MonoBehaviour
             move.y = 0;
         }
 
+        if (move.x == 0 && move.y == 0)
+        {
+            animator.SetFloat("animeinputvertical", 0);
+        }
 
     }
 
