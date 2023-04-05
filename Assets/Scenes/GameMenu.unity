@@ -356,7 +356,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2018636051}
         m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadTrailTrapper
+        m_MethodName: LoadTrailTrapperTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -501,8 +501,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2018636051}
-        m_TargetAssemblyTypeName: LoadGame1, Assembly-CSharp
-        m_MethodName: LoadDangerDodgeball
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: LoadDangerDodgeballTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1485,8 +1485,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2018636051}
-        m_TargetAssemblyTypeName: LoadGame1, Assembly-CSharp
-        m_MethodName: LoadSavageShooter
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: LoadSavageShooterTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2754,8 +2754,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2018636051}
-        m_TargetAssemblyTypeName: LoadGame1, Assembly-CSharp
-        m_MethodName: LoadButtonBullets
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: LoadButtonBulletsTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3187,8 +3187,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2018636051}
-        m_TargetAssemblyTypeName: LoadGame1, Assembly-CSharp
-        m_MethodName: LoadRichochetRumbel
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: LoadRichochetRumbleTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3608,8 +3608,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 2018636051}
-        m_TargetAssemblyTypeName: LoadGame1, Assembly-CSharp
-        m_MethodName: LoadPivotPanic
+        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
+        m_MethodName: LoadPivotPanicTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
