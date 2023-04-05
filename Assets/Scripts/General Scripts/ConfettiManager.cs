@@ -20,11 +20,15 @@ public class ConfettiManager : Singleton<ConfettiManager>
     public void StartConfetti(bool redWon)
     {
         this.redWon = redWon;
-
         SoundManager.Instance.PlayVictorySound();
         SoundManager.Instance.FadeGameMusic();
         cannonAnimator.SetBool("Activated", true);
         increaseScoreTimer.PauseTimer(false);
+    }
+
+    public void OnlyPlayConfetti()
+    {
+        cannonAnimator.SetBool("Activated", true);
     }
 
     private void Update()

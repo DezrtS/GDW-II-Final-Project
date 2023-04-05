@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class VictoryManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(StartMusic());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator StartMusic()
     {
-        
+        yield return new WaitForSeconds(2);
+        StartCoroutine(SoundManager.Instance.fadeTitleMusicSoundIn());
+        ConfettiManager.Instance.OnlyPlayConfetti();
     }
 }
