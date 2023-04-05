@@ -148,7 +148,7 @@ public class SoundManager : Singleton<SoundManager>
             Title.volume += 0.7f * Time.deltaTime / fade;
             yield return null;
             i++;
-            if (i == 1000)
+            if (i == 2000)
             {
                 break;
             }

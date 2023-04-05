@@ -61,6 +61,9 @@ public class LoadScene : MonoBehaviour
             case 9:
                 SceneManager.LoadScene("GameMenu");
                 break;
+            case 10:
+                SceneManager.LoadScene("StartMenu");
+                break;
             default:
                 loading = false;
                 break;
@@ -132,6 +135,17 @@ public class LoadScene : MonoBehaviour
 
     public void LoadGameSelectMenu()
     {
+        SetNextSceneToLoad(9);
+    }
+
+    public void ReplayGame()
+    {
+        SoundManager.Instance.fadeTitleMusicOut();
+        P1Score.Instance.ResetScore();
+        P2Score.Instance.ResetScore();
+      //  Destroy(FindObjectOfType<SoundManager>());
+
+        //Destroy(GameObject.Find("Sound"));
         SetNextSceneToLoad(9);
     }
 
