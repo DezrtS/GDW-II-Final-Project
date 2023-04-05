@@ -138,15 +138,15 @@ public class LoadScene : MonoBehaviour
         SetNextSceneToLoad(9);
     }
 
-    public void LoadTitleMenu()
+    public void ReplayGame()
     {
         SoundManager.Instance.fadeTitleMusicOut();
         P1Score.Instance.ResetScore();
         P2Score.Instance.ResetScore();
       //  Destroy(FindObjectOfType<SoundManager>());
 
-        Destroy(GameObject.Find("Sound"));
-        SetNextSceneToLoad(10);
+        //Destroy(GameObject.Find("Sound"));
+        SetNextSceneToLoad(9);
     }
 
     private IEnumerator ZoomTransition()
