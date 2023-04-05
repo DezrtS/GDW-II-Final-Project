@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     public Transform trans;
     // [SerializeField] Animator animator;
     public Vector2 faceDirection;
+    Animator animator;
 
 
     int p1Health;
@@ -23,6 +24,8 @@ public class Movement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        animator = GetComponent<Animator>();
+        animator.SetBool("isredplayer1", true);
     }
 
     private void OnDestroy()
@@ -55,12 +58,14 @@ public class Movement : MonoBehaviour
         
         if(Input.GetKey(KeyCode.A))
         {
+            animator.SetFloat("animeinputvertical", 1);
             move.x = -1;
             FaceForward();
         }
 
         else if(Input.GetKey(KeyCode.D))
         {
+            animator.SetFloat("animeinputvertical", 1);
             move.x = 1;
             FaceForward();
         }
@@ -75,27 +80,33 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
+            animator.SetFloat("animeinputvertical", 1);
             move.y = 1;
             FaceForward();
         }
 
         else if (Input.GetKey(KeyCode.S))
         {
-
+            animator.SetFloat("animeinputvertical", 1);
             move.y = -1;
             FaceForward();
         }
 
         else
         {
+            
             move.y = 0;
         }
 
-        
+        if(move.x == 0 && move.y == 0)
+        {
+            animator.SetFloat("animeinputvertical", 0);
+        }
     }
 
      public void FixedUpdate()
     {
+        
         body.MovePosition(body.position + move * playerSpeed * Time.fixedDeltaTime);
     }
 
