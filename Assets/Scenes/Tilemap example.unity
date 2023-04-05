@@ -2327,6 +2327,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7225213859800377101, guid: 0a120fc303c60214c92e49eecba9e805, type: 3}
+      propertyPath: redWon
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7225213859890430744, guid: 0a120fc303c60214c92e49eecba9e805, type: 3}
       propertyPath: m_Text
       value: Blue Wins!!!
