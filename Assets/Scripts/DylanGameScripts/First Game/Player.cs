@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //Set Player Values
     private Rigidbody2D rig;
     [SerializeField] private float speed = 1;
     [SerializeField] private float jumpPower = 1;
@@ -51,13 +52,13 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        //Call screen size
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
     }
 
-    
-
     private void OnBecameInvisible()
     {
+        //Allow player to return back to the other side of the screen if they leave the camera
         if (transform.position.x > screenWidth)
         {
             transform.position = new Vector3(-screenWidth, transform.position.y, transform.position.z);
@@ -70,6 +71,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Set walking inputs
         rig.velocity = new Vector2(0, rig.velocity.y);
 
         float movementInput;
@@ -82,20 +84,24 @@ public class Player : MonoBehaviour
 
             if (movementInput == 0 && grounded)
             {
+                //Set animation to idle
                 anim.SetBool("isRunning", false);
             }
             else
             {
+                //Set animation to running
                 anim.SetBool("isRunning", true);
             }
 
             if (movementInput > 0)
             {
-                transform.localScale = new Vector3(2, 2, 2); // Flip the sprite to face right
+                // Flip the sprite to face right
+                transform.localScale = new Vector3(2, 2, 2); 
             }
             else if (movementInput < 0)
             {
-                transform.localScale = new Vector3(-2, 2, 2); // Flip the sprite to face left
+                // Flip the sprite to face left
+                transform.localScale = new Vector3(-2, 2, 2); 
             }
 
         }
@@ -106,24 +112,29 @@ public class Player : MonoBehaviour
 
             if (movementInput == 0 && grounded)
             {
+                //Set player 2 animation to idle
                 anim.SetBool("isRunning2", false);
             }
             else
             {
+                //Set player 2 animation to running
                 anim.SetBool("isRunning2", true);
             }
 
             if (movementInput > 0)
             {
-                transform.localScale = new Vector3(2, 2, 2); // Flip the sprite to face right
+                // Flip the sprite to face right
+                transform.localScale = new Vector3(2, 2, 2);
             }
             else if (movementInput < 0)
             {
-                transform.localScale = new Vector3(-2, 2, 2); // Flip the sprite to face left
+                // Flip the sprite to face left
+                transform.localScale = new Vector3(-2, 2, 2); 
             }
 
         }
 
+        //Set jumping inputs
         if (grounded && jumpInput > 0)
         {
             if (isPlayerOne)
@@ -134,16 +145,17 @@ public class Player : MonoBehaviour
             {
                 anim.SetTrigger("takeOff2");
             }
-            //anim.SetTrigger("Player1Jump");
+
+            //Allow player to jump
             rig.velocity = new Vector2(rig.velocity.x, 0);
             rig.AddForce(Vector3.up * jumpPower, ForceMode2D.Impulse);
-            // anim.SetBool("isJumping", false);
         }
         else
         {
-            //anim.SetBool("isJumping", true);
+            
         }
 
+        //Set jumping animations
         if (grounded == true)
         {
             if (isPlayerOne)
@@ -166,8 +178,9 @@ public class Player : MonoBehaviour
                 anim.SetBool("isJumping2", true);
             }
         }
+
+        //Allow player to move
         rig.velocity = new Vector2(movementInput * speed, rig.velocity.y);
-        //transform.position = Vector3.MoveTowards(transform.position, transform.position + movementInput * groundNormal, Time.deltaTime * speed);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -201,6 +214,7 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        //Subtract health from the player if projectile collides with player
         if (gameObject.CompareTag("Player1") || gameObject.CompareTag("Player2"))
         {
             if (collision.CompareTag("ProjectilePlayer1") || collision.CompareTag("ProjectilePlayer2"))
@@ -213,6 +227,7 @@ public class Player : MonoBehaviour
             }
         }
 
+        //Check if game ended and who won
         if (heartScript.returnHealth() <= 0 && !GameEnder.Instance.IsGameEnding())
         {
             if (isPlayerOne)
@@ -229,11 +244,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    //Get player 1 health
     public int ReturnP1Health()
     {
         return (heartScript.returnHealth());
     }
 
+    //Get player 2 health
     public int ReturnP2Health()
     {
         return (heartScript.returnHealth());
