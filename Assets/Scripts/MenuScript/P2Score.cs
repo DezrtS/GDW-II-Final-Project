@@ -33,6 +33,11 @@ public class P2Score : Singleton<P2Score>
         score ++;
     }
 
+    public void ResetScore()
+    {
+        score = 0;
+    }
+
 
 
 

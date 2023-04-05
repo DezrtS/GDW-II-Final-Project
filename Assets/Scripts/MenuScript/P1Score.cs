@@ -32,4 +32,9 @@ public class P1Score : Singleton<P1Score>
     {
         score ++;
     }
+
+    public void ResetScore()
+    {
+        score = 0;
+    }
 }
