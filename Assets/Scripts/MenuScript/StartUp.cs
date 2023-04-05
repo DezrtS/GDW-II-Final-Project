@@ -82,7 +82,7 @@ public class StartUp : MonoBehaviour
 
         yield return new WaitForSeconds(3);
         titleLogo.enabled = true;
-        SoundManager.Instance.playTitleMusic();
+       StartCoroutine( SoundManager.Instance.fadeTitleMusicSoundIn());
         startButton.SetActive(true);
     }
 
