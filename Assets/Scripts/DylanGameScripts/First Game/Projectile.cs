@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    //Set Values
     private Rigidbody2D rig;
-
     public float speed = 10f;
     private float screenWidth;
-    //public float knockbackForce = 500;
-   // public ParticleSystem explosionParticles;
-
 
     private void Awake()
     {
@@ -40,12 +37,13 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
+        //Get screen size
         screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
-       // explosionParticles = GetComponentInChildren<ParticleSystem>();
     }
 
     private void FixedUpdate()
     {
+        //Allow projectile to return back to the other side of the screen if they leave the camera
         if (transform.position.x > screenWidth)
         {
             transform.position = new Vector3(-screenWidth, transform.position.y, transform.position.z);
@@ -54,42 +52,30 @@ public class Projectile : MonoBehaviour
         {
             transform.position = new Vector3(screenWidth, transform.position.y, transform.position.z);
         }
-        //else if (transform.position.y > Camera.main.orthographicSize)
-        //{
-        //    transform.position = new Vector3(transform.position.x, -Camera.main.orthographicSize, transform.position.z);
-        //}
-        //else if (transform.position.y < -Camera.main.orthographicSize)
-        //{
-        //    transform.position = new Vector3(transform.position.x, Camera.main.orthographicSize, transform.position.z);
-        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Check which projectile collided with which player
         if (gameObject.CompareTag("ProjectilePlayer1"))
         {
             if (collision.CompareTag("Player2"))
             {
-                PlayerScoreManager.UpdatePlayerScore("Player2");
+                //Destroy the game object and play sound
                 Destroy(gameObject);
                 SoundManager.Instance.playDeathSound();
-                //collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position).normalized * knockbackForce, ForceMode2D.Impulse);
 
-                // Destroy all other projectiles in the scene
                 Projectile[] allProjectiles = FindObjectsOfType<Projectile>();
                 foreach (Projectile projectile in allProjectiles)
                 {
                     if (projectile.gameObject != gameObject)
                     {
+                        //Destroy all projectiles active on the screen
                         Destroy(projectile.gameObject);
-
-                        /*if (explosionParticles != null)
-                        {
-                            explosionParticles.Play();
-                        }*/
                     }
                 }
 
+                //Shake the screen
                 Camera.main.GetComponent<ShakeBehaviour>().TriggerShake();
             }
         }
@@ -97,26 +83,21 @@ public class Projectile : MonoBehaviour
         {
             if (collision.CompareTag("Player1"))
             {
-                PlayerScoreManager.UpdatePlayerScore("Player1");
+                //Destroy the game object and play sound
                 Destroy(gameObject);
                 SoundManager.Instance.playDeathSound();
-                //collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - transform.position).normalized * knockbackForce, ForceMode2D.Impulse);
 
-                // Destroy all other projectiles in the scene
                 Projectile[] allProjectiles = FindObjectsOfType<Projectile>();
                 foreach (Projectile projectile in allProjectiles)
                 {
                     if (projectile.gameObject != gameObject)
                     {
+                        //Destroy all other projectiles in the scene
                         Destroy(projectile.gameObject);
-
-                        /*if (explosionParticles != null)
-                        {
-                            explosionParticles.Play();
-                        }*/
                     }
                 }
 
+                //Shake the screen
                 Camera.main.GetComponent<ShakeBehaviour>().TriggerShake();
             }
         }
