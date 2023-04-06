@@ -7,6 +7,7 @@ public class DDMove : MonoBehaviour
 
     Rigidbody2D body;
     Transform trans;
+    Animator animator;
     public float speed = 10;
     public float rotationStr;
     public float steeringInput;
@@ -27,7 +28,8 @@ public class DDMove : MonoBehaviour
         StartGetInputs();
         body = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
-        
+        animator = GetComponent<Animator>();
+        animator.SetBool("isredplayer1", isPlayer1);
 
     }
 
@@ -41,6 +43,7 @@ public class DDMove : MonoBehaviour
         steeringInput = Input.GetAxis(horizontalInput);
         moveInput = Input.GetAxis(verticalInput);
         buttonInput = Input.GetButtonDown(fireInput);
+        AnimatorMethod();
     }
 
     private void FixedUpdate()
@@ -75,5 +78,9 @@ public class DDMove : MonoBehaviour
             verticalInput = vertical2;
             fireInput = button2;
         }
+    }
+    void AnimatorMethod()
+    {
+        animator.SetFloat("animeinputvertical", moveInput);
     }
 }
