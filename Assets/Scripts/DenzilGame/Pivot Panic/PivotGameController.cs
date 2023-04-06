@@ -10,6 +10,8 @@ public class PivotGameController : MonoBehaviour
     [SerializeField] private List<GameObject> players = new List<GameObject>();
     [SerializeField] private HeartsKeeper heartsKeeper;
 
+    public bool onTutorial = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -25,7 +27,7 @@ public class PivotGameController : MonoBehaviour
 
     private void OnTransitionEnded(bool isExitTransition)
     {
-        if (isExitTransition)
+        if (isExitTransition && !onTutorial)
         {
             GameUIManager.Instance.ShowUI();
             CountdownManager.Instance.SpawnAndStartCountdown();
@@ -36,14 +38,18 @@ public class PivotGameController : MonoBehaviour
     {
         TransitionManager.Instance.OnTransitionEnded += OnTransitionEnded;
 
-        if (heartsKeeper.isNewGame)
+        if (!onTutorial)
         {
-            StartCoroutine(SoundManager.Instance.fadeSideViewMusicIn());
-            TransitionManager.Instance.PlayRandomExitTransition();
-        } else
-        {
-            GameUIManager.Instance.ShowUINow();
-            CountdownManager.Instance.RestartCountdown();
+            if (heartsKeeper.isNewGame)
+            {
+                StartCoroutine(SoundManager.Instance.fadeSideViewMusicIn());
+                TransitionManager.Instance.PlayRandomExitTransition();
+            }
+            else
+            {
+                GameUIManager.Instance.ShowUINow();
+                CountdownManager.Instance.RestartCountdown();
+            }
         }
     }
 
