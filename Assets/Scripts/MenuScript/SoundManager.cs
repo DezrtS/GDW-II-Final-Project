@@ -13,6 +13,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource Shoot;
     public AudioSource Title;
     public AudioSource ButtonClick;
+    public AudioSource ScoreIncrease;
     public AudioSource ButtonDodgeballMusic;
     public AudioSource TrailRumbleMusic;
     public AudioSource BulletButtonClick;
@@ -115,6 +116,11 @@ public class SoundManager : Singleton<SoundManager>
     public void PlayBulletButtonClick()
     {
         BulletButtonClick.Play();
+    }
+
+    public void PlayIncreaseScoreSound()
+    {
+        ScoreIncrease.Play();
     }
 
 

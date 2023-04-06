@@ -57,6 +57,11 @@ public class TTmove : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+
+        if (Mathf.Abs(transform.position.x) > 17.5f || Mathf.Abs(transform.position.y) > 10.5f)
+        {
+            transform.position = Vector3.zero;
+        }
     }
 
     private void Move()

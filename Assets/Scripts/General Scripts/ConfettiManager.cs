@@ -39,6 +39,8 @@ public class ConfettiManager : Singleton<ConfettiManager>
             {
                 GameUIManager.Instance.IncreaseScore(redWon);
                 shrinkTextTimer.PauseTimer(false);
+                StartCoroutine(Timer(1.2f));
+
             }
 
             if (shrinkTextTimer.UpdateTimer())
@@ -50,5 +52,11 @@ public class ConfettiManager : Singleton<ConfettiManager>
                 shrinkTextTimer.PauseTimer(true);
             }
         }
+    }
+
+    IEnumerator Timer(float time)
+    {
+        yield return new WaitForSeconds(time);
+        SoundManager.Instance.PlayIncreaseScoreSound();
     }
 }

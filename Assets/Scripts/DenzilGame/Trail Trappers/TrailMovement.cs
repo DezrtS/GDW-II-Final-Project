@@ -102,10 +102,10 @@ public class TrailMovement : MonoBehaviour
 
         if (Input.GetButtonDown(actionInputString) && canDropTail && Time.timeScale == 1)
         {
-            trail.PlaceTrail(isPlayerOne);
-            trail.ShrinkTailNow(2);
-            canDropTail = false;
-            tailDropTimer.PauseTimer(false);
+            //trail.PlaceTrail(isPlayerOne);
+            //trail.ShrinkTailNow(2);
+            //canDropTail = false;
+            //tailDropTimer.PauseTimer(false);
         }
 
         if (tailDropTimer.UpdateTimer())
@@ -170,6 +170,9 @@ public class TrailMovement : MonoBehaviour
             heartsKeeper.TakeAwayHealth(isPlayerOne);
             ShakeBehaviour.Instance.TriggerShake();
 
+            SoundManager.Instance.stopTrailSpeedUp();
+            SoundManager.Instance.stopTrailSpeedUp2();
+
             if (heartScript.returnHealth() <= 0)
             {
                 SoundManager.Instance.playDeathSound();
@@ -188,8 +191,6 @@ public class TrailMovement : MonoBehaviour
             }
             else
             {
-                SoundManager.Instance.stopTrailSpeedUp();
-                SoundManager.Instance.stopTrailSpeedUp2();
                 SoundManager.Instance.playHitSound();
                 trail.StopAllCoroutines();
                 TrailGameController.Instance.ResetGame();

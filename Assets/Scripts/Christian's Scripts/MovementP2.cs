@@ -130,6 +130,6 @@ public class MovementP2 : MonoBehaviour
 
 
         Quaternion rotationdirection = Quaternion.LookRotation(Vector3.forward, faceDirection);
-        trans.rotation = Quaternion.RotateTowards(trans.rotation, rotationdirection, 1);
+        trans.rotation = Quaternion.RotateTowards(trans.rotation, rotationdirection, 250 * Time.deltaTime);
     }
 }

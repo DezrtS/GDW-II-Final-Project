@@ -203,4 +203,9 @@ public class LoadScene : MonoBehaviour
         LoadNextScene();
     }
 
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

@@ -613,8 +613,7 @@ GameObject:
   - component: {fileID: 626459920}
   - component: {fileID: 626459919}
   - component: {fileID: 626459918}
-  - component: {fileID: 626459917}
-  - component: {fileID: 626459916}
+  - component: {fileID: 626459922}
   m_Layer: 0
   m_Name: BBPlayer
   m_TagString: P1
@@ -637,42 +636,6 @@ Transform:
   m_Father: {fileID: 430174181}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &626459916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626459914}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7062e93daec7e04b889dd58dc41b39b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 3
-  heartNum: 3
-  heartImage:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  fullHeartSprite: {fileID: 21300000, guid: e96a1f202801037439dcb3c9bdb772cd, type: 3}
-  emptyHeartSprite: {fileID: 21300000, guid: efac6f1d91529ba4d992a71365293801, type: 3}
---- !u!58 &626459917
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626459914}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.3515625
 --- !u!70 &626459918
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -779,6 +742,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &626459922
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626459914}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1763b313f7110743ada565cb0228382, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &687204398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -939,11 +922,9 @@ GameObject:
   - component: {fileID: 832986491}
   - component: {fileID: 832986498}
   - component: {fileID: 832986497}
-  - component: {fileID: 832986496}
   - component: {fileID: 832986495}
-  - component: {fileID: 832986494}
-  - component: {fileID: 832986493}
   - component: {fileID: 832986492}
+  - component: {fileID: 832986499}
   m_Layer: 0
   m_Name: BBPlayer2
   m_TagString: P1
@@ -983,42 +964,6 @@ MonoBehaviour:
   heartScript: {fileID: 0}
   trans: {fileID: 0}
   faceDirection: {x: 0, y: 0}
---- !u!114 &832986493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832986490}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7062e93daec7e04b889dd58dc41b39b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 3
-  heartNum: 3
-  heartImage:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  fullHeartSprite: {fileID: 21300000, guid: e96a1f202801037439dcb3c9bdb772cd, type: 3}
-  emptyHeartSprite: {fileID: 21300000, guid: efac6f1d91529ba4d992a71365293801, type: 3}
---- !u!58 &832986494
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832986490}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.3515625
 --- !u!70 &832986495
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1035,23 +980,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.75, y: 0.5}
   m_Direction: 0
---- !u!114 &832986496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832986490}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73a8b9ed2cb443548a5291bdfea26bbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 10
-  body: {fileID: 0}
-  heartScript: {fileID: 0}
-  trans: {fileID: 0}
-  faceDirection: {x: 0, y: 0}
 --- !u!50 &832986497
 Rigidbody2D:
   serializedVersion: 4
@@ -1125,6 +1053,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &832986499
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832986490}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1763b313f7110743ada565cb0228382, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &851392155
 GameObject:
   m_ObjectHideFlags: 0
@@ -4890,6 +4838,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2303810376444614873, guid: d8dc4aa186f38804e94ffe54543b11f9, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2303810376444614875, guid: d8dc4aa186f38804e94ffe54543b11f9, type: 3}
       propertyPath: m_Name
       value: Faded Continue UI
