@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc370db045a1ae8479fa00bb3b0e310a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stopMusicOnStart: 1
 --- !u!1 &3678681718559351990
 GameObject:
   m_ObjectHideFlags: 0

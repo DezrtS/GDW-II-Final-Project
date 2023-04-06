@@ -61,6 +61,27 @@ public class LoadScene : MonoBehaviour
             case 9:
                 SceneManager.LoadScene("GameMenu");
                 break;
+            case 10:
+                SceneManager.LoadScene("StartMenu");
+                break;
+            case 11:
+                SceneManager.LoadScene("DangerDodgeBallTutorial");
+                break;
+            case 12:
+                SceneManager.LoadScene("PivotPanicTutorial");
+                break;
+            case 13:
+                SceneManager.LoadScene("BulletButtonTutorial");
+                break;
+            case 14:
+                SceneManager.LoadScene("RicochetRubmleTutorial");
+                break;
+            case 15:
+                SceneManager.LoadScene("SavageShooterTutorial");
+                break;
+            case 16:
+                SceneManager.LoadScene("TrailTrapperTutorial");
+                break;
             default:
                 loading = false;
                 break;
@@ -120,6 +141,36 @@ public class LoadScene : MonoBehaviour
         SetNextSceneToLoad(6);
     }
 
+    public void LoadDangerDodgeballTutorial()
+    {
+        SetNextSceneToLoad(11);
+    }
+
+    public void LoadPivotPanicTutorial()
+    {
+        SetNextSceneToLoad(12);
+    }
+    public void LoadButtonBulletsTutorial()
+    {
+        SetNextSceneToLoad(13);
+    }
+
+
+    public void LoadRichochetRumbleTutorial()
+    {
+        SetNextSceneToLoad(14);
+    }
+
+    public void LoadSavageShooterTutorial()
+    {
+        SetNextSceneToLoad(15);
+    }
+
+    public void LoadTrailTrapperTutorial()
+    {
+        SetNextSceneToLoad(16);
+    }
+
     public void LoadCredits()
     {
         SetNextSceneToLoad(7);
@@ -132,6 +183,17 @@ public class LoadScene : MonoBehaviour
 
     public void LoadGameSelectMenu()
     {
+        SetNextSceneToLoad(9);
+    }
+
+    public void ReplayGame()
+    {
+        SoundManager.Instance.fadeTitleMusicOut();
+        P1Score.Instance.ResetScore();
+        P2Score.Instance.ResetScore();
+      //  Destroy(FindObjectOfType<SoundManager>());
+
+        //Destroy(GameObject.Find("Sound"));
         SetNextSceneToLoad(9);
     }
 

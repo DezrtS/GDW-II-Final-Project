@@ -1,0 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FinalMenu : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+
+       StartCoroutine( SoundManager.Instance.fadeTitleMusicSoundIn());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

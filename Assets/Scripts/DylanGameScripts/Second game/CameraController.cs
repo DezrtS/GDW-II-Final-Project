@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    //Set values for movement
     public float radius = 5f;
     public float moveSpeed = 0.1f;
     public float moveTime = 3f;
@@ -45,10 +46,12 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        //Move the camera
         if (!moveTimer.UpdateTimer())
         {
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime / moveSpeed);
-        } else
+        }
+        else
         {
             moveTimer.RestartTimer();
             targetPosition = GetRandomPosition();
@@ -57,6 +60,7 @@ public class CameraController : MonoBehaviour
 
     private Vector3 GetRandomPosition()
     {
+        //Get a random position for the camera to move to
         Vector2 randomPoint = Random.insideUnitCircle * radius;
         Vector3 newPosition = transform.position + new Vector3(randomPoint.x, randomPoint.y, 0f);
         return newPosition;

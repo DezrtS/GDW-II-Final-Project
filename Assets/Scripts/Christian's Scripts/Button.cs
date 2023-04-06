@@ -49,7 +49,7 @@ public class Button : MonoBehaviour
         if(collision.gameObject.tag == "P1")
         {
             SoundManager.Instance.PlayBulletButtonClick();
-          canNum.SetTarget(2);
+            canNum.SetTarget(2);
             sprite.sprite = Red;
             
         }
