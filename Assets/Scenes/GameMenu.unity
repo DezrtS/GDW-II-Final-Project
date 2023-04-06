@@ -502,7 +502,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2018636051}
         m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadDangerDodgeball
+        m_MethodName: LoadDangerDodgeballTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2755,7 +2755,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2018636051}
         m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadButtonBullets
+        m_MethodName: LoadButtonBulletsTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
