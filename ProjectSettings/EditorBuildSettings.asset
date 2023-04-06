@@ -51,9 +51,6 @@ EditorBuildSettings:
     path: Assets/Scenes/GameTutorials/DangerDodgeballTutorial.unity
     guid: f64fdd388c72a494b924c955b934b7cb
   - enabled: 1
-    path: Assets/Scenes/GameTutorials/PilotPushTutorial.unity
-    guid: 5b4e479f62561a1478c4c4c92d6ed51f
-  - enabled: 1
     path: Assets/Scenes/GameTutorials/PivotPanicTutorial.unity
     guid: 822151d894f63be498bbd7363efe81de
   - enabled: 1
